@@ -1,15 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import { Product } from './product.model';
+import { ProductsService } from './products.service';
+import { ProductComponent } from './product.component';
 
 @Component({
-    selector: '[product-list]',
+    selector: 'product-list',
     template: `
-        <div product
-            *ngFor="let product of products | async"
-            [product]="product"></div>
+        <product-item
+            *ngFor="let product of products"
+            [product]="product"></product-item>
     `
 })
 
-export class ProductListComponent {
+export class ProductListComponent implements OnInit {
+    private products: Product[];
 
+    constructor(
+        public productsService: ProductsService) { }
+
+    ngOnInit() {
+        this.getProducts();
+    }
+
+    getProducts() {
+        this.productsService.getProductsMock().then(products => this.products = products);
+    }
 }

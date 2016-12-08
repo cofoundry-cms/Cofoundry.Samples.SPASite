@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Product } from './product.model';
 
 @Component({
-    selector: '[product]',
+    selector: 'product-item',
     template: `
-        <img src="product-image">
+        <img src="">
         <div class="product__details">
-            <h3>Product name</h3>
-            <p>Product details</p>
-            <span>Product Price</span>
+            <h3>{{product.product}}</h3>
+            <p>{{product.description}}</p>
+            <span>{{product.price}}</span>
         </div>
     `
 })
 
 export class ProductComponent {
-    
+    @Input() product: Product;
 }

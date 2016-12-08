@@ -20,11 +20,7 @@ export class ProductsService {
         return this.http.get(apiRoute).map((res: Response) => res.json());
     }
 
-    getProductsMock(): Product[] {
-        return Products.map(product => this.clone(product));
-    }
-
-    private clone(object: any){
-        return JSON.parse(JSON.stringify(object));
+    getProductsMock(): Promise<Product[]> {
+        return Promise.resolve(Products);
     }
 }
