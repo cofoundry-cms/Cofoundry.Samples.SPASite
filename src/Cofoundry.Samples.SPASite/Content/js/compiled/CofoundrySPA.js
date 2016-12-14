@@ -35,7 +35,32 @@ var CofoundrySPA = CofoundrySPA || {};
     });
 
 })(CofoundrySPA.App = CofoundrySPA.App || {}, jQuery, _, Backbone);
-;(function (components, pages, app, $, _, Backbone) {
+;(function (models, app, $, _, Backbone) {
+    models.Cat = Backbone.Model.extend({});
+})(
+    CofoundrySPA.Models = CofoundrySPA.Models || {},
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (collections, models, app, $, _, Backbone) {
+    collections.Cats = Backbone.Collection.extend({
+        model: models.Cat,
+
+        url: '/api/cats',
+
+        parse: function(response) {
+            console.log(response);
+        }
+    });
+})(
+    CofoundrySPA.Collections = CofoundrySPA.Collections || {},
+    CofoundrySPA.Models,
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (components, pages, app, $, _, Backbone) {
     app.SiteView = Backbone.View.extend({
         el : 'html',
         events : {
@@ -94,7 +119,7 @@ var CofoundrySPA = CofoundrySPA || {};
 
         },
         initialize : function() {
-            console.log('word to ya mom!');
+            
         },
         render : function() {
             return;
@@ -111,8 +136,6 @@ var CofoundrySPA = CofoundrySPA || {};
 (function(app, $, _, Backbone) {
 
     $(function() {
-        console.log('init');
-
         // Initialize Backbone router and global views
         app.router   = new app.Router();
         app.siteView = new app.SiteView();
@@ -122,8 +145,6 @@ var CofoundrySPA = CofoundrySPA || {};
         });
 
         app.router.on('route:index', function() {
-            console.log('home');
-
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 

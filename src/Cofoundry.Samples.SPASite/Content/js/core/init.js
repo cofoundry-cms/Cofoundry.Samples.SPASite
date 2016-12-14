@@ -2,8 +2,6 @@
 (function(app, $, _, Backbone) {
 
     $(function() {
-        console.log('init');
-
         // Initialize Backbone router and global views
         app.router   = new app.Router();
         app.siteView = new app.SiteView();
@@ -13,8 +11,6 @@
         });
 
         app.router.on('route:index', function() {
-            console.log('home');
-
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 

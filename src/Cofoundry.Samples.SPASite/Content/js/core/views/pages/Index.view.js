@@ -5,7 +5,7 @@
 
         },
         initialize : function() {
-            console.log('word to ya mom!');
+            
         },
         render : function() {
             return;
