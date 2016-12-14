@@ -1,0 +1,150 @@
+@mixin font-size($size, $modifier:1.2) {
+    // IE 8 fallback in pixels
+    $pixel-size: ($size * 10) * $modifier; 
+    font-size: #{$pixel-size}px;
+
+    // fontsize in REM
+    font-size: #{$size}rem;
+}
+
+@mixin arrow($height:0.8em, $width:0.6em, $color:white, $direction:right) {
+    content: "";
+    display: inline-block;
+    width:1px;
+    height:1px;
+    border:($height/2) solid transparent;
+    
+    @if $direction == 'left' {
+        border-right-color:$color;
+        border-right-width:$width;
+    }
+    @elseif $direction == 'down' {
+        border-top-color:$color;
+        border-top-width:$width;
+    }
+    @elseif $direction == 'up' {
+        border-bottom-color:$color;
+        border-bottom-width:$width;
+    }
+    @else {
+        border-left-color:$color;
+        border-left-width:$width;
+    }
+}
+
+@mixin center($positioning : absolute) {
+    -webkit-font-smoothing: antialiased;
+    position: $positioning;
+    top:50%;    
+    left:50%;
+    @include translate(-50%, -50%);
+}
+
+@mixin calc($property, $operation) {
+    #{$property}: -webkit-calc(#{$operation});
+    #{$property}:    -moz-calc(#{$operation});
+    #{$property}:         calc(#{$operation});
+}
+
+@mixin appearance($value) {
+    -webkit-appearance: $value;
+       -moz-appearance: $value;
+            appearance: $value;
+
+    @if $value == none {
+        &::-ms-expand {
+            display: none;
+        }
+    }
+}
+
+@mixin disable-animation() {
+    -webkit-transition: none !important;
+       -moz-transition: none !important;
+            transition: none !important; 
+}
+
+@mixin center-button() {
+    @include translateX(-1.4em);
+    margin:auto;
+}
+
+// makes inline image behave kinda like background image with cover positioning
+@mixin emulate-cover() {
+    overflow:hidden;
+    position: relative;
+
+    img {
+        position:absolute;
+        top:50%;
+        left:50%;
+        @include translate(-50%, -50%);
+
+        width:100%;
+        height:auto;
+    }
+}
+
+@mixin hide-in-print {
+    @media print {
+        display:none;
+    }
+}
+
+@mixin hide-text {
+    text-indent: -100%;
+    overflow:hidden;
+}
+
+// Adapted from http://jakearchibald.github.io/sass-ie/
+$mq-support: true !default;
+$mq-max-width: 1400px;
+@mixin respond-min($width) {
+
+    // Check for units on the width
+    @if unitless($width){
+        @warn "Assuming #{$width} to be in pixels, change to #{$width}px or another unit of measurement";
+        $width: $width * 1px;
+    }
+
+    @if $mq-support {
+        @media screen and (min-width: $width) {
+            @content;
+        }
+    } 
+    @else {
+        // Check media query applies
+        @if (em($width) <= em($mq-max-width)) {
+            @content;
+        }
+    }
+}
+
+@mixin respond-max($width) {
+
+    // Check for units on the width
+    @if unitless($width){
+        @warn "Assuming #{$width} to be in pixels, change to #{$width}px or another unit of measurement";
+        $width: $width * 1px;
+    }
+
+    // if this should apply like an element query, apply appropriate polyfill styles
+    // @if $element-query {
+    //     // we use a wrapper with data attribute set with JS.
+    //     .eq-wrapper[data-min-width="#{$width}"] & {
+    //         @content;
+    //     }
+    // }
+
+    @if $mq-support {
+        @media screen and (max-width: $width) {
+            @content;
+        }
+    } 
+    @else {
+        // Check media query applies
+        @if (em($width) >= em($mq-max-width)) {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,20 @@
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x:hidden;
+}
+
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-shadow: rgba(255,255,255,0.01) 0 0 1px;
+    -webkit-text-stroke: rgba(255,255,255,0.01) 0.1px;
+    -webkit-text-stroke-width: 0.1px;
+}
+
+* {
+    box-sizing:border-box;
+}
