@@ -1,7 +1,7 @@
 /**
  * Global styles
  *
- * @author  Devs @ Uber Digital
+ * @author Devs @ Uber Digital
  */
 
 /*===============================
@@ -9,10 +9,7 @@
 =================================*/ 
 @import "compass/reset";
 @import "compass";
-//@import "breakpoint";
 
-
-// @import "prototype/base";
 /*===============================
     Third party CSS
 =================================*/
@@ -52,8 +49,3 @@
 =================================*/
 
 @import "core/blocks/**";
-
-// /*===============================
-//     Page specific styles and overrides -- This should be as rarely used as possible
-// =================================*/
-// @import "pages/**";

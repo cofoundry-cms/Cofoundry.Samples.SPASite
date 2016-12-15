@@ -49,6 +49,7 @@ module.exports = function(grunt) {
                     '../Content/js/third_party/backbone/jquery-2.1.4.min.js',
                     '../Content/js/third_party/backbone/underscore-min.js',
                     '../Content/js/third_party/backbone/backbone-min.js',
+                    '../Content/js/third_party/bootstrap.min.js',
                     '../Content/js/core/app.js',
                     '../Content/js/core/models/*.js',
                     '../Content/js/core/collections/*.js',

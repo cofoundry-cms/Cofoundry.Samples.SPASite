@@ -1,99 +1,12 @@
 // colors
-$color-almost-white:#f7f7f7;
-$color-grey:#e7ebed;
-$color-grey--dark:#c9c9c9;
-$color-grey--darker:#8f9fa7;
+$cms-color-primary:     #2C2233;
+$cms-color-secondary:   #5E0042;
+$cms-color-tertiary:    #005869;
 
-$color-header-button:#ecf1f4;
+$cms-color-hightlight:  #00856A;
+$cms-color-lowlight:    #8DB500;
 
-$color-red:#d70614;
-
-$color-green-blue:#445b6c;
-$color-green-blue--light:#5ac0f7;
-$color-green-blue--dark:#225271;
-
-$color-dark-blue:#072d46;
-
-$color-text:#445b6c;
-$color-text-alt:#7e99aa;
-$color-text-alt-2:#ccd9e1;
-
-$color-text-charcoal: #777;
-
-$color-site-bg:$color-almost-white;
-$color-site-bg-2:#2e3c46;
-$color-site-bg-3:#232e37;
-
-$eastman-colors : (
-    red:#d70614,
-    
-    orange:#ffa200,
-    orange--med:#fcc771,
-    orange--light:#fddfad,
-    
-    yellow:#ffcb00,
-    yellow--med:#ffdf4d,
-    yellow--light:#ffed99,
-
-    light-green:#bed600,
-    light-green--med:#d3e36d,
-    light-green--light:#e6efab,
-
-    green:#5cc151,
-    green--med:#9dd394,
-    green--light:#c6e6c2,
-
-    teal:#60cdcb,
-    teal--med:#94d8d7,
-    teal--light:#c2e9e8,
-
-    blue:#00b8e4,
-    blue--med:#4dd0ec,
-    blue--light:#99e4f4,
-
-    magenta:#brr873,
-    magenta--med:#d558ab,
-    magenta--light:#e79fcf,
-
-    grey:#646464,
-    grey--med:#a6a5a8,
-    grey--light:#cccbcd,
-
-    tan:#c4c1a0,
-    tan--med:#e5e3d0,
-    tan--light:#f0efe4,
-
-    muted-green:#91b9a4,
-    muted-green--med:#b8d4ce,
-    muted-green--light:#d6e6e3,
-
-    muted-blue:#7e99aa,
-    muted-blue--med:#a6bdcc,
-    muted-blue--light:#ccd9e1,
-
-    muted-red:#9b243e,
-    muted-red--med:#c45171,
-    muted-red--light:#dd9bae,
-
-    ivory:#f9e497,
-    ivory--med:#fff3cf,
-    ivory--light:#fff8e3,
-
-    muted-orange:#cd5a13,
-    muted-orange--med:#eb9a61,
-    muted-orange--light:#f3c5a4
-);
-
-
-//social colors
-
-$social-colors : (
-    facebook:#3b5998,
-    twitter:#33ccff,
-    linkedin:#4875b4,
-    youtube:#e52d27,
-    instagram:#4e7ea7
-);
+$cms-color-text:        #000;
 
 // dimensions
 $breakpoint-max-width:1100px;
