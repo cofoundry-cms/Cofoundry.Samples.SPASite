@@ -4,24 +4,20 @@
     <title>Cofoundry SPA Sample</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/content/styles.css">
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
-
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
-
-    <script src="systemjs.config.js"></script>
-    <script>
-      System.import('app').catch(function(err){ console.error(err); });
-    </script>
+    <link rel="stylesheet" href="/Content/css/screen.css">
 </head>
 
 <body>
-    <my-app>Loading Cofoundry SPA Sample</my-app>
+    <main>
+        <h1 style="font-size:100px">Word to your mother</h1>
+    </main>
+
+    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
+
+    <script id="catItem" type="text/template">
+        <img src="<%= image %>" alt="">
+        <h2 class="name"><%= name %></h2>
+        <h3 class="breed"><%= breed %></h3>
+    </script>
 </body>
 </html>
-
-

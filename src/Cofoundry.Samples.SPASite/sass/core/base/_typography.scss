@@ -1,0 +1,22 @@
+html {
+    font-size: 100%;
+    font-family: Helvetica, Arial, sans-serif;
+    line-height: 1.5em;
+    color: $color-text;
+}
+
+strong, b {
+    font-weight: bold;
+}
+
+i, em {
+    font-style: italic;
+}
+
+u {
+    text-decoration: underline;
+}
+
+p a {
+    color: $color-red;
+}

@@ -1,0 +1,59 @@
+/**
+ * Global styles
+ *
+ * @author  Devs @ Uber Digital
+ */
+
+/*===============================
+    Required compass includes
+=================================*/ 
+@import "compass/reset";
+@import "compass";
+//@import "breakpoint";
+
+
+// @import "prototype/base";
+/*===============================
+    Third party CSS
+=================================*/
+@import "third_party/**";
+
+/*===============================
+    Config includes
+=================================*/
+
+@import "core/config/**";
+
+/*===============================
+    Uber mixins and other stuff
+=================================*/
+
+@import "libs/**";
+
+/*===============================
+    Base includes -- basic layouts, typography etc.
+=================================*/
+@import "core/base/**";
+
+/*===============================
+    Element styles -- mostly placeholders, meant to be extended and combined into components
+=================================*/
+
+@import "core/elements/**";
+
+/*===============================
+    Component styles -- implementing elements in combination to form components
+=================================*/
+
+@import "core/components/**";
+
+/*===============================
+    Block styles -- blocks are combinations of components, plus needed overrides.
+=================================*/
+
+@import "core/blocks/**";
+
+// /*===============================
+//     Page specific styles and overrides -- This should be as rarely used as possible
+// =================================*/
+// @import "pages/**";
