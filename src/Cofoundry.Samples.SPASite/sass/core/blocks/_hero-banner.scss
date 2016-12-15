@@ -1,0 +1,42 @@
+.hero-banner {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: auto;
+        height: 100%;
+        transform: translate(-50%, -50%);
+    }
+
+    @include respond-min(500px) {
+        img {
+            left: 0;
+            width: 100%;
+            height: auto;
+            transform: translateY(-50%);
+        }
+    }
+
+    @include respond-min(800px) {
+        height: 450px;
+    }
+}
+
+.hero-banner__overlay {
+    position: relative;
+    height: 100%;
+}
+
+.hero-banner__text {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    padding-left: 15px;
+}

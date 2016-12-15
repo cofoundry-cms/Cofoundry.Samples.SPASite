@@ -2,7 +2,7 @@ html {
     font-size: 100%;
     font-family: Helvetica, Arial, sans-serif;
     line-height: 1.5em;
-    color: $color-text;
+    color: $cms-color-text;
 }
 
 strong, b {
@@ -18,5 +18,5 @@ u {
 }
 
 p a {
-    color: $color-red;
+    color: $cms-color-primary;
 }

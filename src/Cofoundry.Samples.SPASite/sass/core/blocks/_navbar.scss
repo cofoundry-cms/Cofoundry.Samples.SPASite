@@ -1,0 +1,54 @@
+.navbar {
+    background-color: $cms-color-primary;
+    border: 0;
+    height: 60px;
+}
+
+.navbar-toggle {
+    margin-top: 12px;
+}
+
+.navbar-default .navbar-collapse {
+    border: 0;
+    background-color: $cms-color-tertiary;
+
+    @include respond-min(768px) {
+        background-color: transparent;    
+    }
+}
+
+.navbar-header {
+    height: 60px;
+}
+
+.navbar__menu {
+    list-style-type: none;
+    padding-left: 0;
+
+    li {    
+        padding: 10px 0;
+    }   
+
+    a {
+        color: white;
+        display: block;
+    }
+
+    @include respond-min(768px) {
+        float: right;
+
+        li {
+            display: inline-block;
+            line-height: 60px;
+            padding: 0;
+
+            &:hover {
+                background-color: $cms-color-secondary;
+            }
+        }
+
+        a {
+            padding: 0 15px;
+        }
+    }
+}

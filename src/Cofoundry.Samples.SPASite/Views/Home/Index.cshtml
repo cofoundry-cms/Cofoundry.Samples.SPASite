@@ -4,20 +4,70 @@
     <title>Cofoundry SPA Sample</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
     <link rel="stylesheet" href="/Content/css/screen.css">
 </head>
 
 <body>
-    <main>
-        <h1 style="font-size:100px">Word to your mother</h1>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="/" class="logo">Example Inc.</a>
+            </div>
+
+            <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
+                <ul class="navbar__menu">
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="welcome">
+            <h1>Cat App Name Here</h1>
+            <a class="btn" href="/login">Login</a>
+            <a class="btn" href="/register">Register</a>
+            <a class="btn" href="/cats">Skip for now</a>
+        </div>
     </main>
 
     <script src="/Content/js/compiled/CofoundrySPA.js"></script>
 
+    <script id="catListingPage" type="text/template">
+        <div class="hero-banner">
+            <img src="/images/hero-banner-bg.jpg">
+
+            <div class="container hero-banner__overlay">
+                <div class="hero-banner__text">
+                    <h1>Cats</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                
+            </div>
+        </div>
+    </script>
+
     <script id="catItem" type="text/template">
-        <img src="<%= image %>" alt="">
-        <h2 class="name"><%= name %></h2>
-        <h3 class="breed"><%= breed %></h3>
+        <a href="/cat-details">
+            <div class="cat__image">
+                <img src="/images/sz_cat_list.jpg">
+            </div>
+            <div class="cat__details">
+                <span class="name">Fly ass shoes</span>
+                <span class="price">£80</span>
+            </div>
+        </a>
     </script>
 </body>
 </html>
