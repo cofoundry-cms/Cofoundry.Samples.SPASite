@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cofoundry.Samples.SPASite", "Cofoundry.Samples.SPASite\Cofoundry.Samples.SPASite.csproj", "{3EF426D1-45B8-4EE6-B127-76BF62D3BE66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cofoundry.Samples.SPASite.Domain", "Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj", "{3A5252B5-71B2-42CE-B9E2-B72207B1CFE0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3EF426D1-45B8-4EE6-B127-76BF62D3BE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF426D1-45B8-4EE6-B127-76BF62D3BE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF426D1-45B8-4EE6-B127-76BF62D3BE66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5252B5-71B2-42CE-B9E2-B72207B1CFE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5252B5-71B2-42CE-B9E2-B72207B1CFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5252B5-71B2-42CE-B9E2-B72207B1CFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5252B5-71B2-42CE-B9E2-B72207B1CFE0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
