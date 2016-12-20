@@ -221,6 +221,7 @@
     <Compile Include="Api\FeaturesApiController.cs" />
     <Compile Include="Api\BreedsApiController.cs" />
     <Compile Include="Api\CatsApiController.cs" />
+    <Compile Include="App_Start\RouteRegistration.cs" />
     <Compile Include="App_Start\Startup.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
