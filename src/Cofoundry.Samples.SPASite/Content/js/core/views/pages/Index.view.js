@@ -2,9 +2,7 @@
     pages.Index = Backbone.View.extend({
         el : 'main',
         template: _.template($('#indexTemplate').html()),
-        events : {
 
-        },
         initialize : function() {
             this.catsView = new collectionViews.Cats();
         },

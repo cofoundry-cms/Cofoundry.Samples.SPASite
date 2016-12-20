@@ -37,14 +37,21 @@ var CofoundrySPA = CofoundrySPA || {};
 })(CofoundrySPA.App = CofoundrySPA.App || {}, jQuery, _, Backbone);
 ;(function (models, app, $, _, Backbone) {
     models.Cat = Backbone.Model.extend({
-        initialize: function(options) {
-            console.log(options);
-        },
+        initialize: function(options) {},
         url: function() {
             if (this.id) {
-                var urlstring = 'cats/' + this.id;
+                var urlstring = '/api/cats/' + this.id;
                 return urlstring;
             }
+        },
+        parse: function(response) {
+            var parsedResponse = response;
+
+            if (this.id) {
+                parsedResponse = response.data;
+            }
+
+            return parsedResponse;
         }
     });
 })(
@@ -79,7 +86,6 @@ var CofoundrySPA = CofoundrySPA || {};
             
         },
         initialize : function() {
-            console.log('wat');
         },
         render : function() {
             if (this.currentPage) {
@@ -110,29 +116,6 @@ var CofoundrySPA = CofoundrySPA || {};
         tagName: 'div',
         className: 'col-sm-3 cat',
         template: _.template($('#catItem').html()),
-
-        render : function() {
-            this.$el.html(this.template(this.model.toJSON()));
-
-            return this;
-        }
-    });
-})(
-    CofoundrySPA.ItemViews = CofoundrySPA.ItemViews || {},
-    CofoundrySPA.Models,
-    CofoundrySPA.App,
-    jQuery,
-    _, 
-    Backbone
-);;(function (itemViews, models, app, $, _, Backbone) {
-    itemViews.CatDetails = Backbone.View.extend({
-        tagName: 'div',
-        className: 'row',
-        template: _.template($('#catDetails').html()),
-
-        initialize : function() {
-            this.render();
-        },
 
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
@@ -202,16 +185,36 @@ var CofoundrySPA = CofoundrySPA || {};
     jQuery, 
     _, 
     Backbone
-);        ;(function (pages, collectionViews, components, collections, app, $, _, Backbone) {
+);        ;(function (pages, itemViews, models, app, $, _, Backbone) {
+    pages.CatDetails = Backbone.View.extend({
+        el : 'main',
+        tagName: 'div',
+        className: 'row',
+        template: _.template($('#catDetails').html()),
+
+        initialize : function() {
+            this.render();
+        },
+        render : function() {
+            this.$el.html(this.template(this.model.toJSON()));
+
+            return this;
+        }
+    });
+})(
+    CofoundrySPA.PageViews = CofoundrySPA.PageViews || {},
+    CofoundrySPA.ItemViews,
+    CofoundrySPA.Models,
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (pages, collectionViews, components, collections, app, $, _, Backbone) {
     pages.Index = Backbone.View.extend({
         el : 'main',
         template: _.template($('#indexTemplate').html()),
-        events : {
 
-        },
         initialize : function() {
-            console.log('page-view')
-
             this.catsView = new collectionViews.Cats();
         },
         render : function() {
@@ -230,9 +233,52 @@ var CofoundrySPA = CofoundrySPA || {};
     jQuery,
     _, 
     Backbone
+);;(function (pages, itemViews, models, app, $, _, Backbone) {
+    pages.Login = Backbone.View.extend({
+        el : 'main',
+        template: _.template($('#login').html()),
+
+        initialize : function() {
+            this.render();
+        },
+        render : function() {
+            this.$el.empty().append(this.template);
+
+            return this;
+        }
+    });
+})(
+    CofoundrySPA.PageViews = CofoundrySPA.PageViews || {},
+    CofoundrySPA.ItemViews,
+    CofoundrySPA.Models,
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (pages, itemViews, models, app, $, _, Backbone) {
+    pages.Register = Backbone.View.extend({
+        el : 'main',
+        template: _.template($('#register').html()),
+
+        initialize : function() {
+            this.render();
+        },
+        render : function() {
+            this.$el.empty().append(this.template);
+
+            return this;
+        }
+    });
+})(
+    CofoundrySPA.PageViews = CofoundrySPA.PageViews || {},
+    CofoundrySPA.ItemViews,
+    CofoundrySPA.Models,
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
 );;// We have written all our lovely classes and whatnot, now let's initialise the application.
 (function(models, app, $, _, Backbone) {
-
     $(function() {
         // Initialize Backbone router and global views
         app.router   = new app.Router();
@@ -243,7 +289,6 @@ var CofoundrySPA = CofoundrySPA || {};
         });
 
         app.router.on('route:index', function() {
-            console.log('hiya');
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 
@@ -251,7 +296,7 @@ var CofoundrySPA = CofoundrySPA || {};
             var cat = new models.Cat({ id: id });
 
             cat.fetch().done(_.bind(function() {
-                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details({ model: cat }));
+                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ model: cat }));
             }, this)); 
         });
 

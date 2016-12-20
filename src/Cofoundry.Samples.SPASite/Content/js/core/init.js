@@ -1,6 +1,5 @@
 // We have written all our lovely classes and whatnot, now let's initialise the application.
 (function(models, app, $, _, Backbone) {
-
     $(function() {
         // Initialize Backbone router and global views
         app.router   = new app.Router();
@@ -11,7 +10,6 @@
         });
 
         app.router.on('route:index', function() {
-            console.log('hiya');
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 
@@ -19,7 +17,7 @@
             var cat = new models.Cat({ id: id });
 
             cat.fetch().done(_.bind(function() {
-                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details({ model: cat }));
+                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ model: cat }));
             }, this)); 
         });
 
