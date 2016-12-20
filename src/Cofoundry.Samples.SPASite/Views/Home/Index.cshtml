@@ -30,29 +30,17 @@
     </nav>
 
     <main class="main">
-        <div class="hero-banner">
-            <img src="/Content/images/cat-fight-hero.jpg">
-
-            <div class="container hero-banner__overlay">
-                <div class="hero-banner__text">
-                    <h1>CAT FIGHT!!!!</h1>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            
-        </div>
+        
     </main>
 
     <!-- TEMPLATES -->
     <script id="indexTemplate" type="text/template">
         <div class="hero-banner">
-            <img src="/images/hero-banner-bg.jpg">
+            <img src="/Content/images/cat-fight-hero.jpg">
 
             <div class="container hero-banner__overlay">
                 <div class="hero-banner__text">
-                    <h1>Cats</h1>
+                    <h1>Cats SPAring!</h1>
                 </div>
             </div>
         </div>
@@ -65,16 +53,76 @@
     </script>
 
     <script id="catItem" type="text/template">
-
         <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg">
+                <img src="/content/images/toby.jpg">
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
             </div>
         </a>
     </script>
+
+    <script id="catDetails" type="text/template">
+        <div class="col-sm-6 cat-images">
+            <img src="/content/images/toby.jpg">
+            <img src="/content/images/toby.jpg">
+        </div>
+
+        <div class="col-sm-6 cat-info">
+            <h1 class="name"><%= name %></h1>
+            <span class="breed">breed</span>
+            <p class="description"><%= description %></p>
+
+            <div class="">
+                <button id="like" class="btn btn-default">I heart <%= name %></button>
+            </div>
+        </div>
+    </script>
+
+    <script id="login" type="text/template">
+        <div class=".col-md-6 .col-md-offset-3">
+            <h2>Login</h2>
+            <form action="">
+                <div class="form-group">
+                    <label for="exampleInputEmail">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </script>
+
+    <script id="register" type="text/template">
+        <div class=".col-md-6 .col-md-offset-3">
+            <h2>Register</h2>
+            <form action="">
+                <div class="form-group">
+                    <label for="inputFirstName">First name</label>
+                    <input type="email" class="form-control" id="inputFirstName" placeholder="First name">
+                </div>
+                <div class="form-group">
+                    <label for="inputSurname">Surname</label>
+                    <input type="email" class="form-control" id="inputSurname" placeholder="Surname">
+                </div>
+                <div class="form-group">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword">Password</label>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </script>
+
+
 
     <script src="/Content/js/compiled/CofoundrySPA.js"></script>
 </body>

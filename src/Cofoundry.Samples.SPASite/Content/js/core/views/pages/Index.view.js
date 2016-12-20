@@ -1,13 +1,18 @@
 (function (pages, collectionViews, components, collections, app, $, _, Backbone) {
     pages.Index = Backbone.View.extend({
         el : 'main',
+        template: _.template($('#indexTemplate').html()),
         events : {
 
         },
         initialize : function() {
+            console.log('page-view')
+
             this.catsView = new collectionViews.Cats();
         },
         render : function() {
+            this.$el.append(this.template);
+
             this.$('.container').append(this.catsView.render().el);
             return;
         }

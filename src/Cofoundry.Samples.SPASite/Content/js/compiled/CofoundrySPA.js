@@ -36,7 +36,17 @@ var CofoundrySPA = CofoundrySPA || {};
 
 })(CofoundrySPA.App = CofoundrySPA.App || {}, jQuery, _, Backbone);
 ;(function (models, app, $, _, Backbone) {
-    models.Cat = Backbone.Model.extend({});
+    models.Cat = Backbone.Model.extend({
+        initialize: function(options) {
+            console.log(options);
+        },
+        url: function() {
+            if (this.id) {
+                var urlstring = 'cats/' + this.id;
+                return urlstring;
+            }
+        }
+    });
 })(
     CofoundrySPA.Models = CofoundrySPA.Models || {},
     CofoundrySPA.App,
@@ -69,7 +79,7 @@ var CofoundrySPA = CofoundrySPA || {};
             
         },
         initialize : function() {
-
+            console.log('wat');
         },
         render : function() {
             if (this.currentPage) {
@@ -100,6 +110,29 @@ var CofoundrySPA = CofoundrySPA || {};
         tagName: 'div',
         className: 'col-sm-3 cat',
         template: _.template($('#catItem').html()),
+
+        render : function() {
+            this.$el.html(this.template(this.model.toJSON()));
+
+            return this;
+        }
+    });
+})(
+    CofoundrySPA.ItemViews = CofoundrySPA.ItemViews || {},
+    CofoundrySPA.Models,
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (itemViews, models, app, $, _, Backbone) {
+    itemViews.CatDetails = Backbone.View.extend({
+        tagName: 'div',
+        className: 'row',
+        template: _.template($('#catDetails').html()),
+
+        initialize : function() {
+            this.render();
+        },
 
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
@@ -172,13 +205,18 @@ var CofoundrySPA = CofoundrySPA || {};
 );        ;(function (pages, collectionViews, components, collections, app, $, _, Backbone) {
     pages.Index = Backbone.View.extend({
         el : 'main',
+        template: _.template($('#indexTemplate').html()),
         events : {
 
         },
         initialize : function() {
+            console.log('page-view')
+
             this.catsView = new collectionViews.Cats();
         },
         render : function() {
+            this.$el.append(this.template);
+
             this.$('.container').append(this.catsView.render().el);
             return;
         }
@@ -193,7 +231,7 @@ var CofoundrySPA = CofoundrySPA || {};
     _, 
     Backbone
 );;// We have written all our lovely classes and whatnot, now let's initialise the application.
-(function(app, $, _, Backbone) {
+(function(models, app, $, _, Backbone) {
 
     $(function() {
         // Initialize Backbone router and global views
@@ -205,28 +243,34 @@ var CofoundrySPA = CofoundrySPA || {};
         });
 
         app.router.on('route:index', function() {
+            console.log('hiya');
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 
-        app.router.on('route:details', function () {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details());
+        app.router.on('route:details', function(id) {
+            var cat = new models.Cat({ id: id });
+
+            cat.fetch().done(_.bind(function() {
+                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details({ model: cat }));
+            }, this)); 
         });
 
-        app.router.on('route:login', function (urlslug) {
+        app.router.on('route:login', function(urlslug) {
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Login());
         });
 
-        app.router.on('route:register', function () {
+        app.router.on('route:register', function() {
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Register());
         });
 
         // Start router
-        Backbone.history.start({pushState:false, hashChange: false});
+        Backbone.history.start({pushState: true, hashChange: false});
 
         // rendering the site gets this party started.
         app.siteView.render();
     });
 })(
+    CofoundrySPA.Models,
     CofoundrySPA.App,
     jQuery,
     _,

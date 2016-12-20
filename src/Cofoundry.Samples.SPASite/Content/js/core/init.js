@@ -1,5 +1,5 @@
 // We have written all our lovely classes and whatnot, now let's initialise the application.
-(function(app, $, _, Backbone) {
+(function(models, app, $, _, Backbone) {
 
     $(function() {
         // Initialize Backbone router and global views
@@ -11,28 +11,34 @@
         });
 
         app.router.on('route:index', function() {
+            console.log('hiya');
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
         });
 
-        app.router.on('route:details', function () {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details());
+        app.router.on('route:details', function(id) {
+            var cat = new models.Cat({ id: id });
+
+            cat.fetch().done(_.bind(function() {
+                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Details({ model: cat }));
+            }, this)); 
         });
 
-        app.router.on('route:login', function (urlslug) {
+        app.router.on('route:login', function(urlslug) {
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Login());
         });
 
-        app.router.on('route:register', function () {
+        app.router.on('route:register', function() {
             app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Register());
         });
 
         // Start router
-        Backbone.history.start({pushState:false, hashChange: false});
+        Backbone.history.start({pushState: true, hashChange: false});
 
         // rendering the site gets this party started.
         app.siteView.render();
     });
 })(
+    CofoundrySPA.Models,
     CofoundrySPA.App,
     jQuery,
     _,

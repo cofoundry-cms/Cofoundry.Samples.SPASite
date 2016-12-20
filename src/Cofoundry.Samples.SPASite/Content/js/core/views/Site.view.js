@@ -5,7 +5,7 @@
             
         },
         initialize : function() {
-
+            console.log('wat');
         },
         render : function() {
             if (this.currentPage) {
