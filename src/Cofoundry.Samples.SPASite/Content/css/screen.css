@@ -1066,7 +1066,20 @@ p a {
 /*===============================
     Element styles -- mostly placeholders, meant to be extended and combined into components
 =================================*/
-/* No files to import found in core/elements/** */
+/* line 1, ../../sass/core/elements/_logo.scss */
+.logo {
+  color: white;
+  font-size: 20px;
+  margin-left: 10px;
+  margin-top: 15px;
+  display: inline-block;
+}
+/* line 8, ../../sass/core/elements/_logo.scss */
+.logo:hover {
+  text-decoration: none;
+  color: white;
+}
+
 /*===============================
     Component styles -- implementing elements in combination to form components
 =================================*/
@@ -1087,21 +1100,17 @@ p a {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 100%;
+  width: auto;
+  height: 100%;
   transform: translate(-50%, -50%);
 }
 
-/* line 20, ../../sass/core/components/cat.scss */
+/* line 21, ../../sass/core/components/cat.scss */
 .cat__details {
   margin-top: 10px;
 }
-/* line 23, ../../sass/core/components/cat.scss */
-.cat__details .name {
-  color: #005869;
-}
-/* line 27, ../../sass/core/components/cat.scss */
+/* line 28, ../../sass/core/components/cat.scss */
 .cat__details .price {
-  color: #2C2233;
   float: right;
 }
 

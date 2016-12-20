@@ -5,7 +5,9 @@
         url: '/api/cats',
 
         parse: function(response) {
-            console.log(response);
+            var cats = response.data.items;
+
+            return cats;
         }
     });
 })(

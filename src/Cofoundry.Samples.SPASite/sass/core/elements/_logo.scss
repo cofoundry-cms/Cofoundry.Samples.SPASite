@@ -1,0 +1,12 @@
+.logo {
+    color: white;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 15px;
+    display: inline-block;
+
+    &:hover {
+        text-decoration: none;
+        color: white;
+    }
+}

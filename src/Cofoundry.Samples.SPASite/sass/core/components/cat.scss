@@ -12,7 +12,8 @@
         position: absolute;
         left: 50%;
         top: 50%;
-        width: 100%;
+        width: auto;
+        height: 100%;
         transform: translate(-50%, -50%);
     }
 }
@@ -21,11 +22,11 @@
     margin-top: 10px;
 
     .name {
-        color: $cms-color-tertiary;
+        // color: $cms-color-tertiary;
     }
 
     .price {
-        color: $cms-color-primary;
+        // color: $cms-color-primary;
         float: right;
     }
 }

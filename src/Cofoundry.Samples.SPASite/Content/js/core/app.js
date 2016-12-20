@@ -4,12 +4,6 @@
 var CofoundrySPA = CofoundrySPA || {};
 
 (function(app, $, _, Backbone){
-    // Override the default template syntax
-    _.templateSettings = {
-        evaluate: /\{\[([\s\S]+?)\]\}/g,
-        interpolate: /\{\{([\s\S]+?)\}\}/g
-    };
-
     app.routeMap = {
         '(/)'               : 'index',
         'cat/:id'           : 'details',

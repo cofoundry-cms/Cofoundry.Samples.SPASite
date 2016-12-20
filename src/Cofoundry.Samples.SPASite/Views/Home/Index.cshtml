@@ -19,7 +19,7 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <a href="/" class="logo">Example Inc.</a>
+                <a href="/" class="logo">SPA Cats</a>
             </div>
 
             <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
@@ -30,17 +30,23 @@
     </nav>
 
     <main class="main">
-        <div class="welcome">
-            <h1>Cat App Name Here</h1>
-            <a class="btn" href="/login">Login</a>
-            <a class="btn" href="/register">Register</a>
-            <a class="btn" href="/cats">Skip for now</a>
+        <div class="hero-banner">
+            <img src="/Content/images/cat-fight-hero.jpg">
+
+            <div class="container hero-banner__overlay">
+                <div class="hero-banner__text">
+                    <h1>CAT FIGHT!!!!</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            
         </div>
     </main>
 
-    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
-
-    <script id="catListingPage" type="text/template">
+    <!-- TEMPLATES -->
+    <script id="indexTemplate" type="text/template">
         <div class="hero-banner">
             <img src="/images/hero-banner-bg.jpg">
 
@@ -59,15 +65,17 @@
     </script>
 
     <script id="catItem" type="text/template">
-        <a href="/cat-details">
+
+        <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="/images/sz_cat_list.jpg">
+                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg">
             </div>
             <div class="cat__details">
-                <span class="name">Fly ass shoes</span>
-                <span class="price">£80</span>
+                <span class="name"><%= name %></span>
             </div>
         </a>
     </script>
+
+    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
 </body>
 </html>
