@@ -6,8 +6,6 @@
 
         },
         initialize : function() {
-            console.log('page-view')
-
             this.catsView = new collectionViews.Cats();
         },
         render : function() {
