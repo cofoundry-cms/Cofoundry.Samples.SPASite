@@ -1,8 +1,9 @@
 html {
     font-size: 100%;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     line-height: 1.5em;
     color: $cms-color-text;
+    font-weight: 300;
 }
 
 strong, b {
@@ -19,4 +20,14 @@ u {
 
 p a {
     color: $cms-color-primary;
+}
+
+h1 {
+    font-weight: 700;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
 }
