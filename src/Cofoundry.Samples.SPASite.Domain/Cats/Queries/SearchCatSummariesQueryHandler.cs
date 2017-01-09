@@ -66,7 +66,7 @@ namespace Cofoundry.Samples.SPASite.Domain
                 cat.Name = customEntity.Title;
                 cat.Description = model.Description;
 
-                if (EnumerableHelper.IsNullOrEmpty(model.ImageAssetIds))
+                if (!EnumerableHelper.IsNullOrEmpty(model.ImageAssetIds))
                 {
                     cat.MainImage = images.GetOrDefault(model.ImageAssetIds.FirstOrDefault());
                 }
