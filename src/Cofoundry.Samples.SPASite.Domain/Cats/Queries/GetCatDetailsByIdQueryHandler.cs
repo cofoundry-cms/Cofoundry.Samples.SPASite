@@ -52,17 +52,17 @@ namespace Cofoundry.Samples.SPASite.Domain
             return cat;
         }
 
-        private Task<Breed> GetBreedAsync(int? breedId)
+        private async Task<Breed> GetBreedAsync(int? breedId)
         {
             if (!breedId.HasValue) return null;
             var query = new GetBreedByIdQuery(breedId.Value);
 
-            return _queryExecutor.ExecuteAsync(query);
+            return await _queryExecutor.ExecuteAsync(query);
         }
 
         private async Task<IEnumerable<Feature>> GetFeaturesAsync(int[] featureIds)
         {
-            if (!EnumerableHelper.IsNullOrEmpty(featureIds)) return Enumerable.Empty<Feature>();
+            if (EnumerableHelper.IsNullOrEmpty(featureIds)) return Enumerable.Empty<Feature>();
             var query = new GetFeaturesByIdRangeQuery(featureIds);
 
             var features = await _queryExecutor.ExecuteAsync(query);
@@ -75,7 +75,7 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         private async Task<IEnumerable<ImageAssetRenderDetails>> GetImagesAsync(int[] imageAssetIds)
         {
-            if (!EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Enumerable.Empty<ImageAssetRenderDetails>();
+            if (EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Enumerable.Empty<ImageAssetRenderDetails>();
 
             var images = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
 
