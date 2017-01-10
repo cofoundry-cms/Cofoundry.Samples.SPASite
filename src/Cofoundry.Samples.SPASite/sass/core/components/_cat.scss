@@ -1,5 +1,17 @@
 .cat {
     margin-bottom: 30px;
+
+    &:hover {
+        .cat__image img {
+            filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .name {
+            color: $cms-color-tertiary;
+        }
+    }
 }
 
 .cat__image {
@@ -15,6 +27,7 @@
         width: auto;
         height: 100%;
         transform: translate(-50%, -50%);
+        @include transition(filter 0.25s ease-in);
     }
 }
 
@@ -22,11 +35,8 @@
     margin-top: 10px;
 
     .name {
-        // color: $cms-color-tertiary;
-    }
-
-    .price {
-        // color: $cms-color-primary;
-        float: right;
+        color: $cms-color-text;
+        font-weight: 700;
+        font-size: 1.125rem;
     }
 }

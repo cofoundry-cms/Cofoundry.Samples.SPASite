@@ -83,6 +83,10 @@
       <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0007\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Cofoundry.Plugins.ImageResizing.ImageResizer, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0001\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0068\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
@@ -105,6 +109,10 @@
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.4.9.5, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>..\packages\HtmlAgilityPack.1.4.9.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ImageResizer, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ImageResizer.4.0.5\lib\net45\ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">

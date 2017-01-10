@@ -59,7 +59,7 @@
     <script id="catItem" type="text/template">
         <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg">
+                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg?width=263&height=263&mode=crop">
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
@@ -70,18 +70,24 @@
     <script id="catDetails" type="text/template">
         <div class="container content-block">
             <div class="col-sm-6 cat-images">
-                <img src="/content/images/toby.jpg">
-                <img src="/content/images/toby.jpg">
+                <% _.each(images, function(image) { %>
+                    <img src="/assets/images/<%= image.imageAssetId %>_<%= image.fileName %>.jpg?width=540&mode=crop">
+                <% }); %>
             </div>
 
             <div class="col-sm-6 cat-info">
-                <h1 class="name"><%= name %></h1>
-                <span class="breed">breed</span>
+                <h2 class="name"><%= name %></h2>
+                <span class="breed"><%= breed.title %></span>
+
+                <div class="characteristics">
+                    <span class="title">Characteristics:</span>
+                    <% _.each(features, function(feature) { %>
+                        <span class="characteristic"><%= feature.title %></span>
+                    <% }); %> 
+                </div>
                 <p class="description"><%= description %></p>
 
-                <div class="">
-                    <button id="like" class="btn btn-default">I heart <%= name %></button>
-                </div>
+                <button id="like" class="btn btn-love">I <span class="glyphicon glyphicon-heart"></span> <%= name %></button>
             </div>
         </div>
     </script>

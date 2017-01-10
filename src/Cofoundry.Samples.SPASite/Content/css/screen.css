@@ -1073,12 +1073,28 @@ h1 {
 h2 {
   font-weight: 700;
   font-size: 2.5rem;
+  line-height: 2.5rem;
   margin-bottom: 2rem;
 }
 
 /*===============================
     Element styles -- mostly placeholders, meant to be extended and combined into components
 =================================*/
+/* line 1, ../../sass/core/elements/_button.scss */
+.btn-love {
+  background-color: #5E0042;
+  color: white;
+}
+
+/* line 1, ../../sass/core/elements/_characteristic.scss */
+.characteristic {
+  background-color: #005869;
+  display: inline-block;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
 /* line 1, ../../sass/core/elements/_logo.scss */
 .logo {
   color: white;
@@ -1106,19 +1122,45 @@ h2 {
   height: auto;
 }
 
+/* line 2, ../../sass/core/components/_cat-info.scss */
+.cat-info h2 {
+  margin-bottom: 0;
+}
+/* line 6, ../../sass/core/components/_cat-info.scss */
+.cat-info .breed {
+  display: block;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+/* line 13, ../../sass/core/components/_cat-info.scss */
+.cat-info .description {
+  margin-bottom: 30px;
+}
+
 /* line 1, ../../sass/core/components/_cat.scss */
 .cat {
   margin-bottom: 30px;
 }
-
 /* line 5, ../../sass/core/components/_cat.scss */
+.cat:hover .cat__image img {
+  filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+}
+/* line 11, ../../sass/core/components/_cat.scss */
+.cat:hover .name {
+  color: #005869;
+}
+
+/* line 17, ../../sass/core/components/_cat.scss */
 .cat__image {
   width: 100%;
   padding-bottom: 100%;
   overflow: hidden;
   position: relative;
 }
-/* line 11, ../../sass/core/components/_cat.scss */
+/* line 23, ../../sass/core/components/_cat.scss */
 .cat__image img {
   position: absolute;
   left: 50%;
@@ -1126,15 +1168,30 @@ h2 {
   width: auto;
   height: 100%;
   transform: translate(-50%, -50%);
+  -moz-transition: filter 0.25s ease-in;
+  -o-transition: filter 0.25s ease-in;
+  -webkit-transition: filter 0.25s ease-in;
+  transition: filter 0.25s ease-in;
 }
 
-/* line 21, ../../sass/core/components/_cat.scss */
+/* line 34, ../../sass/core/components/_cat.scss */
 .cat__details {
   margin-top: 10px;
 }
-/* line 28, ../../sass/core/components/_cat.scss */
-.cat__details .price {
-  float: right;
+/* line 37, ../../sass/core/components/_cat.scss */
+.cat__details .name {
+  color: #000;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+/* line 1, ../../sass/core/components/_characteristics.scss */
+.characteristics {
+  margin-bottom: 30px;
+}
+/* line 4, ../../sass/core/components/_characteristics.scss */
+.characteristics .title {
+  display: block;
 }
 
 /*===============================
