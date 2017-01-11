@@ -165,3 +165,4 @@ e2e/**/*.js.map
 _test-output
 _temp
 src/Cofoundry.Samples.SPASite/App_Data/Files/Images
+src/Cofoundry.Samples.SPASite/App_Data/Files/ImageAssetCache

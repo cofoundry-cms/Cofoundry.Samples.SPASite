@@ -48,5 +48,32 @@ namespace Cofoundry.Samples.SPASite
         }
 
         #endregion
+
+        #region commands
+
+        [HttpPost]
+        [Route("{catId:int}/likes")]
+        public Task<IHttpActionResult> Like(int catId)
+        {
+            var command = new SetCatLikedCommand()
+            {
+                CatId = catId,
+                IsLiked = true
+            };
+            return _apiResponseHelper.RunCommandAsync(this, command);
+        }
+
+        [HttpDelete]
+        [Route("{catId:int}/likes")]
+        public Task<IHttpActionResult> UnLike(int catId)
+        {
+            var command = new SetCatLikedCommand()
+            {
+                CatId = catId
+            };
+            return _apiResponseHelper.RunCommandAsync(this, command);
+        }
+
+        #endregion
     }
 }
