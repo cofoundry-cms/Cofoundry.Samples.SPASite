@@ -1,9 +1,7 @@
 (function (models, app, $, _, Backbone) {
-    models.Register = Backbone.Model.extend({
-        url: '/api/auth/register',
+    models.Login = Backbone.Model.extend({
+        url: '/api/auth/login',
         defaults: {
-            name: '',
-            surname: '',
             email: '',
             password: ''
         }

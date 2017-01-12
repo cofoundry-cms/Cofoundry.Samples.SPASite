@@ -3,7 +3,7 @@
         el : 'main',
         template: _.template($('#register').html()),
         events: {
-            'submit .form': 'onFormSubmit'
+            'submit .register-form': 'onFormSubmit'
         },
 
         initialize : function() {
@@ -47,7 +47,7 @@
                     $input = this.$el.find('input[name="' + name + '"] + .error');
 
                 $input.text(message).removeClass('hidden');
-            }, this)
+            }, this);
         },
         clearErrors: function() {
             var errorTexts = this.$el.find('.error');
@@ -64,7 +64,7 @@
             app.User.token = token;
         },
         showRegisteredMessage: function() {
-            this.$el.find('.form').addClass('hidden');
+            this.$el.find('.register-form').addClass('hidden');
             this.$el.find('.message').removeClass('hidden');
         }
     });

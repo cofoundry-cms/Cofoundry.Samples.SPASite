@@ -67,6 +67,20 @@ var CofoundrySPA = CofoundrySPA || {};
     _, 
     Backbone
 );;(function (models, app, $, _, Backbone) {
+    models.Login = Backbone.Model.extend({
+        url: '/api/auth/login',
+        defaults: {
+            email: '',
+            password: ''
+        }
+    });
+})(
+    CofoundrySPA.Models = CofoundrySPA.Models || {},
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (models, app, $, _, Backbone) {
     models.Register = Backbone.Model.extend({
         url: '/api/auth/register',
         defaults: {
@@ -74,9 +88,6 @@ var CofoundrySPA = CofoundrySPA || {};
             surname: '',
             email: '',
             password: ''
-        },
-        parse: function(response) {
-            
         }
     });
 })(
@@ -233,7 +244,7 @@ var CofoundrySPA = CofoundrySPA || {};
             return this;
         },
         checkAuth: function() {
-            console.log(sessionStorage.User.authenticated);
+            console.log(app.User.authenticated);
             if (app.User.authenticated === true) this.showLoveButton();
         },
         showLoveButton: function() {
@@ -281,14 +292,70 @@ var CofoundrySPA = CofoundrySPA || {};
     pages.Login = Backbone.View.extend({
         el : 'main',
         template: _.template($('#login').html()),
+        events: {
+            'submit .login-form': 'onFormSubmit'
+        },
 
         initialize : function() {
+            this.model = new models.Login();
             this.render();
         },
         render : function() {
             this.$el.empty().append(this.template);
-
             return this;
+        },
+        onFormSubmit: function(e) {
+            e.preventDefault();
+            this.clearErrors();
+
+            var that = this;
+
+            this.$el.find('input[name]').each(function() {
+                that.model.set(this.name, this.value);
+            });
+
+            this.model.save(null, {
+                error: function(model, response) {
+                    var JSONResponse = JSON.parse(response.responseText),
+                        errors = JSONResponse.errors;
+
+                    that.handleErrors(errors);
+                },
+                success: function(model, response) {
+                    var token = response.data.antiForgeryToken;
+
+                    that.handleLogin(token);
+                }
+            });
+        },
+        handleErrors: function(errors) {
+            console.log(errors);
+
+            _.each(errors, function(error) {
+                var name = error.properties[0].toLowerCase(),
+                    message = error.message,
+                    $input = this.$el.find('input[name="' + name + '"] + .error');
+
+                $input.text(message).removeClass('hidden');
+            }, this);
+        },
+        clearErrors: function() {
+            var errorTexts = this.$el.find('.error');
+
+            _.each(errorTexts, function(error) {
+                if (!$(error).hasClass('hidden')) $(error).addClass('hidden');
+                $(error).text('');
+            });
+        },
+        handleLogin: function(token) {
+            this.showLoginMessage();
+
+            app.User.authenticated = true;
+            app.User.token = token;
+        },
+        showLoginMessage: function() {
+            this.$el.find('.login-form').addClass('hidden');
+            this.$el.find('.message').removeClass('hidden');
         }
     });
 })(
@@ -304,7 +371,7 @@ var CofoundrySPA = CofoundrySPA || {};
         el : 'main',
         template: _.template($('#register').html()),
         events: {
-            'submit .form': 'onFormSubmit'
+            'submit .register-form': 'onFormSubmit'
         },
 
         initialize : function() {
@@ -348,7 +415,7 @@ var CofoundrySPA = CofoundrySPA || {};
                     $input = this.$el.find('input[name="' + name + '"] + .error');
 
                 $input.text(message).removeClass('hidden');
-            }, this)
+            }, this);
         },
         clearErrors: function() {
             var errorTexts = this.$el.find('.error');
@@ -365,7 +432,7 @@ var CofoundrySPA = CofoundrySPA || {};
             app.User.token = token;
         },
         showRegisteredMessage: function() {
-            this.$el.find('.form').addClass('hidden');
+            this.$el.find('.register-form').addClass('hidden');
             this.$el.find('.message').removeClass('hidden');
         }
     });
