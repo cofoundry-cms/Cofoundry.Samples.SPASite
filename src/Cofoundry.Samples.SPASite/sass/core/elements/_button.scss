@@ -1,4 +1,10 @@
 .btn-love {
     background-color: $cms-color-secondary;
     color: white;
+    @include transition(background-color 0.2s ease-out);
+
+    &:hover {
+        background-color: $cms-color-primary;
+        color: white;
+    }
 }

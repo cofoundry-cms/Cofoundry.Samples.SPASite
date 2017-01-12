@@ -53,11 +53,11 @@ module.exports = function(grunt) {
                     '../Content/js/core/app.js',
                     '../Content/js/core/models/*.js',
                     '../Content/js/core/collections/*.js',
-                    '../Content/js/core/views/*.js',
                     '../Content/js/core/views/itemViews/*.js',
                     '../Content/js/core/views/collectionViews/*.js',
                     '../Content/js/core/views/components/*.js',
                     '../Content/js/core/views/pages/*.js',
+                    '../Content/js/core/views/*.js',
                     '../Content/js/core/init.js',
                 ],
                 // the location of the resulting JS file

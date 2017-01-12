@@ -30,7 +30,7 @@
         });
 
         // Start router
-        Backbone.history.start({pushState: true, hashChange: false});
+        Backbone.history.start({pushState: true});
 
         // rendering the site gets this party started.
         app.siteView.render();

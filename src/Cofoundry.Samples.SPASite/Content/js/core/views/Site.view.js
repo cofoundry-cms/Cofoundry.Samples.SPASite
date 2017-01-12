@@ -5,6 +5,7 @@
             
         },
         initialize : function() {
+            this.menu = new components.Menu();
         },
         render : function() {
             if (this.currentPage) {

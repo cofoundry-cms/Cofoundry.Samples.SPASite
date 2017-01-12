@@ -3,9 +3,7 @@
 
     &:hover {
         .cat__image img {
-            filter: grayscale(100%);
-            -moz-filter: grayscale(100%);
-            -webkit-filter: grayscale(100%);
+            transform: translate(-50%, -50%) scale(1.1);
         }
 
         .name {
@@ -27,7 +25,8 @@
         width: auto;
         height: 100%;
         transform: translate(-50%, -50%);
-        @include transition(filter 0.25s ease-in);
+        transform-origin: 50% 50%;
+        @include transition(transform 1s linear);
     }
 }
 

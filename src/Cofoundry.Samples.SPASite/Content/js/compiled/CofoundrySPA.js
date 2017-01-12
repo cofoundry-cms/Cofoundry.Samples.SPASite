@@ -30,6 +30,13 @@ var CofoundrySPA = CofoundrySPA || {};
     // Global event publish/subscribe
     app.Events = _.extend({}, Backbone.Events);
 
+    // Global user profile
+    app.User = {
+        'authenticated': false,
+        'token': null,
+        'favourites': []
+    };
+
     app.Router = Backbone.Router.extend({
         routes : app.routeMap
     });
@@ -37,7 +44,6 @@ var CofoundrySPA = CofoundrySPA || {};
 })(CofoundrySPA.App = CofoundrySPA.App || {}, jQuery, _, Backbone);
 ;(function (models, app, $, _, Backbone) {
     models.Cat = Backbone.Model.extend({
-        initialize: function(options) {},
         url: function() {
             if (this.id) {
                 var urlstring = '/api/cats/' + this.id;
@@ -52,6 +58,25 @@ var CofoundrySPA = CofoundrySPA || {};
             }
 
             return parsedResponse;
+        }
+    });
+})(
+    CofoundrySPA.Models = CofoundrySPA.Models || {},
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (models, app, $, _, Backbone) {
+    models.Register = Backbone.Model.extend({
+        url: '/api/auth/register',
+        defaults: {
+            name: '',
+            surname: '',
+            email: '',
+            password: ''
+        },
+        parse: function(response) {
+            
         }
     });
 })(
@@ -79,48 +104,26 @@ var CofoundrySPA = CofoundrySPA || {};
     jQuery,
     _, 
     Backbone
-);;(function (components, pages, app, $, _, Backbone) {
-    app.SiteView = Backbone.View.extend({
-        el : 'html',
-        events : {
-            
-        },
-        initialize : function() {
-        },
-        render : function() {
-            if (this.currentPage) {
-                this.currentPage.render();
-            }
-            
-            return;
-        },
-        setCurrentPage : function(pageView) {
-            this.currentPage = pageView;
-        },
-        enterLoadingState : function() {
-            this.$el.addClass('JS-loading');
-        },
-        exitLoadingState : function() {
-            this.$el.removeClass('JS-loading');
-        }
-    });
-})(
-    CofoundrySPA.ComponentViews,
-    CofoundrySPA.PageViews,
-    CofoundrySPA.App,
-    jQuery, 
-    _, 
-    Backbone
 );;(function (itemViews, models, app, $, _, Backbone) {
     itemViews.Cat = Backbone.View.extend({
         tagName: 'div',
         className: 'col-sm-3 cat',
         template: _.template($('#catItem').html()),
+        events: {
+            'click': 'goToCat'
+        },
 
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
 
             return this;
+        },
+        goToCat: function(e) {
+            e.preventDefault();
+
+            var id = this.model.get('catId');
+
+            app.router.navigate('/cat/' + id, {trigger: true})
         }
     });
 })(
@@ -185,6 +188,34 @@ var CofoundrySPA = CofoundrySPA || {};
     jQuery, 
     _, 
     Backbone
+);        ;(function (components, app, $, _, Backbone) {
+    components.Menu = Backbone.View.extend({
+        el : '.navbar',
+        events : {
+            'click .logo': 'goHome',
+            'click .navbar__link': 'linkNavigate'
+        },
+        initialize: function () {
+
+        },
+        goHome: function(e) {
+            e.preventDefault();
+            app.router.navigate('', {trigger: true});
+        },
+        linkNavigate: function(e) {
+            e.preventDefault();
+
+            var url = e.target.pathname;
+
+            app.router.navigate(url, {trigger: true});
+        }
+    });
+})(
+    CofoundrySPA.ComponentViews = CofoundrySPA.ComponentViews || {},
+    CofoundrySPA.App,
+    jQuery, 
+    _, 
+    Backbone
 );        ;(function (pages, itemViews, models, app, $, _, Backbone) {
     pages.CatDetails = Backbone.View.extend({
         el : 'main',
@@ -198,7 +229,15 @@ var CofoundrySPA = CofoundrySPA || {};
         render : function() {
             this.$el.html(this.template(this.model.toJSON()));
 
+            this.checkAuth();
             return this;
+        },
+        checkAuth: function() {
+            console.log(sessionStorage.User.authenticated);
+            if (app.User.authenticated === true) this.showLoveButton();
+        },
+        showLoveButton: function() {
+            this.$el.find('.btn-love').removeClass('hidden');
         }
     });
 })(
@@ -216,12 +255,17 @@ var CofoundrySPA = CofoundrySPA || {};
 
         initialize : function() {
             this.catsView = new collectionViews.Cats();
+            this.checkAuth();
+            this.render();
         },
         render : function() {
-            this.$el.append(this.template);
+            this.$el.empty().append(this.template);
 
             this.$('.container').append(this.catsView.render().el);
             return;
+        },
+        checkAuth: function() {
+            console.log(app.User.authenticated);
         }
     });
 })(
@@ -259,14 +303,70 @@ var CofoundrySPA = CofoundrySPA || {};
     pages.Register = Backbone.View.extend({
         el : 'main',
         template: _.template($('#register').html()),
+        events: {
+            'submit .form': 'onFormSubmit'
+        },
 
         initialize : function() {
+            this.model = new models.Register();
             this.render();
         },
         render : function() {
             this.$el.empty().append(this.template);
-
             return this;
+        },
+        onFormSubmit: function(e) {
+            e.preventDefault();
+            this.clearErrors();
+
+            var that = this;
+
+            this.$el.find('input[name]').each(function() {
+                that.model.set(this.name, this.value);
+            });
+
+            this.model.save(null, {
+                error: function(model, response) {
+                    var JSONResponse = JSON.parse(response.responseText),
+                        errors = JSONResponse.errors;
+
+                    that.handleErrors(errors);
+                },
+                success: function(model, response) {
+                    var token = response.data.antiForgeryToken;
+
+                    that.handleRegister(token);
+                }
+            });
+        },
+        handleErrors: function(errors) {
+            console.log(errors);
+
+            _.each(errors, function(error) {
+                var name = error.properties[0].toLowerCase(),
+                    message = error.message,
+                    $input = this.$el.find('input[name="' + name + '"] + .error');
+
+                $input.text(message).removeClass('hidden');
+            }, this)
+        },
+        clearErrors: function() {
+            var errorTexts = this.$el.find('.error');
+
+            _.each(errorTexts, function(error) {
+                if (!$(error).hasClass('hidden')) $(error).addClass('hidden');
+                $(error).text('');
+            });
+        },
+        handleRegister: function(token) {
+            this.showRegisteredMessage();
+
+            app.User.authenticated = true;
+            app.User.token = token;
+        },
+        showRegisteredMessage: function() {
+            this.$el.find('.form').addClass('hidden');
+            this.$el.find('.message').removeClass('hidden');
         }
     });
 })(
@@ -275,6 +375,39 @@ var CofoundrySPA = CofoundrySPA || {};
     CofoundrySPA.Models,
     CofoundrySPA.App,
     jQuery,
+    _, 
+    Backbone
+);;(function (components, pages, app, $, _, Backbone) {
+    app.SiteView = Backbone.View.extend({
+        el : 'html',
+        events : {
+            
+        },
+        initialize : function() {
+            this.menu = new components.Menu();
+        },
+        render : function() {
+            if (this.currentPage) {
+                this.currentPage.render();
+            }
+            
+            return;
+        },
+        setCurrentPage : function(pageView) {
+            this.currentPage = pageView;
+        },
+        enterLoadingState : function() {
+            this.$el.addClass('JS-loading');
+        },
+        exitLoadingState : function() {
+            this.$el.removeClass('JS-loading');
+        }
+    });
+})(
+    CofoundrySPA.ComponentViews,
+    CofoundrySPA.PageViews,
+    CofoundrySPA.App,
+    jQuery, 
     _, 
     Backbone
 );;// We have written all our lovely classes and whatnot, now let's initialise the application.
@@ -309,7 +442,7 @@ var CofoundrySPA = CofoundrySPA || {};
         });
 
         // Start router
-        Backbone.history.start({pushState: true, hashChange: false});
+        Backbone.history.start({pushState: true});
 
         // rendering the site gets this party started.
         app.siteView.render();

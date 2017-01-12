@@ -1,0 +1,9 @@
+.message {
+    border: 1px solid $cms-color-border;
+    border-radius: 10px;
+    padding: 20px;
+
+    p:last-of-type {
+        margin-bottom: 0;
+    }
+}
