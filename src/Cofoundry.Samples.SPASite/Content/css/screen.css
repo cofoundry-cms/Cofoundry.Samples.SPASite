@@ -1084,6 +1084,15 @@ h2 {
 .btn-love {
   background-color: #5E0042;
   color: white;
+  -moz-transition: background-color 0.2s ease-out;
+  -o-transition: background-color 0.2s ease-out;
+  -webkit-transition: background-color 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
+}
+/* line 6, ../../sass/core/elements/_button.scss */
+.btn-love:hover {
+  background-color: #2C2233;
+  color: white;
 }
 
 /* line 1, ../../sass/core/elements/_characteristic.scss */
@@ -1144,23 +1153,21 @@ h2 {
 }
 /* line 5, ../../sass/core/components/_cat.scss */
 .cat:hover .cat__image img {
-  filter: grayscale(100%);
-  -moz-filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
+  transform: translate(-50%, -50%) scale(1.1);
 }
-/* line 11, ../../sass/core/components/_cat.scss */
+/* line 9, ../../sass/core/components/_cat.scss */
 .cat:hover .name {
   color: #005869;
 }
 
-/* line 17, ../../sass/core/components/_cat.scss */
+/* line 15, ../../sass/core/components/_cat.scss */
 .cat__image {
   width: 100%;
   padding-bottom: 100%;
   overflow: hidden;
   position: relative;
 }
-/* line 23, ../../sass/core/components/_cat.scss */
+/* line 21, ../../sass/core/components/_cat.scss */
 .cat__image img {
   position: absolute;
   left: 50%;
@@ -1168,17 +1175,18 @@ h2 {
   width: auto;
   height: 100%;
   transform: translate(-50%, -50%);
-  -moz-transition: filter 0.25s ease-in;
-  -o-transition: filter 0.25s ease-in;
-  -webkit-transition: filter 0.25s ease-in;
-  transition: filter 0.25s ease-in;
+  transform-origin: 50% 50%;
+  -moz-transition: -moz-transform 1s linear;
+  -o-transition: -o-transform 1s linear;
+  -webkit-transition: -webkit-transform 1s linear;
+  transition: transform 1s linear;
 }
 
-/* line 34, ../../sass/core/components/_cat.scss */
+/* line 33, ../../sass/core/components/_cat.scss */
 .cat__details {
   margin-top: 10px;
 }
-/* line 37, ../../sass/core/components/_cat.scss */
+/* line 36, ../../sass/core/components/_cat.scss */
 .cat__details .name {
   color: #000;
   font-weight: 700;

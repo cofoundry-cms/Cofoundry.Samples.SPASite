@@ -1,6 +1,5 @@
 (function (models, app, $, _, Backbone) {
     models.Cat = Backbone.Model.extend({
-        initialize: function(options) {},
         url: function() {
             if (this.id) {
                 var urlstring = '/api/cats/' + this.id;

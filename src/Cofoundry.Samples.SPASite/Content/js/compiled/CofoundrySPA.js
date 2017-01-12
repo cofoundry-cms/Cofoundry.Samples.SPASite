@@ -37,7 +37,6 @@ var CofoundrySPA = CofoundrySPA || {};
 })(CofoundrySPA.App = CofoundrySPA.App || {}, jQuery, _, Backbone);
 ;(function (models, app, $, _, Backbone) {
     models.Cat = Backbone.Model.extend({
-        initialize: function(options) {},
         url: function() {
             if (this.id) {
                 var urlstring = '/api/cats/' + this.id;
@@ -52,6 +51,25 @@ var CofoundrySPA = CofoundrySPA || {};
             }
 
             return parsedResponse;
+        }
+    });
+})(
+    CofoundrySPA.Models = CofoundrySPA.Models || {},
+    CofoundrySPA.App,
+    jQuery,
+    _, 
+    Backbone
+);;(function (models, app, $, _, Backbone) {
+    models.Register = Backbone.Model.extend({
+        url: '/api/auth/register',
+        defaults: {
+            name: '',
+            surname: '',
+            email: '',
+            password: ''
+        },
+        parse: function(response) {
+            
         }
     });
 })(
@@ -259,15 +277,37 @@ var CofoundrySPA = CofoundrySPA || {};
     pages.Register = Backbone.View.extend({
         el : 'main',
         template: _.template($('#register').html()),
+        events: {
+            'submit .form': 'onFormSubmit'
+        },
 
         initialize : function() {
+            this.model = new models.Register();
             this.render();
         },
         render : function() {
             this.$el.empty().append(this.template);
 
             return this;
-        }
+        },
+        onFormSubmit: function(e) {
+            e.preventDefault();
+
+            var that = this;
+
+            this.$el.find('input[name]').each(function() {
+                that.model.set(this.name, this.value);
+            });
+
+            this.model.save(null, {
+                error: function(model, response) {
+                    console.log('error', response);
+                },
+                success: function(model, response) {
+                    console.log('error', response);  
+                }
+            });
+        },
     });
 })(
     CofoundrySPA.PageViews = CofoundrySPA.PageViews || {},
