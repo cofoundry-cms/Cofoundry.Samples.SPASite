@@ -5,12 +5,17 @@
 
         initialize : function() {
             this.catsView = new collectionViews.Cats();
+            this.checkAuth();
+            this.render();
         },
         render : function() {
-            this.$el.append(this.template);
+            this.$el.empty().append(this.template);
 
             this.$('.container').append(this.catsView.render().el);
             return;
+        },
+        checkAuth: function() {
+            console.log(app.User.authenticated);
         }
     });
 })(

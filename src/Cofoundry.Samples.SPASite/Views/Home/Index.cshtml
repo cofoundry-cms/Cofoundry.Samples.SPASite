@@ -25,9 +25,9 @@
 
             <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
                 <ul class="navbar__menu">
-                    <li><a href="/">Cats</a></li>
-                    <li><a href="/login">Login</a></li>
-                    <li><a href="/register">Register</a></li>
+                    <li><a href="/" class="navbar__link">Cats</a></li>
+                    <li><a href="/login" class="navbar__link">Login</a></li>
+                    <li><a href="/register" class="navbar__link">Register</a></li>
                 </ul>
             </div>
         </div>
@@ -86,8 +86,7 @@
                     <% }); %> 
                 </div>
                 <p class="description"><%= description %></p>
-
-                <button id="like" class="btn btn-love">I <span class="glyphicon glyphicon-heart"></span> <%= name %></button>
+                <button id="like" class="btn btn-love hidden">I <span class="glyphicon glyphicon-heart"></span> <%= name %></button>
             </div>
         </div>
     </script>
@@ -101,13 +100,18 @@
                         <div class="form-group">
                             <label for="exampleInputEmail">Email address</label>
                             <input type="email" class="form-control" id="exampleInputEmail" placeholder="Email">
+                            <span class="error hidden"></span>
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword">Password</label>
                             <input type="password" class="form-control" id="exampleInputPassword" placeholder="Password">
+                            <span class="error hidden"></span>
                         </div>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
+                    <div class="message hidden">
+                        <p>Login successful!</p>
+                    </div>
                 </div>
             </div>
         </div>
