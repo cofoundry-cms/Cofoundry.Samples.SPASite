@@ -26,7 +26,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         public Task ExecuteAsync(SetCatLikedCommand command, IExecutionContext executionContext)
         {
             return _entityFrameworkSqlExecutor
-                .ExecuteCommandAsync("Cofoundry.CustomEntity_AddDraft",
+                .ExecuteCommandAsync("app.CatLike_SetLiked",
                  new SqlParameter("@CatId", command.CatId),
                  new SqlParameter("@UserId", executionContext.UserContext.UserId),
                  new SqlParameter("@IsLiked", command.IsLiked),
