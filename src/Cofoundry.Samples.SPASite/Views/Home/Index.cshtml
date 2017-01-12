@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model HomeViewModel
+
+<!DOCTYPE html>
 <html>
 <head>
     <title>Cofoundry SPA Sample</title>
@@ -157,5 +159,12 @@
 
 
     <script src="/Content/js/compiled/CofoundrySPA.js"></script>
+
+    <script>
+        var SPACatsState = {
+            csrfToken: "@Model.XSRFToken",
+            isLoggedIn: @Model.IsLoggedIn.ToString().ToLower()
+        };
+    </script>
 </body>
 </html>

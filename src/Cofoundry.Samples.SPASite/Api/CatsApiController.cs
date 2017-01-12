@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite
 {
     [RoutePrefix("api/cats")]
+    [ValidateApiAntiForgeryToken]
     public class CatsApiController : ApiController
     {
         private readonly IQueryExecutor _queryExecutor;
@@ -51,6 +52,7 @@ namespace Cofoundry.Samples.SPASite
 
         #region commands
 
+        [Authorize]
         [HttpPost]
         [Route("{catId:int}/likes")]
         public Task<IHttpActionResult> Like(int catId)
@@ -63,6 +65,7 @@ namespace Cofoundry.Samples.SPASite
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
 
+        [Authorize]
         [HttpDelete]
         [Route("{catId:int}/likes")]
         public Task<IHttpActionResult> UnLike(int catId)

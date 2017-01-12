@@ -173,35 +173,44 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Breeds\Definition\BreedCustomEntityDefinition.cs" />
-    <Compile Include="Breeds\Definition\BreedDataModel.cs" />
-    <Compile Include="Breeds\Queries\GetAllBreedsQuery.cs" />
-    <Compile Include="Breeds\Queries\GetAllBreedsQueryHandler.cs" />
-    <Compile Include="Cats\Commands\SetCatLikedCommandHandler.cs" />
-    <Compile Include="Cats\Commands\SetCatLikedCommand.cs" />
-    <Compile Include="Cats\Queries\GetCatDetailsByIdQuery.cs" />
-    <Compile Include="Cats\Queries\GetCatDetailsByIdQueryHandler.cs" />
-    <Compile Include="Breeds\Models\Breed.cs" />
-    <Compile Include="Breeds\Queries\GetBreedByIdQuery.cs" />
-    <Compile Include="Breeds\Queries\GetBreedByIdQueryHandler.cs" />
-    <Compile Include="Cats\Definition\CatCustomEntityDefinition.cs" />
-    <Compile Include="Cats\Definition\CatDataModel.cs" />
-    <Compile Include="Cats\Models\CatDetails.cs" />
-    <Compile Include="Cats\Models\CatSummary.cs" />
-    <Compile Include="Cats\Queries\SearchCatSummariesQueryHandler.cs" />
-    <Compile Include="Cats\Queries\SearchCatSummariesQuery.cs" />
-    <Compile Include="Features\Definition\FeatureCustomEntityDefinition.cs" />
-    <Compile Include="Features\Definition\FeatureDataModel.cs" />
-    <Compile Include="Features\Model\Feature.cs" />
-    <Compile Include="Features\Queries\GetAllFeaturesQuery.cs" />
-    <Compile Include="Features\Queries\GetFeaturesByIdRangeQuery.cs" />
-    <Compile Include="Features\Queries\GetAllFeaturesQueryHandler.cs" />
-    <Compile Include="Features\Queries\GetFeaturesByIdRangeQueryHandler.cs" />
-    <Compile Include="Members\Command\LogMemberInCommand.cs" />
-    <Compile Include="Members\Command\LogMemberInCommandHandler.cs" />
-    <Compile Include="Members\Command\RegisterMemberAndLogInCommandHandler.cs" />
-    <Compile Include="Members\Command\RegisterMemberAndLogInCommand.cs" />
-    <Compile Include="Members\Definition\MemberUserArea.cs" />
+    <Compile Include="Data\Bootstrap\DataDependencyRegistration.cs" />
+    <Compile Include="Data\Cats\CatLikeCountMap.cs" />
+    <Compile Include="Data\Cats\CatLikeMap.cs" />
+    <Compile Include="Data\Cats\CatLikeCount.cs" />
+    <Compile Include="Data\Cats\CatLike.cs" />
+    <Compile Include="Data\SPASiteDbContext.cs" />
+    <Compile Include="Domain\Breeds\Definition\BreedCustomEntityDefinition.cs" />
+    <Compile Include="Domain\Breeds\Definition\BreedDataModel.cs" />
+    <Compile Include="Domain\Breeds\Queries\GetAllBreedsQuery.cs" />
+    <Compile Include="Domain\Breeds\Queries\GetAllBreedsQueryHandler.cs" />
+    <Compile Include="Domain\Cats\Commands\SetCatLikedCommandHandler.cs" />
+    <Compile Include="Domain\Cats\Commands\SetCatLikedCommand.cs" />
+    <Compile Include="Domain\Cats\Queries\GetCatSummariesByUserLikedQuery.cs" />
+    <Compile Include="Domain\Cats\Queries\GetCatDetailsByIdQuery.cs" />
+    <Compile Include="Domain\Cats\Queries\GetCatDetailsByIdQueryHandler.cs" />
+    <Compile Include="Domain\Breeds\Models\Breed.cs" />
+    <Compile Include="Domain\Breeds\Queries\GetBreedByIdQuery.cs" />
+    <Compile Include="Domain\Breeds\Queries\GetBreedByIdQueryHandler.cs" />
+    <Compile Include="Domain\Cats\Definition\CatCustomEntityDefinition.cs" />
+    <Compile Include="Domain\Cats\Definition\CatDataModel.cs" />
+    <Compile Include="Domain\Cats\Models\CatDetails.cs" />
+    <Compile Include="Domain\Cats\Models\CatSummary.cs" />
+    <Compile Include="Domain\Cats\Queries\GetCatSummariesByUserLikedQueryHandler.cs" />
+    <Compile Include="Domain\Cats\Queries\SearchCatSummariesQueryHandler.cs" />
+    <Compile Include="Domain\Cats\Queries\SearchCatSummariesQuery.cs" />
+    <Compile Include="Domain\Features\Definition\FeatureCustomEntityDefinition.cs" />
+    <Compile Include="Domain\Features\Definition\FeatureDataModel.cs" />
+    <Compile Include="Domain\Features\Model\Feature.cs" />
+    <Compile Include="Domain\Features\Queries\GetAllFeaturesQuery.cs" />
+    <Compile Include="Domain\Features\Queries\GetFeaturesByIdRangeQuery.cs" />
+    <Compile Include="Domain\Features\Queries\GetAllFeaturesQueryHandler.cs" />
+    <Compile Include="Domain\Features\Queries\GetFeaturesByIdRangeQueryHandler.cs" />
+    <Compile Include="Domain\Members\Command\LogMemberInCommand.cs" />
+    <Compile Include="Domain\Members\Command\LogMemberInCommandHandler.cs" />
+    <Compile Include="Domain\Members\Command\RegisterMemberAndLogInCommandHandler.cs" />
+    <Compile Include="Domain\Members\Command\RegisterMemberAndLogInCommand.cs" />
+    <Compile Include="Domain\Members\Definition\MemberUserArea.cs" />
+    <Compile Include="Install\UpdatePackageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -209,8 +218,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Members\Models\" />
-    <Folder Include="Members\Queries\" />
+    <Folder Include="Domain\Members\Models\" />
+    <Folder Include="Domain\Members\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Install\Db\Schema\0001.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Install\Db\StoredProcedures\app.CatLike_SetLiked.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
