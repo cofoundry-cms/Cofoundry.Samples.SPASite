@@ -1,8 +1,10 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
+using Cofoundry.Samples.SPASite.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,16 +18,19 @@ namespace Cofoundry.Samples.SPASite.Domain
         private readonly ICustomEntityRepository _customEntityRepository;
         private readonly IImageAssetRepository _imageAssetRepository;
         private readonly IQueryExecutor _queryExecutor;
+        private readonly SPASiteDbContext _dbContext;
 
         public GetCatDetailsByIdQueryHandler(
             ICustomEntityRepository customEntityRepository,
             IImageAssetRepository imageAssetRepository,
-            IQueryExecutor queryExecutor
+            IQueryExecutor queryExecutor,
+            SPASiteDbContext dbContext
             )
         {
             _customEntityRepository = customEntityRepository;
             _imageAssetRepository = imageAssetRepository;
             _queryExecutor = queryExecutor;
+            _dbContext = dbContext;
         }
 
         public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
@@ -48,8 +53,19 @@ namespace Cofoundry.Samples.SPASite.Domain
             cat.Breed = await GetBreedAsync(model.BreedId);
             cat.Features = await GetFeaturesAsync(model.FeatureIds);
             cat.Images = await GetImagesAsync(model.ImageAssetIds);
+            cat.TotalLikes = await GetLikeCount(customEntity.CustomEntityId);
 
             return cat;
+        }
+
+        private Task<int> GetLikeCount(int catId)
+        {
+            return _dbContext
+                .CatLikeCounts
+                .AsNoTracking()
+                .Where(c => c.CatCustomEntityId == catId)
+                .Select(c => c.TotalLikes)
+                .FirstOrDefaultAsync();
         }
 
         private async Task<Breed> GetBreedAsync(int? breedId)

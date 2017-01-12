@@ -13,6 +13,12 @@ namespace Cofoundry.Samples.SPASite.App_Start
         public void RegisterRoutes(RouteCollection routes)
         {
             routes.MapRoute(
+                name: "SignOut",
+                url: "sign-out",
+                defaults: new { controller = "Home", action = "SignOut" }
+            );
+
+            routes.MapRoute(
                 name: "CatchAll", 
                 url: "{*url}", 
                 defaults: new { controller = "Home", action = "Index" }

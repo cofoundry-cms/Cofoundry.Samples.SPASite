@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class CatSummary
+    public class CatDetails
     {
         public int CatId { get; set; }
 
@@ -15,6 +15,12 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         public string Description { get; set; }
 
-        public ImageAssetRenderDetails MainImage { get; set; }
+        public int TotalLikes { get; set; }
+
+        public Breed Breed { get; set; }
+
+        public IEnumerable<Feature> Features { get; set; }
+
+        public IEnumerable<ImageAssetRenderDetails> Images { get; set; }
     }
 }
