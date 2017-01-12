@@ -1060,16 +1060,22 @@ u {
 }
 
 /* line 21, ../../sass/core/base/_typography.scss */
+p {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+/* line 26, ../../sass/core/base/_typography.scss */
 p a {
   color: #2C2233;
 }
 
-/* line 25, ../../sass/core/base/_typography.scss */
+/* line 31, ../../sass/core/base/_typography.scss */
 h1 {
   font-weight: 700;
 }
 
-/* line 29, ../../sass/core/base/_typography.scss */
+/* line 35, ../../sass/core/base/_typography.scss */
 h2 {
   font-weight: 700;
   font-size: 2.5rem;
@@ -1104,6 +1110,14 @@ h2 {
   border-radius: 10px;
 }
 
+/* line 1, ../../sass/core/elements/_error.scss */
+.error {
+  display: block;
+  color: red;
+  font-size: .75rem;
+  margin: 5px 0 10px;
+}
+
 /* line 1, ../../sass/core/elements/_logo.scss */
 .logo {
   color: white;
@@ -1116,6 +1130,17 @@ h2 {
 .logo:hover {
   text-decoration: none;
   color: white;
+}
+
+/* line 1, ../../sass/core/elements/_message.scss */
+.message {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+}
+/* line 6, ../../sass/core/elements/_message.scss */
+.message p:last-of-type {
+  margin-bottom: 0;
 }
 
 /*===============================
