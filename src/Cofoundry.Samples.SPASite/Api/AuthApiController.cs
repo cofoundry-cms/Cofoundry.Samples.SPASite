@@ -15,12 +15,12 @@ namespace Cofoundry.Samples.SPASite
     [RoutePrefix("api/auth")]
     public class AuthApiController : ApiController
     {
-        private readonly ApiResponseHelper _apiResponseHelper;
+        private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IAntiCSRFService _antiCSRFService;
         private readonly ICommandExecutor _commandExecutor;
 
         public AuthApiController(
-            ApiResponseHelper apiResponseHelper,
+            IApiResponseHelper apiResponseHelper,
             IAntiCSRFService antiCSRFService,
             ICommandExecutor commandExecutor
             )

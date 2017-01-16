@@ -17,12 +17,12 @@ namespace Cofoundry.Samples.SPASite
     public class CurrentUserApiController : ApiController
     {
         private readonly IQueryExecutor _queryExecutor;
-        private readonly ApiResponseHelper _apiResponseHelper;
+        private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IUserContextService _userContextService;
 
         public CurrentUserApiController(
             IQueryExecutor queryExecutor,
-            ApiResponseHelper apiResponseHelper,
+            IApiResponseHelper apiResponseHelper,
             IUserContextService userContextService
             )
         {
