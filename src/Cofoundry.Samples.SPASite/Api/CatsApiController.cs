@@ -15,11 +15,11 @@ namespace Cofoundry.Samples.SPASite
     public class CatsApiController : ApiController
     {
         private readonly IQueryExecutor _queryExecutor;
-        private readonly ApiResponseHelper _apiResponseHelper;
+        private readonly IApiResponseHelper _apiResponseHelper;
 
         public CatsApiController(
             IQueryExecutor queryExecutor,
-            ApiResponseHelper apiResponseHelper
+            IApiResponseHelper apiResponseHelper
             )
         {
             _queryExecutor = queryExecutor;

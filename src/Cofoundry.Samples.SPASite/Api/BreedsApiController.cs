@@ -14,11 +14,11 @@ namespace Cofoundry.Samples.SPASite
     public class BreedsApiController : ApiController
     {
         private readonly IQueryExecutor _queryExecutor;
-        private readonly ApiResponseHelper _apiResponseHelper;
+        private readonly IApiResponseHelper _apiResponseHelper;
 
         public BreedsApiController(
             IQueryExecutor queryExecutor,
-            ApiResponseHelper apiResponseHelper
+            IApiResponseHelper apiResponseHelper
             )
         {
             _queryExecutor = queryExecutor;

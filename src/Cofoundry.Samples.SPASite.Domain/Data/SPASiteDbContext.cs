@@ -39,20 +39,7 @@ namespace Cofoundry.Samples.SPASite.Data
         {
             modelBuilder
                 .UseDefaultConfig()
-                .MapCofoundryUsers()
-                .MapCofoundryEntityDefinitions()
-                .MapCofoundryImageAssets()
-                .MapCofoundryCustomEntities()
-                .Map(new PageTemplateMap())
-                .Map(new PageTemplateSectionMap())
-                .Map(new ModuleTemplateMap())
-                .Map(new PageModuleTypeMap())
-                .Map(new PageGroupItemMap())
-                .Map(new PageGroupMap())
-                .Map(new PageVersionModuleMap())
-                .Map(new PageMap())
-                .Map(new PageTagMap())
-                .Map(new PageVersionMap())
+                .MapCofoundryContent()
                 .Map(new CatLikeMap())
                 .Map(new CatLikeCountMap());
         }
