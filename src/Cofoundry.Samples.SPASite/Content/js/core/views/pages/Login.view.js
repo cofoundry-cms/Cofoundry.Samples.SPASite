@@ -60,8 +60,7 @@
         handleLogin: function(token) {
             this.showLoginMessage();
 
-            app.User.authenticated = true;
-            app.User.token = token;
+            app.User.set({authenticated: true, token: token});
         },
         showLoginMessage: function() {
             this.$el.find('.login-form').addClass('hidden');

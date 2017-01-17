@@ -60,8 +60,7 @@
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
-            app.User.authenticated = true;
-            app.User.token = token;
+            app.User.set({authenticated: true, token: token});
         },
         showRegisteredMessage: function() {
             this.$el.find('.register-form').addClass('hidden');

@@ -15,7 +15,6 @@
             return;
         },
         checkAuth: function() {
-            console.log(app.User.authenticated);
         }
     });
 })(

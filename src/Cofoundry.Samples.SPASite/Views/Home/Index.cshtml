@@ -28,8 +28,9 @@
             <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
                 <ul class="navbar__menu">
                     <li><a href="/" class="navbar__link">Cats</a></li>
-                    <li><a href="/login" class="navbar__link">Login</a></li>
-                    <li><a href="/register" class="navbar__link">Register</a></li>
+                    <li><a href="/login" class="navbar__link unauth">Login</a></li>
+                    <li><a href="/register" class="navbar__link unauth">Register</a></li>
+                    <li><a href="/signout" class="navbar__link logout auth hidden">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -51,7 +52,7 @@
             </div>
         </div>
 
-        <div class="container content-block">
+        <div id="cont" class="container content-block">
             <div class="row">
                 
             </div>
@@ -80,6 +81,7 @@
             <div class="col-sm-6 cat-info">
                 <h2 class="name"><%= name %></h2>
                 <span class="breed"><%= breed.title %></span>
+                <span class="likes"><%= totalLikes %></span>
 
                 <div class="characteristics">
                     <span class="title">Characteristics:</span>
@@ -156,15 +158,14 @@
         </div>
     </script>
 
-
-
-    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
-
     <script>
         var SPACatsState = {
             csrfToken: "@Model.XSRFToken",
             isLoggedIn: @Model.IsLoggedIn.ToString().ToLower()
         };
     </script>
+
+    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
+
 </body>
 </html>

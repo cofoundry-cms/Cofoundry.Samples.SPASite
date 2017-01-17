@@ -14,13 +14,6 @@ var CofoundrySPA = CofoundrySPA || {};
     // Global event publish/subscribe
     app.Events = _.extend({}, Backbone.Events);
 
-    // Global user profile
-    app.User = {
-        'authenticated': false,
-        'token': null,
-        'favourites': []
-    };
-
     app.Router = Backbone.Router.extend({
         routes : app.routeMap
     });
