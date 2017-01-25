@@ -17,7 +17,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         [CustomEntity(BreedCustomEntityDefinition.DefinitionCode)]
         public int? BreedId { get; set; }
 
-        [Display(Name = "Features", Description = "Extra features or proiperties that help categorize this cat")]
+        [Display(Name = "Features", Description = "Extra features or properties that help categorize this cat")]
         [CustomEntityCollection(FeatureCustomEntityDefinition.DefinitionCode)]
         public int[] FeatureIds { get; set; }
 

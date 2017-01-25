@@ -41,7 +41,7 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         /// <summary>
         /// A short description that shows up as a tooltip for the admin 
-        /// module.
+        /// panel.
         /// </summary>
         public string Description
         {
