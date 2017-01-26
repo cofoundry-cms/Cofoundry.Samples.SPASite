@@ -5,11 +5,14 @@
         className: 'row',
         template: _.template($('#catDetails').html()),
         events: {
-            'click .btn-love': 'toggleLink'
+            'click .btn-love': 'handleLike'
         },
+
+        like: true,
 
         initialize : function() {
             this.render();
+            this.listenTo(this.model, 'change', this.setLikeState);
         },
         render : function() {
             this.$el.empty().html(this.template(this.model.toJSON()));
@@ -24,33 +27,42 @@
                 id = this.model.get('catId');
 
             _.each(favs, function(fav) {
-                console.log(id, fav.catId);
-                if (id === fav.catId) this.changeButton();
+                if (id === fav.catId) this.setLikeState();
             }, this);
         },
         showLoveButton: function() {
             this.$el.find('.btn-love').removeClass('hidden');
         },
         changeButton: function() {
-            console.log('core');
+            var $button = this.$el.find('.btn-love'),
+                catName = this.model.get('name');
 
-            this.$el.find('.btn-love').html('UN-<span class="glyphicon glyphicon-heart"></span> <%= name %>').addClass('unlike');
+            if ($button.hasClass('unlike')) {
+                $button.html('I <span class="glyphicon glyphicon-heart"></span> ' + catName).removeClass('unlike'); 
+            } else {
+                $button.html('UN-<span class="glyphicon glyphicon-heart"></span> ' + catName).addClass('unlike');
+            }
         },
-        toggleLink: function(e) {
+        setLikeState: function() {
+            this.like = !this.like;
+            this.changeButton();
+
+            return this;
+        },
+        handleLike: function() {
             var id = this.model.get('catId'),
                 url = '/api/cats/' + id + '/likes',
                 type = 'POST',
                 that = this;
 
-            if ($(e.target).hasClass('unlike')) type = 'DELETE';
+            if (this.like === false) type = 'DELETE';
             
             $.ajax({
                 url: url,
                 type: type
             })
-            .done(function( data ) {
+            .done(function( data, response ) {
                 that.model.fetch();
-                that.render();
             });
         }
     });
