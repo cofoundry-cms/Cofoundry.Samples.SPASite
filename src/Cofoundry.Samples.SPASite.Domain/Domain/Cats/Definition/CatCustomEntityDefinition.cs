@@ -7,6 +7,13 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// Each custom entity requires a definition class which provides settings
+    /// describing the entity and how it should behave.
+    /// 
+    /// This definition uses ICustomisedTermCustomEntityDefinition to change
+    /// the display name for the title property to be 'Name'.
+    /// </summary>
     public class CatCustomEntityDefinition : ICustomisedTermCustomEntityDefinition<CatDataModel>
     {
         /// <summary>

@@ -159,6 +159,11 @@
     </script>
 
     <script>
+        @*
+            Our SPA requires some initial state to load so we output
+            these as an js object    
+        *@
+        
         var SPACatsState = {
             csrfToken: "@Model.XSRFToken",
             isLoggedIn: @Model.IsLoggedIn.ToString().ToLower()

@@ -9,6 +9,10 @@ using Cofoundry.Plugins.DependencyInjection.AutoFac.Web;
 
 namespace Cofoundry.Samples.SPASite.App_Start
 {
+    /// <summary>
+    /// Cofoundry requires the use of an Owin Startup class. For more information
+    /// on the startup process see https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup
+    /// </summary>
     public class Startup
     {
         public void Configuration(IAppBuilder app)

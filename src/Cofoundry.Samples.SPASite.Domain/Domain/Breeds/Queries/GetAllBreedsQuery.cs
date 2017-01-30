@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// A query handler always requires a query definition, even if there are 
+    /// no parameters. As a shortcut you can instead make use of the generic 
+    /// GetAllQuery so that you only need to define a handler.
+    /// 
+    /// See https://github.com/cofoundry-cms/cofoundry/wiki/CQS#query-helpers for
+    /// more information on Query Helpers
+    /// </summary>
     public class GetAllBreedsQuery : IQuery<IEnumerable<Breed>>
     {
     }

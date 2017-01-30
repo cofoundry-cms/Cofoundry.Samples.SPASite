@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// Each custom entity requires a definition class which provides settings
+    /// describing the entity and how it should behave.
+    /// </summary>
     public class FeatureCustomEntityDefinition : ICustomEntityDefinition<FeatureDataModel>
     {
         /// <summary>

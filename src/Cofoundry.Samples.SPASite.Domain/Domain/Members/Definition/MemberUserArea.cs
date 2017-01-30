@@ -10,6 +10,8 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// <summary>
     /// Defining a user area allows us to provide an enhanced
     /// to people who have signed up to the site.
+    /// 
+    /// For more info see https://github.com/cofoundry-cms/cofoundry/wiki/User-Areas
     /// </summary>
     public class MemberUserArea : IUserArea
     {

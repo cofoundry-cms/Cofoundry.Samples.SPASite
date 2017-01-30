@@ -11,6 +11,7 @@ namespace Cofoundry.Samples.SPASite
     {
         protected void Application_Start()
         {
+            // Startup logic is in the owin startup file (App_Start/Startup.cs) 
         }
     }
 }

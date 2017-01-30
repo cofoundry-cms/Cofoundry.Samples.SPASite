@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// This query uses IIgnorePermissionCheckHandler because the permissions
+    /// are already checked by the underlying custom entity query.
+    /// </summary>
     public class GetAllBreedsQueryHandler
         : IAsyncQueryHandler<GetAllBreedsQuery, IEnumerable<Breed>>
         , IIgnorePermissionCheckHandler
@@ -32,6 +36,11 @@ namespace Cofoundry.Samples.SPASite.Domain
             return breeds;
         }
 
+        /// <summary>
+        /// For simplicity this logic is just repeated between handlers, but to 
+        /// reduce repetition you could use a library like AutoMapper or break out
+        /// the logic into a seperate mapper class and inject it in.
+        /// </summary>
         private Breed MapBreed(CustomEntityRenderSummary customEntity)
         {
             var breed = new Breed();

@@ -9,10 +9,16 @@ using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Cofoundry.Web;
 using Cofoundry.Core;
+using Cofoundry.Core.Validation;
 
 namespace Cofoundry.Samples.SPASite
 {
+    /// <summary>
+    /// Our auth api has to work a bit differently to other api controllers because we
+    /// need to pass back the CSRF token once the user has been logged in.
+    /// </summary>
     [RoutePrefix("api/auth")]
+    [ValidateApiAntiForgeryToken]
     public class AuthApiController : ApiController
     {
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -50,7 +56,7 @@ namespace Cofoundry.Samples.SPASite
         {
             await _commandExecutor.ExecuteAsync(command);
 
-            // In order to process further requests we need to pass back the new anto csrf token.
+            // In order to process further requests we need to pass back the new csrf token.
             var data = new
             {
                 AntiForgeryToken = _antiCSRFService.GetToken()

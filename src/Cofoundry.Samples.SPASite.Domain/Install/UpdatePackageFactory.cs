@@ -8,6 +8,15 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain.Install
 {
+    /// <summary>
+    /// Cofoundry has an automatic update system that runs when the app is 
+    /// started. This mainly runs sql scripts, but it can also run .net 
+    /// code too. Your app as well as any plugin can tap into this process 
+    /// to run updates. This example uses a base class to use the default
+    /// process for updating a database using sql scripts.
+    /// 
+    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Auto-Update
+    /// </summary>
     public class UpdatePackageFactory : BaseDbOnlyUpdatePackageFactory
     {
         /// <summary>

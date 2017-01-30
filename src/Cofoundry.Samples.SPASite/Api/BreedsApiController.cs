@@ -38,7 +38,7 @@ namespace Cofoundry.Samples.SPASite
         }
 
         [HttpGet]
-        [Route("{catId:int}")]
+        [Route("{breedId:int}")]
         public async Task<IHttpActionResult> Get(int breedId)
         {
             var query = new GetBreedByIdQuery(breedId);

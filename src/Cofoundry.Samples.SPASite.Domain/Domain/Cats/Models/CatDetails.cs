@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// The difference between the CatDetails and CatSummary model
+    /// is small, but it illustrates how the CQS lets us tailor 
+    /// models returned from queries to fit different situations.
+    /// </summary>
     public class CatDetails
     {
         public int CatId { get; set; }

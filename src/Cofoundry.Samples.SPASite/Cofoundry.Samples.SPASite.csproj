@@ -68,11 +68,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0081\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0088\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0081\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0088\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -88,11 +88,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0081\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0088\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web.Admin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0081\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0088\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
@@ -300,6 +300,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\core\components\cat.css" />
+    <Content Include="Content\css\screen.css" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\cat-fight-hero.jpg" />
+    <Content Include="Content\js\compiled\CofoundrySPA.js" />
+    <Content Include="Content\js\core\app.js" />
+    <Content Include="Content\js\core\collections\Cats.collection.js" />
+    <Content Include="Content\js\core\helper.js" />
+    <Content Include="Content\js\core\init.js" />
+    <Content Include="Content\js\core\models\Cat.model.js" />
+    <Content Include="Content\js\core\models\Login.model.js" />
+    <Content Include="Content\js\core\models\Register.model.js" />
+    <Content Include="Content\js\core\models\User.model.js" />
+    <Content Include="Content\js\core\views\collectionViews\Cats.view.js" />
+    <Content Include="Content\js\core\views\components\Component.view.js" />
+    <Content Include="Content\js\core\views\components\Menu.view.js" />
+    <Content Include="Content\js\core\views\itemViews\Cat.view.js" />
+    <Content Include="Content\js\core\views\pages\CatDetails.view.js" />
+    <Content Include="Content\js\core\views\pages\Index.view.js" />
+    <Content Include="Content\js\core\views\pages\Login.view.js" />
+    <Content Include="Content\js\core\views\pages\Register.view.js" />
+    <Content Include="Content\js\core\views\Site.view.js" />
+    <Content Include="Content\js\third_party\backbone\backbone-min.js" />
+    <Content Include="Content\js\third_party\backbone\jquery-2.1.4.min.js" />
+    <Content Include="Content\js\third_party\backbone\underscore-min.js" />
+    <Content Include="Content\js\third_party\bootstrap.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -322,6 +349,11 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Api\ReadMe.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

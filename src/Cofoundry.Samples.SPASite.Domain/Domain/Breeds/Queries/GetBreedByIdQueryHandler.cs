@@ -31,6 +31,11 @@ namespace Cofoundry.Samples.SPASite.Domain
             return MapBreed(customEntity);
         }
 
+        /// <summary>
+        /// For simplicity this logic is just repeated between handlers, but to 
+        /// reduce repetition you could use a library like AutoMapper or break out
+        /// the logic into a seperate mapper class and inject it in.
+        /// </summary>
         private Breed MapBreed(CustomEntityRenderSummary customEntity)
         {
             var breed = new Breed();

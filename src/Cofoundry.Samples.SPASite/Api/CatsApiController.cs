@@ -52,6 +52,11 @@ namespace Cofoundry.Samples.SPASite
 
         #region commands
 
+        /// <summary>
+        /// Note that here we use the standard Authorize attribute to restrict
+        /// access to this endpoint because you need to be logged in to 'like' a 
+        /// cat
+        /// </summary>
         [Authorize]
         [HttpPost]
         [Route("{catId:int}/likes")]
@@ -62,6 +67,9 @@ namespace Cofoundry.Samples.SPASite
                 CatId = catId,
                 IsLiked = true
             };
+
+            // IApiResponseHelper will validate the command and permissions before executing it
+            // and return any validation errors in a formatted data object
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
 

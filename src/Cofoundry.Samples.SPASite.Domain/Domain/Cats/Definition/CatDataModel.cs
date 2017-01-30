@@ -8,6 +8,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// Data model classes can use data annotations to describe the data
+    /// and provide hints to the admin UI as to how the property should be 
+    /// displayed.
+    /// 
+    /// In this data model we link out to images and other custom entities.
+    /// Although the data model serialized as json in the database, the
+    /// relationships are stored separately which allows us to provide a certain
+    /// amount of data integrity.
+    /// </summary>
     public class CatDataModel : ICustomEntityVersionDataModel
     {
         [Display(Description = "A short description or tag-line to describe the cat")]

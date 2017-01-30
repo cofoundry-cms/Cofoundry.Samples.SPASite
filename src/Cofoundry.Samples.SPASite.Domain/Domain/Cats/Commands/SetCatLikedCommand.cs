@@ -9,6 +9,11 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// Here we can use ILoggableCommand to mark this class as
+    /// loggable. The default logger only logs to the debugger,
+    /// but you can use a plugin to extend this functionality
+    /// </summary>
     public class SetCatLikedCommand : ICommand, ILoggableCommand
     {
         [PositiveInteger]

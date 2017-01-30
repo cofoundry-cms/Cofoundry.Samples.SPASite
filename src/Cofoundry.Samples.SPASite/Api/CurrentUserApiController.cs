@@ -12,7 +12,6 @@ using Cofoundry.Domain;
 namespace Cofoundry.Samples.SPASite
 {
     [Authorize]
-    [ValidateApiAntiForgeryToken]
     [RoutePrefix("api/users/current")]
     public class CurrentUserApiController : ApiController
     {
@@ -37,6 +36,9 @@ namespace Cofoundry.Samples.SPASite
         [Route("cats/liked")]
         public async Task<IHttpActionResult> GetLikedCats()
         {
+            // Here we get the userId of the currently logged in user. We could have
+            // done this in the query handler, but instead we've chosen to keep the query 
+            // flexible so it can be re-used in a more generic fashion
             var userContext = _userContextService.GetCurrentContext();
             var query = new GetCatSummariesByUserLikedQuery(userContext.UserId.Value);
             var results = await _queryExecutor.ExecuteAsync(query);

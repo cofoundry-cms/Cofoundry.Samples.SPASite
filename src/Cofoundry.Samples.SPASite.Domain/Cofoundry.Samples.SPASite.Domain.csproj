@@ -43,15 +43,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0081\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0088\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0081\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0088\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0081\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0088\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
@@ -304,6 +304,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Install\Db\StoredProcedures\app.CatLike_SetLiked.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Domain\ReadMe.md" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
