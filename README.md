@@ -2,7 +2,7 @@
 
 An example demonstrating how to use Cofoundry to create a SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features.
 
-The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this layer separate from your web layer.
+The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
 
 - Startup registration
 - Route Registration
