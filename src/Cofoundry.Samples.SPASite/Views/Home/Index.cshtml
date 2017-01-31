@@ -30,7 +30,7 @@
                     <li><a href="/" class="navbar__link">Cats</a></li>
                     <li><a href="/login" class="navbar__link unauth">Login</a></li>
                     <li><a href="/register" class="navbar__link unauth">Register</a></li>
-                    <li><a href="/signout" class="navbar__link logout auth hidden">Logout</a></li>
+                    <li><form action="/sign-out" method="POST"><button class="navbar__link logout auth hidden" type="submit">Logout</button></form></li>
                 </ul>
             </div>
         </div>
@@ -62,7 +62,7 @@
     <script id="catItem" type="text/template">
         <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg?width=263&height=263&mode=crop">
+                <img src="<%= mainImage %>?width=263&height=263&mode=crop?width=263&height=263&mode=crop">
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
@@ -74,7 +74,7 @@
         <div class="container content-block">
             <div class="col-sm-6 cat-images">
                 <% _.each(images, function(image) { %>
-                    <img src="/assets/images/<%= image.imageAssetId %>_<%= image.fileName %>.jpg?width=540&mode=crop">
+                    <img src="<%= image %>?width=540&mode=crop">
                 <% }); %>
             </div>
 
@@ -111,6 +111,7 @@
                             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
                             <span class="error hidden"></span>
                         </div>
+                        <span class="error form-error hidden"></span>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                     <div class="message hidden">
@@ -147,6 +148,7 @@
                             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password">
                             <span class="error hidden"></span>
                         </div>
+                        <span class="error form-error hidden"></span>
                         <button type="submit" class="btn btn-default">Submit</button>
                     </form>
                     <div class="message hidden">

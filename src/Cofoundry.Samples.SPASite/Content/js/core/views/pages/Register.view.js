@@ -1,4 +1,4 @@
-(function (pages, itemViews, models, app, $, _, Backbone) {
+(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Register = Backbone.View.extend({
         el : 'main',
         template: _.template($('#register').html()),
@@ -39,8 +39,6 @@
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,
@@ -60,6 +58,7 @@
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
+            helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
         },
         showRegisteredMessage: function() {
@@ -74,5 +73,6 @@
     CofoundrySPA.App,
     jQuery,
     _, 
-    Backbone
+    Backbone,
+    Helper
 );
