@@ -1073,9 +1073,12 @@ p a {
 /* line 31, ../../sass/core/base/_typography.scss */
 h1 {
   font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  margin-bottom: 2rem;
 }
 
-/* line 35, ../../sass/core/base/_typography.scss */
+/* line 38, ../../sass/core/base/_typography.scss */
 h2 {
   font-weight: 700;
   font-size: 2.5rem;
@@ -1263,7 +1266,7 @@ h2 {
 @media screen and (min-width: 800px) {
   /* line 1, ../../sass/core/blocks/_hero-banner.scss */
   .hero-banner {
-    height: 450px;
+    height: 400px;
   }
 }
 
@@ -1275,12 +1278,13 @@ h2 {
 
 /* line 35, ../../sass/core/blocks/_hero-banner.scss */
 .hero-banner__text {
+  background-color: white;
   position: absolute;
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  color: white;
-  padding-left: 15px;
+  padding: 30px;
+  width: 50%;
 }
 
 /* line 1, ../../sass/core/blocks/_navbar.scss */
