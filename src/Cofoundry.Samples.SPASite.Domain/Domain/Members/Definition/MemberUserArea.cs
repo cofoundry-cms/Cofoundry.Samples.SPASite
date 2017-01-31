@@ -29,11 +29,12 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         /// <summary>
         /// Display name of the area, used in the Cofoundry admin panel
-        /// as the navigation link to manage your users
+        /// as the navigation link to manage your users. This should be singular
+        /// because "Users" is appended to the link text.
         /// </summary>
         public string Name
         {
-            get { return "SPACat Members"; }
+            get { return "SPA Cat"; }
         }
 
         /// <summary>
