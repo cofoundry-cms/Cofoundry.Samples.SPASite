@@ -1,4 +1,4 @@
-(function (pages, itemViews, models, app, $, _, Backbone) {
+(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Login = Backbone.View.extend({
         el : 'main',
         template: _.template($('#login').html()),
@@ -42,11 +42,18 @@
             console.log(errors);
 
             _.each(errors, function(error) {
-                var name = error.properties[0].toLowerCase(),
+                if (error.properties.length > 0) {
+                    var name = error.properties[0].toLowerCase(),
                     message = error.message,
                     $input = this.$el.find('input[name="' + name + '"] + .error');
 
-                $input.text(message).removeClass('hidden');
+                    $input.text(message).removeClass('hidden');
+                } else {
+                    var message = error.message,
+                        $formError = this.$el.find('.form-error');
+
+                    $formError.text(message).removeClass('hidden');
+                }
             }, this);
         },
         clearErrors: function() {
@@ -60,7 +67,10 @@
         handleLogin: function(token) {
             this.showLoginMessage();
 
+            helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
+
+            console.log(app.User.get('token'));
         },
         showLoginMessage: function() {
             this.$el.find('.login-form').addClass('hidden');
@@ -74,5 +84,6 @@
     CofoundrySPA.App,
     jQuery,
     _, 
-    Backbone
+    Backbone,
+    Helper
 );

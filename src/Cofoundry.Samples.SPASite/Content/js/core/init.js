@@ -9,11 +9,14 @@
         app.siteView = new app.SiteView();
 
         // Checks if user is logged in and if true sets the user data
+        helper.prefilter(SPACatsState.csrfToken);
+
         if (SPACatsState.isLoggedIn === true) {
-            helper.prefilter(SPACatsState.csrfToken);
             app.User.set({authenticated: true, token: SPACatsState.csrfToken});
             app.User.getFavourites();
         }
+
+        console.log(app.User.get('token'));
 
         $(window).load(function (e) {
             app.Events.trigger('app loaded', e);

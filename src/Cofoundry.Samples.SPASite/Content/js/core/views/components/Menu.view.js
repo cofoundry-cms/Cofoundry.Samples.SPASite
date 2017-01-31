@@ -3,8 +3,7 @@
         el : '.navbar',
         events : {
             'click .logo': 'goHome',
-            'click .navbar__link': 'linkNavigate',
-            'click .logout': 'handleLogout'
+            'click .navbar__link': 'linkNavigate'
         },
         initialize: function() {
             this.$unAuthLinks = this.$el.find('.unauth');
@@ -15,7 +14,7 @@
             app.router.navigate('', {trigger: true});
         },
         linkNavigate: function(e) {
-            if (e.target.pathname === '/signout') return;
+            if (e.target.tagName === 'BUTTON') return;
 
             e.preventDefault();
 

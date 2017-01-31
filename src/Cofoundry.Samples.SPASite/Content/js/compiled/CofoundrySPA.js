@@ -231,8 +231,7 @@ var CofoundrySPA = CofoundrySPA || {};
         el : '.navbar',
         events : {
             'click .logo': 'goHome',
-            'click .navbar__link': 'linkNavigate',
-            'click .logout': 'handleLogout'
+            'click .navbar__link': 'linkNavigate'
         },
         initialize: function() {
             this.$unAuthLinks = this.$el.find('.unauth');
@@ -243,7 +242,7 @@ var CofoundrySPA = CofoundrySPA || {};
             app.router.navigate('', {trigger: true});
         },
         linkNavigate: function(e) {
-            if (e.target.pathname === '/signout') return;
+            if (e.target.tagName === 'BUTTON') return;
 
             e.preventDefault();
 
@@ -386,7 +385,7 @@ var CofoundrySPA = CofoundrySPA || {};
     jQuery,
     _, 
     Backbone
-);;(function (pages, itemViews, models, app, $, _, Backbone) {
+);;(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Login = Backbone.View.extend({
         el : 'main',
         template: _.template($('#login').html()),
@@ -430,11 +429,18 @@ var CofoundrySPA = CofoundrySPA || {};
             console.log(errors);
 
             _.each(errors, function(error) {
-                var name = error.properties[0].toLowerCase(),
+                if (error.properties.length > 0) {
+                    var name = error.properties[0].toLowerCase(),
                     message = error.message,
                     $input = this.$el.find('input[name="' + name + '"] + .error');
 
-                $input.text(message).removeClass('hidden');
+                    $input.text(message).removeClass('hidden');
+                } else {
+                    var message = error.message,
+                        $formError = this.$el.find('.form-error');
+
+                    $formError.text(message).removeClass('hidden');
+                }
             }, this);
         },
         clearErrors: function() {
@@ -448,7 +454,10 @@ var CofoundrySPA = CofoundrySPA || {};
         handleLogin: function(token) {
             this.showLoginMessage();
 
+            helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
+
+            console.log(app.User.get('token'));
         },
         showLoginMessage: function() {
             this.$el.find('.login-form').addClass('hidden');
@@ -462,8 +471,9 @@ var CofoundrySPA = CofoundrySPA || {};
     CofoundrySPA.App,
     jQuery,
     _, 
-    Backbone
-);;(function (pages, itemViews, models, app, $, _, Backbone) {
+    Backbone,
+    Helper
+);;(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Register = Backbone.View.extend({
         el : 'main',
         template: _.template($('#register').html()),
@@ -525,7 +535,10 @@ var CofoundrySPA = CofoundrySPA || {};
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
+            helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
+
+            console.log(app.User.get('token'));
         },
         showRegisteredMessage: function() {
             this.$el.find('.register-form').addClass('hidden');
@@ -539,7 +552,8 @@ var CofoundrySPA = CofoundrySPA || {};
     CofoundrySPA.App,
     jQuery,
     _, 
-    Backbone
+    Backbone,
+    Helper
 );;(function (components, pages, app, $, _, Backbone) {
     app.SiteView = Backbone.View.extend({
         el : 'html',
@@ -584,11 +598,14 @@ var CofoundrySPA = CofoundrySPA || {};
         app.siteView = new app.SiteView();
 
         // Checks if user is logged in and if true sets the user data
+        helper.prefilter(SPACatsState.csrfToken);
+
         if (SPACatsState.isLoggedIn === true) {
-            helper.prefilter(SPACatsState.csrfToken);
             app.User.set({authenticated: true, token: SPACatsState.csrfToken});
             app.User.getFavourites();
         }
+
+        console.log(app.User.get('token'));
 
         $(window).load(function (e) {
             app.Events.trigger('app loaded', e);

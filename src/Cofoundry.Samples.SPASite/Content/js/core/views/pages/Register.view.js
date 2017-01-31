@@ -1,4 +1,4 @@
-(function (pages, itemViews, models, app, $, _, Backbone) {
+(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Register = Backbone.View.extend({
         el : 'main',
         template: _.template($('#register').html()),
@@ -60,7 +60,10 @@
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
+            helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
+
+            console.log(app.User.get('token'));
         },
         showRegisteredMessage: function() {
             this.$el.find('.register-form').addClass('hidden');
@@ -74,5 +77,6 @@
     CofoundrySPA.App,
     jQuery,
     _, 
-    Backbone
+    Backbone,
+    Helper
 );

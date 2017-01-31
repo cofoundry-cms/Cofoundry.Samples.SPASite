@@ -29,7 +29,9 @@
         padding: 10px 0;
     }   
 
-    a {
+    .navbar__link {
+        background-color: transparent;
+        border: 0;
         color: white;
         display: block;
     }
@@ -47,7 +49,7 @@
             }
         }
 
-        a {
+        .navbar__link {
             padding: 0 15px;
         }
     }
