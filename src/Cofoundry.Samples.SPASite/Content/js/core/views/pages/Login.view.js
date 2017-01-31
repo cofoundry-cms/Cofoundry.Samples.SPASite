@@ -39,8 +39,6 @@
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 if (error.properties.length > 0) {
                     var name = error.properties[0].toLowerCase(),
@@ -69,8 +67,6 @@
 
             helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
-
-            console.log(app.User.get('token'));
         },
         showLoginMessage: function() {
             this.$el.find('.login-form').addClass('hidden');

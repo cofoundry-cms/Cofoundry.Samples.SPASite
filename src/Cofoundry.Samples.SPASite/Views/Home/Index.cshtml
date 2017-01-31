@@ -62,7 +62,7 @@
     <script id="catItem" type="text/template">
         <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="/assets/images/<%= mainImage.imageAssetId %>_<%= mainImage.fileName %>.jpg?width=263&height=263&mode=crop">
+                <img src="<%= mainImage %>?width=263&height=263&mode=crop?width=263&height=263&mode=crop">
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
@@ -74,7 +74,7 @@
         <div class="container content-block">
             <div class="col-sm-6 cat-images">
                 <% _.each(images, function(image) { %>
-                    <img src="/assets/images/<%= image.imageAssetId %>_<%= image.fileName %>.jpg?width=540&mode=crop">
+                    <img src="<%= image %>?width=540&mode=crop">
                 <% }); %>
             </div>
 

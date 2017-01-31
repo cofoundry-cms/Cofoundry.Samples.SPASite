@@ -39,8 +39,6 @@
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,
@@ -62,8 +60,6 @@
 
             helper.prefilter(token);
             app.User.set({authenticated: true, token: token});
-
-            console.log(app.User.get('token'));
         },
         showRegisteredMessage: function() {
             this.$el.find('.register-form').addClass('hidden');

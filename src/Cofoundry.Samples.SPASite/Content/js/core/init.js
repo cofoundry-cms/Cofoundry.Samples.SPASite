@@ -16,8 +16,6 @@
             app.User.getFavourites();
         }
 
-        console.log(app.User.get('token'));
-
         $(window).load(function (e) {
             app.Events.trigger('app loaded', e);
         });
