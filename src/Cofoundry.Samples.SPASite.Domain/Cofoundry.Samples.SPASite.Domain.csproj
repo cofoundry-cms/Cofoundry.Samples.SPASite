@@ -283,6 +283,8 @@
     <Compile Include="Domain\Features\Queries\GetFeaturesByIdRangeQuery.cs" />
     <Compile Include="Domain\Features\Queries\GetAllFeaturesQueryHandler.cs" />
     <Compile Include="Domain\Features\Queries\GetFeaturesByIdRangeQueryHandler.cs" />
+    <Compile Include="MailTemplates\Bootstrap\AssemblyResourceRegistration.cs" />
+    <Compile Include="MailTemplates\NewUserWelcomeMailTemplate.cs" />
     <Compile Include="Domain\Members\Command\LogMemberInCommand.cs" />
     <Compile Include="Domain\Members\Command\LogMemberInCommandHandler.cs" />
     <Compile Include="Domain\Members\Command\RegisterMemberAndLogInCommandHandler.cs" />
@@ -293,6 +295,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <EmbeddedResource Include="MailTemplates\NewUserWelcomeMail_Text.cshtml" />
+    <EmbeddedResource Include="MailTemplates\NewUserWelcomeMail_Html.cshtml" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

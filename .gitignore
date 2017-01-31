@@ -166,3 +166,4 @@ _test-output
 _temp
 src/Cofoundry.Samples.SPASite/App_Data/Files/Images
 src/Cofoundry.Samples.SPASite/App_Data/Files/ImageAssetCache
+src/Cofoundry.Samples.SPASite/App_Data/Emails

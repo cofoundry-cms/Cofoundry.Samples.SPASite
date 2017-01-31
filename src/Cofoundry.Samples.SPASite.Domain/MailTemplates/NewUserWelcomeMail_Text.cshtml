@@ -1,0 +1,16 @@
+﻿@inherits EmailTemplateBase<NewUserWelcomeMailTemplate>
+@using Cofoundry.Samples.SPASite.Domain
+@using Cofoundry.Core.Mail
+
+@{
+    Layout = null;
+}
+
+Hi @Model.FirstName
+
+Thanks for registering with SPA Cats!
+
+Login <a href="@Url.ToAbsolute("/")">here</a>
+
+Thanks,
+SPA Cats
