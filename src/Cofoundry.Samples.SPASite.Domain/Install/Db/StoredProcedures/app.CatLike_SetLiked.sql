@@ -29,13 +29,13 @@ begin
 		delete from app.CatLike where CatCustomEntityId = @CatId and UserId = @UserId
 	end
 
-	
 	merge app.CatLikeCount as destination
 		using (
-			select CatCustomEntityId, Count(UserId) 
-			from app.CatLike 
-			where CatCustomEntityId = @CatId
-			group by CatCustomEntityId
+			select @CatId, Count(UserId) 
+			from app.CatLike cl
+			right outer join Cofoundry.CustomEntity c on cl.CatCustomEntityId = c.CustomEntityId
+			where cl.CatCustomEntityId = @CatId or c.CustomEntityId = @CatId
+			group by cl.CatCustomEntityId
 		) src (CatCustomEntityId, TotalLikes)
         on destination.CatCustomEntityId = src.CatCustomEntityId
 	when matched then 
