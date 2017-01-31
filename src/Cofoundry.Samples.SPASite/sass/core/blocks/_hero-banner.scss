@@ -23,7 +23,7 @@
     }
 
     @include respond-min(800px) {
-        height: 450px;
+        height: 400px;
     }
 }
 
@@ -33,10 +33,11 @@
 }
 
 .hero-banner__text {
+    background-color: white;
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(-50%);
-    color: white;
-    padding-left: 15px;
+    padding: 30px;
+    width: 50%;
 }
