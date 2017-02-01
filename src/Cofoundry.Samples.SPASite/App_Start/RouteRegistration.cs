@@ -41,7 +41,7 @@ namespace Cofoundry.Samples.SPASite.App_Start
 
             routes.MapRoute(
                 name: "Cats",
-                url: "cats*",
+                url: "cat/{id}",
                 defaults: new { controller = "Home", action = "Index" }
             );
 

@@ -82,7 +82,9 @@
 
             <div class="col-sm-6 cat-info">
                 <h2 class="name"><%= name %></h2>
+                <% if (breed) { %>
                 <span class="breed"><%= breed.title %></span>
+                <% } %>
                 <span class="likes"><%= totalLikes %></span>
 
                 <div class="characteristics">

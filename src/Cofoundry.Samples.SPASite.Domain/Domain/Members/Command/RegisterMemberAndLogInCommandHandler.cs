@@ -1,4 +1,5 @@
-﻿using Cofoundry.Domain;
+﻿using Cofoundry.Core.Mail;
+using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
 using Cofoundry.Web;
@@ -20,13 +21,15 @@ namespace Cofoundry.Samples.SPASite.Domain
         private readonly IUserContextService _userContextService;
         private readonly ILoginService _loginService;
         private readonly IExecutionContextFactory _executionContextFactory;
+        private readonly IMailService _mailService;
         
         public RegisterMemberAndLogInCommandHandler(
             CofoundryDbContext dbContext,
             ICommandExecutor commandExecutor,
             IUserContextService userContextService,
             ILoginService loginService,
-            IExecutionContextFactory executionContextFactory
+            IExecutionContextFactory executionContextFactory,
+            IMailService mailService
             )
         {
             _dbContext = dbContext;
@@ -34,12 +37,11 @@ namespace Cofoundry.Samples.SPASite.Domain
             _userContextService = userContextService;
             _loginService = loginService;
             _executionContextFactory = executionContextFactory;
+            _mailService = mailService;
         }
 
         public async Task ExecuteAsync(RegisterMemberAndLogInCommand command, IExecutionContext executionContext)
         {
-            // if user does not exist
-
             // TODO: Implement a better way to define, auto-populate and get ahold of roles programatically
             var roleId = await _dbContext
                 .Roles
@@ -48,6 +50,41 @@ namespace Cofoundry.Samples.SPASite.Domain
                 .Select(r => r.RoleId)
                 .SingleOrDefaultAsync();
 
+            var addUserCommand = MapAddUserCommand(command, roleId);
+
+            await SaveNewUser(executionContext, addUserCommand);
+            await SendWelcomeNotification(command);
+
+            // Log the user in. Note that the new user id is set in the OutputUserId which is a 
+            // convention used by the CQS framework (see https://github.com/cofoundry-cms/cofoundry/wiki/CQS)
+            await _loginService.LogAuthenticatedUserInAsync(addUserCommand.OutputUserId, true);
+        }
+
+        /// <summary>
+        /// Because we're not logged in, we'll need to elevate permissions to 
+        /// add a new user account. IExecutionContextFactory can be used to get 
+        /// an execution context for the system user, which we then use to
+        /// execute the command.
+        /// </summary>
+        private async Task SaveNewUser(IExecutionContext executionContext, AddUserCommand addUserCommand)
+        {
+            var systemExecutionContext = await _executionContextFactory.CreateSystemUserExecutionContextAsync(executionContext);
+
+            await _commandExecutor.ExecuteAsync(addUserCommand, systemExecutionContext);
+        }
+
+        /// <summary>
+        /// We're going to make use of the built in AddUserCommand which will take 
+        /// care of most of the logic for us. Here we map from our domain command to 
+        /// the Cofoundry one. 
+        /// 
+        /// It's important that we don't expose the AddUserCommand directly in our
+        /// web api, which could allow a 'parameter injection attack' to take place:
+        /// 
+        /// See https://www.owasp.org/index.php/Web_Parameter_Tampering
+        /// </summary>
+        private AddUserCommand MapAddUserCommand(RegisterMemberAndLogInCommand command, int roleId)
+        {
             var addUserCommand = new AddUserCommand();
             addUserCommand.Email = command.Email;
             addUserCommand.FirstName = command.FirstName;
@@ -56,17 +93,17 @@ namespace Cofoundry.Samples.SPASite.Domain
             addUserCommand.RoleId = roleId;
             addUserCommand.UserAreaCode = MemberUserArea.AreaCode;
 
-            // Because we're not logged in, we'll need to elevate permissions to allow
-            // the anonymous user to add a new user account
-            var systemExecutionContext = await _executionContextFactory.CreateSystemUserExecutionContextAsync(executionContext);
-            ((ExecutionContext)systemExecutionContext).ExecutionDate = DateTime.UtcNow;
-            await _commandExecutor.ExecuteAsync(addUserCommand, systemExecutionContext);
+            return addUserCommand;
+        }
 
-            // TODO: Send thank you email
-            //await _mailService.SendAsync(member.EmailAddress, new NewUserWelcomeMailTemplate());
-
-            // Log the user in
-            await _loginService.LogAuthenticatedUserInAsync(addUserCommand.OutputUserId, true);
+        /// <summary>
+        /// For more info on sending mail with Cofoundry see https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+        /// </summary>
+        private async Task SendWelcomeNotification(RegisterMemberAndLogInCommand command)
+        {
+            var welcomeEmailTemplate = new NewUserWelcomeMailTemplate();
+            welcomeEmailTemplate.FirstName = command.FirstName;
+            await _mailService.SendAsync(command.Email, welcomeEmailTemplate);
         }
     }
 }
