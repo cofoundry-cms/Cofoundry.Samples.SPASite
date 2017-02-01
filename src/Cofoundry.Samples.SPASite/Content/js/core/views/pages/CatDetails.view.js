@@ -9,19 +9,26 @@
         },
 
         like: true,
+        auth: false,
 
         initialize : function() {
             this.render();
-            this.listenTo(this.model, 'change', this.setLikeState);
         },
         render : function() {
             this.$el.empty().html(this.template(this.model.toJSON()));
 
-            this.checkAuth();
+            if (this.auth === false) {
+                this.checkAuth();
+            } else {
+                this.showLoveButton();
+            }
+            
             return this;
         },
         checkAuth: function() {
             if (app.User.get('authenticated') === true) this.showLoveButton();
+
+            this.auth = true;
 
             var favs = app.User.get('favourites'),
                 id = this.model.get('catId');
@@ -31,7 +38,14 @@
             }, this);
         },
         showLoveButton: function() {
+            var $button = this.$el.find('.btn-love');
+
             this.$el.find('.btn-love').removeClass('hidden');
+
+            if (this.like === true && $button.hasClass('unlike') ||
+                this.like === false && !$button.hasClass('unlike')) {
+                this.changeButton();
+            }
         },
         changeButton: function() {
             var $button = this.$el.find('.btn-love'),
@@ -44,6 +58,8 @@
             }
         },
         setLikeState: function() {
+            console.log(this.like);
+
             this.like = !this.like;
             this.changeButton();
 
@@ -62,7 +78,15 @@
                 type: type
             })
             .done(function( data, response ) {
-                that.model.fetch();
+                that.model.fetch({
+                    success: function (collection, response, options) {
+                        that.render();
+                        that.setLikeState();
+                    },
+                    error: function (collection, response, options) {
+                        console.log('error', response);
+                    }
+                });
             });
         }
     });

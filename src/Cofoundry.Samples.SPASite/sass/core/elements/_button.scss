@@ -3,7 +3,8 @@
     color: white;
     @include transition(background-color 0.2s ease-out);
 
-    &:hover {
+    &:hover,
+    &:active {
         background-color: $cms-color-primary;
         color: white;
     }

@@ -39,6 +39,8 @@
             });
         },
         handleErrors: function(errors) {
+            console.log(errors);
+
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,

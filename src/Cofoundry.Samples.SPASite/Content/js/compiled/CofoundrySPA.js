@@ -19,7 +19,9 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 // Set global namespace
 var Helper = Helper || {};
 
-Helper.prefilter = function(token) {   
+Helper.prefilter = function(token) {
+    console.log(token);
+
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
         return jqXHR.setRequestHeader('X-XSRF-Token', token);
     });
@@ -140,6 +142,8 @@ var CofoundrySPA = CofoundrySPA || {};
                 type: 'GET'
             }).done(function(data) {
                 that.set({favourites: data.data});
+
+                return true;
             });
         }
     });
@@ -318,19 +322,26 @@ var CofoundrySPA = CofoundrySPA || {};
         },
 
         like: true,
+        auth: false,
 
         initialize : function() {
             this.render();
-            this.listenTo(this.model, 'change', this.setLikeState);
         },
         render : function() {
             this.$el.empty().html(this.template(this.model.toJSON()));
 
-            this.checkAuth();
+            if (this.auth === false) {
+                this.checkAuth();
+            } else {
+                this.showLoveButton();
+            }
+            
             return this;
         },
         checkAuth: function() {
             if (app.User.get('authenticated') === true) this.showLoveButton();
+
+            this.auth = true;
 
             var favs = app.User.get('favourites'),
                 id = this.model.get('catId');
@@ -340,7 +351,14 @@ var CofoundrySPA = CofoundrySPA || {};
             }, this);
         },
         showLoveButton: function() {
+            var $button = this.$el.find('.btn-love');
+
             this.$el.find('.btn-love').removeClass('hidden');
+
+            if (this.like === true && $button.hasClass('unlike') ||
+                this.like === false && !$button.hasClass('unlike')) {
+                this.changeButton();
+            }
         },
         changeButton: function() {
             var $button = this.$el.find('.btn-love'),
@@ -353,6 +371,8 @@ var CofoundrySPA = CofoundrySPA || {};
             }
         },
         setLikeState: function() {
+            console.log(this.like);
+
             this.like = !this.like;
             this.changeButton();
 
@@ -371,7 +391,15 @@ var CofoundrySPA = CofoundrySPA || {};
                 type: type
             })
             .done(function( data, response ) {
-                that.model.fetch();
+                that.model.fetch({
+                    success: function (collection, response, options) {
+                        that.render();
+                        that.setLikeState();
+                    },
+                    error: function (collection, response, options) {
+                        console.log('error', response);
+                    }
+                });
             });
         }
     });
@@ -452,6 +480,8 @@ var CofoundrySPA = CofoundrySPA || {};
             });
         },
         handleErrors: function(errors) {
+            console.log(errors);
+
             _.each(errors, function(error) {
                 if (error.properties.length > 0) {
                     var name = error.properties[0].toLowerCase(),
@@ -536,6 +566,8 @@ var CofoundrySPA = CofoundrySPA || {};
             });
         },
         handleErrors: function(errors) {
+            console.log(errors);
+
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,

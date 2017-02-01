@@ -46,7 +46,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             {
                 await _loginService.LogFailedLoginAttemptAsync(MemberUserArea.AreaCode, command.Email);
                 
-                throw new PropertyValidationException(nameof(command.Password), "The give username/password combination was invalid");
+                throw new PropertyValidationException("The give username/password combination was invalid", nameof(command.Password));
             }
 
             ValidateLoginArea(user.UserAreaCode);

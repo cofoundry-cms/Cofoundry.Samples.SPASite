@@ -14,6 +14,8 @@
                 type: 'GET'
             }).done(function(data) {
                 that.set({favourites: data.data});
+
+                return true;
             });
         }
     });

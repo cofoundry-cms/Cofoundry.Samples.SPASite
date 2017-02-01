@@ -1099,7 +1099,7 @@ h2 {
   transition: background-color 0.2s ease-out;
 }
 /* line 6, ../../sass/core/elements/_button.scss */
-.btn-love:hover {
+.btn-love:hover, .btn-love:active {
   background-color: #2C2233;
   color: white;
 }
