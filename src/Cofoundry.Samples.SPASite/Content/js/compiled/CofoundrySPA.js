@@ -323,9 +323,15 @@ var CofoundrySPA = CofoundrySPA || {};
         auth: false,
 
         initialize : function() {
-            this.render();
+            this.model = new models.Cat({ id: this.id });
+
+            this.model.fetch();
+
+            this.listenTo(this.model, 'change', this.render);
         },
         render : function() {
+            console.log(this, "render");
+
             this.$el.empty().html(this.template(this.model.toJSON()));
 
             if (this.auth === false) {
@@ -389,7 +395,6 @@ var CofoundrySPA = CofoundrySPA || {};
             .done(function( data, response ) {
                 that.model.fetch({
                     success: function (collection, response, options) {
-                        that.render();
                         that.setLikeState();
                     },
                     error: function (collection, response, options) {
@@ -661,11 +666,7 @@ var CofoundrySPA = CofoundrySPA || {};
         });
 
         app.router.on('route:details', function(id) {
-            var cat = new models.Cat({ id: id });
-
-            cat.fetch().done(_.bind(function() {
-                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ model: cat }));
-            }, this)); 
+            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ id: id }));
         });
 
         app.router.on('route:login', function(urlslug) {

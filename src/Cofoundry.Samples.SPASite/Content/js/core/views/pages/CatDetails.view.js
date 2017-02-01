@@ -12,9 +12,15 @@
         auth: false,
 
         initialize : function() {
-            this.render();
+            this.model = new models.Cat({ id: this.id });
+
+            this.model.fetch();
+
+            this.listenTo(this.model, 'change', this.render);
         },
         render : function() {
+            console.log(this, "render");
+
             this.$el.empty().html(this.template(this.model.toJSON()));
 
             if (this.auth === false) {
@@ -78,7 +84,6 @@
             .done(function( data, response ) {
                 that.model.fetch({
                     success: function (collection, response, options) {
-                        that.render();
                         that.setLikeState();
                     },
                     error: function (collection, response, options) {

@@ -26,11 +26,7 @@
         });
 
         app.router.on('route:details', function(id) {
-            var cat = new models.Cat({ id: id });
-
-            cat.fetch().done(_.bind(function() {
-                app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ model: cat }));
-            }, this)); 
+            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ id: id }));
         });
 
         app.router.on('route:login', function(urlslug) {
