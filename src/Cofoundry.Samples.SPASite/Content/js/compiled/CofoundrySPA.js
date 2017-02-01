@@ -20,8 +20,6 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 var Helper = Helper || {};
 
 Helper.prefilter = function(token) {
-    console.log(token);
-
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
         return jqXHR.setRequestHeader('X-XSRF-Token', token);
     });
@@ -371,8 +369,6 @@ var CofoundrySPA = CofoundrySPA || {};
             }
         },
         setLikeState: function() {
-            console.log(this.like);
-
             this.like = !this.like;
             this.changeButton();
 

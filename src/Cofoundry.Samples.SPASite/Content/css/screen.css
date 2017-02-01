@@ -1121,6 +1121,16 @@ h2 {
   margin: 5px 0 10px;
 }
 
+/* line 1, ../../sass/core/elements/_likes.scss */
+.likes {
+  background: url("/content/images/heart-icon.png") no-repeat left top;
+  background-size: cover;
+  display: inline-block;
+  width: 28px;
+  color: white;
+  text-align: center;
+}
+
 /* line 1, ../../sass/core/elements/_logo.scss */
 .logo {
   color: white;
@@ -1162,17 +1172,28 @@ h2 {
 /* line 2, ../../sass/core/components/_cat-info.scss */
 .cat-info h2 {
   margin-bottom: 0;
+  display: inline-block;
+  position: relative;
+  padding-right: 55px;
 }
-/* line 6, ../../sass/core/components/_cat-info.scss */
+/* line 9, ../../sass/core/components/_cat-info.scss */
 .cat-info .breed {
   display: block;
   margin-bottom: 30px;
   font-weight: 700;
   text-transform: uppercase;
 }
-/* line 13, ../../sass/core/components/_cat-info.scss */
+/* line 16, ../../sass/core/components/_cat-info.scss */
 .cat-info .description {
   margin-bottom: 30px;
+}
+/* line 20, ../../sass/core/components/_cat-info.scss */
+.cat-info .likes {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 45px;
+  font-size: 20px;
 }
 
 /* line 1, ../../sass/core/components/_cat.scss */
@@ -1219,6 +1240,10 @@ h2 {
   color: #000;
   font-weight: 700;
   font-size: 1.125rem;
+}
+/* line 42, ../../sass/core/components/_cat.scss */
+.cat__details .likes {
+  float: right;
 }
 
 /* line 1, ../../sass/core/components/_characteristics.scss */

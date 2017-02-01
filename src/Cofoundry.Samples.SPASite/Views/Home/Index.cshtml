@@ -68,6 +68,7 @@
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
+                <span class="likes"><%= totalLikes %></span>
             </div>
         </a>
     </script>
@@ -81,11 +82,10 @@
             </div>
 
             <div class="col-sm-6 cat-info">
-                <h2 class="name"><%= name %></h2>
+                <h2 class="name"><%= name %> <span class="likes"><%= totalLikes %></span></h2>
                 <% if (breed) { %>
                 <span class="breed"><%= breed.title %></span>
                 <% } %>
-                <span class="likes"><%= totalLikes %></span>
 
                 <div class="characteristics">
                     <span class="title">Characteristics:</span>

@@ -58,8 +58,6 @@
             }
         },
         setLikeState: function() {
-            console.log(this.like);
-
             this.like = !this.like;
             this.changeButton();
 

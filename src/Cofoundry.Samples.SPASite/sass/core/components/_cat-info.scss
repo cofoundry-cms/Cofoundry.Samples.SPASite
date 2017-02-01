@@ -1,6 +1,9 @@
 .cat-info {
     h2 {
         margin-bottom: 0;
+        display: inline-block;
+        position: relative;
+        padding-right: 55px;
     }
 
     .breed {
@@ -12,5 +15,13 @@
 
     .description {
         margin-bottom: 30px;
+    }
+
+    .likes {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 45px;
+        font-size: 20px;
     }
 }
