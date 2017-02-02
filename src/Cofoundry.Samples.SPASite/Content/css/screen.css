@@ -1111,6 +1111,7 @@ h2 {
   color: white;
   padding: 5px 10px;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 
 /* line 1, ../../sass/core/elements/_error.scss */
@@ -1141,9 +1142,8 @@ h2 {
 .likes {
   color: #000;
   font-weight: bold;
-  float: right;
 }
-/* line 6, ../../sass/core/elements/_likes.scss */
+/* line 5, ../../sass/core/elements/_likes.scss */
 .likes:before {
   content: "";
   background: url("/content/images/heart-icon.png") no-repeat left top;
@@ -1168,6 +1168,13 @@ h2 {
   overflow: hidden;
   text-align: left;
   text-transform: capitalize;
+  margin-left: 15px;
+}
+@media screen and (min-width: 768px) {
+  /* line 1, ../../sass/core/elements/_logo.scss */
+  .logo {
+    margin-left: 0;
+  }
 }
 
 /* line 1, ../../sass/core/elements/_message.scss */
@@ -1194,23 +1201,33 @@ h2 {
   height: auto;
 }
 
-/* line 2, ../../sass/core/components/_cat-info.scss */
+/* line 1, ../../sass/core/components/_cat-info.scss */
+.cat-info {
+  padding-top: 30px;
+}
+/* line 4, ../../sass/core/components/_cat-info.scss */
 .cat-info h2 {
   margin-bottom: 0;
   display: inline-block;
   position: relative;
   padding-right: 65px;
 }
-/* line 9, ../../sass/core/components/_cat-info.scss */
+/* line 11, ../../sass/core/components/_cat-info.scss */
 .cat-info .breed {
   display: block;
   margin-bottom: 30px;
   font-weight: 700;
   text-transform: uppercase;
 }
-/* line 16, ../../sass/core/components/_cat-info.scss */
+/* line 18, ../../sass/core/components/_cat-info.scss */
 .cat-info .description {
   margin-bottom: 30px;
+}
+@media screen and (min-width: 768px) {
+  /* line 1, ../../sass/core/components/_cat-info.scss */
+  .cat-info {
+    padding-top: 0;
+  }
 }
 
 /* line 1, ../../sass/core/components/_cat.scss */
@@ -1257,6 +1274,21 @@ h2 {
   color: #000;
   font-weight: 700;
   font-size: 1.125rem;
+  display: block;
+}
+/* line 43, ../../sass/core/components/_cat.scss */
+.cat__details .likes {
+  float: left;
+}
+@media screen and (min-width: 992px) {
+  /* line 48, ../../sass/core/components/_cat.scss */
+  .cat__details .likes {
+    float: right;
+  }
+  /* line 52, ../../sass/core/components/_cat.scss */
+  .cat__details .name {
+    display: inline-block;
+  }
 }
 
 /* line 1, ../../sass/core/components/_characteristics.scss */
@@ -1273,56 +1305,61 @@ h2 {
 =================================*/
 /* line 1, ../../sass/core/blocks/_content-block.scss */
 .content-block {
-  margin-top: 60px;
+  margin-top: 30px;
+}
+@media screen and (min-width: 768px) {
+  /* line 1, ../../sass/core/blocks/_content-block.scss */
+  .content-block {
+    margin-top: 60px;
+  }
 }
 
 /* line 1, ../../sass/core/blocks/_hero-banner.scss */
 .hero-banner {
   width: 100%;
-  height: 300px;
   overflow: hidden;
   position: relative;
 }
-/* line 7, ../../sass/core/blocks/_hero-banner.scss */
+/* line 6, ../../sass/core/blocks/_hero-banner.scss */
 .hero-banner img {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: auto;
-  height: 100%;
-  transform: translate(-50%, -50%);
+  width: 100%;
 }
-@media screen and (min-width: 500px) {
-  /* line 17, ../../sass/core/blocks/_hero-banner.scss */
-  .hero-banner img {
-    left: 0;
-    width: 100%;
-    height: auto;
-    transform: translateY(-50%);
-  }
-}
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 768px) {
   /* line 1, ../../sass/core/blocks/_hero-banner.scss */
   .hero-banner {
     height: 400px;
   }
+  /* line 13, ../../sass/core/blocks/_hero-banner.scss */
+  .hero-banner img {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: auto;
+    transform: translateY(-50%);
+  }
 }
 
-/* line 30, ../../sass/core/blocks/_hero-banner.scss */
+/* line 23, ../../sass/core/blocks/_hero-banner.scss */
 .hero-banner__overlay {
   position: relative;
   height: 100%;
 }
 
-/* line 35, ../../sass/core/blocks/_hero-banner.scss */
+/* line 28, ../../sass/core/blocks/_hero-banner.scss */
 .hero-banner__text {
-  background-color: white;
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: 30px;
-  width: 50%;
+  padding: 30px 15px 0;
+}
+@media screen and (min-width: 768px) {
+  /* line 28, ../../sass/core/blocks/_hero-banner.scss */
+  .hero-banner__text {
+    background-color: white;
+    padding: 30px;
+    width: 50%;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 /* line 1, ../../sass/core/blocks/_navbar.scss */
@@ -1340,7 +1377,7 @@ h2 {
 /* line 11, ../../sass/core/blocks/_navbar.scss */
 .navbar-default .navbar-collapse {
   border: 0;
-  background-color: #005869;
+  background-color: #5E0042;
 }
 @media screen and (min-width: 768px) {
   /* line 11, ../../sass/core/blocks/_navbar.scss */
@@ -1360,32 +1397,31 @@ h2 {
   padding-left: 0;
 }
 /* line 28, ../../sass/core/blocks/_navbar.scss */
-.navbar__menu li {
-  padding: 10px 0;
-}
-/* line 32, ../../sass/core/blocks/_navbar.scss */
 .navbar__menu .navbar__link {
   background-color: transparent;
   border: 0;
   color: white;
   display: block;
+  padding: 10px 0;
+  width: 100%;
+  text-align: left;
 }
 @media screen and (min-width: 768px) {
   /* line 24, ../../sass/core/blocks/_navbar.scss */
   .navbar__menu {
     float: right;
   }
-  /* line 42, ../../sass/core/blocks/_navbar.scss */
+  /* line 41, ../../sass/core/blocks/_navbar.scss */
   .navbar__menu li {
     display: inline-block;
     line-height: 60px;
     padding: 0;
   }
-  /* line 47, ../../sass/core/blocks/_navbar.scss */
+  /* line 46, ../../sass/core/blocks/_navbar.scss */
   .navbar__menu li:hover {
     background-color: #5E0042;
   }
-  /* line 52, ../../sass/core/blocks/_navbar.scss */
+  /* line 51, ../../sass/core/blocks/_navbar.scss */
   .navbar__menu .navbar__link {
     padding: 0 15px;
   }

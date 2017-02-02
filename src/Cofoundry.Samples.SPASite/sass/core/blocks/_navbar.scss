@@ -10,9 +10,9 @@
 
 .navbar-default .navbar-collapse {
     border: 0;
-    background-color: $cms-color-tertiary;
+    background-color: $cms-color-secondary;
 
-    @include respond-min(768px) {
+    @include respond-min($tablet) {
         background-color: transparent;    
     }
 }
@@ -25,18 +25,17 @@
     list-style-type: none;
     padding-left: 0;
 
-    li {    
-        padding: 10px 0;
-    }   
-
     .navbar__link {
         background-color: transparent;
         border: 0;
         color: white;
         display: block;
+        padding: 10px 0;
+        width: 100%;
+        text-align: left;
     }
 
-    @include respond-min(768px) {
+    @include respond-min($tablet) {
         float: right;
 
         li {
