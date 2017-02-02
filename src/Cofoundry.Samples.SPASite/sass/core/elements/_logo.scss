@@ -1,12 +1,9 @@
 .logo {
-    color: white;
-    font-size: 20px;
-    margin-left: 10px;
-    margin-top: 15px;
+    background: url("../images/spacats-logo.png") no-repeat left top;
+    background-size: cover;
+    margin-top: 11px;
     display: inline-block;
-
-    &:hover {
-        text-decoration: none;
-        color: white;
-    }
+    width: 187px;
+    height: 36px;
+    @include hide-text();
 }

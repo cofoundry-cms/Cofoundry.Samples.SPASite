@@ -1,6 +1,6 @@
 (function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Login = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#login').html()),
         events: {
             'submit .login-form': 'onFormSubmit'
@@ -8,10 +8,9 @@
 
         initialize : function() {
             this.model = new models.Login();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
             return this;
         },
         onFormSubmit: function(e) {
@@ -67,7 +66,7 @@
         handleLogin: function(token) {
             this.showLoginMessage();
 
-            helper.prefilter(token);
+            SPACatsState.csrfToken = token;
             app.User.set({authenticated: true, token: token});
         },
         showLoginMessage: function() {

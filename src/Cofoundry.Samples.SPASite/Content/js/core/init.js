@@ -9,10 +9,10 @@
         app.siteView = new app.SiteView();
 
         // Checks if user is logged in and if true sets the user data
-        helper.prefilter(SPACatsState.csrfToken);
+        helper.prefilter();
 
         if (SPACatsState.isLoggedIn === true) {
-            app.User.set({authenticated: true, token: SPACatsState.csrfToken});
+            app.User.set({authenticated: true});
             app.User.getFavourites();
         }
 
@@ -22,19 +22,27 @@
 
         // Page route functions
         app.router.on('route:index', function() {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
+            app.homeView = new CofoundrySPA.PageViews.Index();
+            app.siteView.goto(app.homeView);
         });
 
         app.router.on('route:details', function(id) {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ id: id }));
+            var cat = new models.Cat({ id: id });
+
+            cat.fetch().done(null, function() {
+                app.catView = new CofoundrySPA.PageViews.CatDetails({ model: cat });
+                app.siteView.goto(app.catView);
+            });
         });
 
-        app.router.on('route:login', function(urlslug) {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Login());
+        app.router.on('route:login', function() {
+            app.loginView = new CofoundrySPA.PageViews.Login();
+            app.siteView.goto(app.loginView);
         });
 
         app.router.on('route:register', function() {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Register());
+            app.registerView = new CofoundrySPA.PageViews.Register();
+            app.siteView.goto(new CofoundrySPA.PageViews.Register());
         });
 
         // Start router

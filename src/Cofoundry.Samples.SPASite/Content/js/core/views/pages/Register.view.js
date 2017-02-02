@@ -1,6 +1,6 @@
 (function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Register = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#register').html()),
         events: {
             'submit .register-form': 'onFormSubmit'
@@ -8,10 +8,9 @@
 
         initialize : function() {
             this.model = new models.Register();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
             return this;
         },
         onFormSubmit: function(e) {
@@ -60,7 +59,7 @@
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
-            helper.prefilter(token);
+            SPACatsState.csrfToken = token;
             app.User.set({authenticated: true, token: token});
         },
         showRegisteredMessage: function() {

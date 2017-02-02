@@ -1,8 +1,7 @@
 (function (pages, itemViews, models, app, $, _, Backbone) {
     pages.CatDetails = Backbone.View.extend({
-        el : 'main',
         tagName: 'div',
-        className: 'row',
+        className: 'container content-block',
         template: _.template($('#catDetails').html()),
         events: {
             'click .btn-love': 'handleLike'
@@ -12,16 +11,10 @@
         auth: false,
 
         initialize : function() {
-            this.model = new models.Cat({ id: this.id });
-
-            this.model.fetch();
-
             this.listenTo(this.model, 'change', this.render);
         },
         render : function() {
-            console.log(this, "render");
-
-            this.$el.empty().html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
 
             if (this.auth === false) {
                 this.checkAuth();

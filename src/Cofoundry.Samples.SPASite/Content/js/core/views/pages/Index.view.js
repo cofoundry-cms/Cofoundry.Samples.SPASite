@@ -1,20 +1,16 @@
 (function (pages, collectionViews, components, collections, app, $, _, Backbone) {
     pages.Index = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#indexTemplate').html()),
 
         initialize : function() {
             this.catsView = new collectionViews.Cats();
-            this.checkAuth();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
+            this.$el.find('#cont .row').append(this.catsView.render().el);
 
-            this.$('.container').append(this.catsView.render().el);
-            return;
-        },
-        checkAuth: function() {
+            return this;
         }
     });
 })(

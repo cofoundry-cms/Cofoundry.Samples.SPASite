@@ -7,7 +7,7 @@
         }
 
         .name {
-            color: $cms-color-tertiary;
+            color: $cms-color-secondary;
         }
     }
 }
@@ -37,9 +37,5 @@
         color: $cms-color-text;
         font-weight: 700;
         font-size: 1.125rem;
-    }
-
-    .likes {
-        float: right;
     }
 }

@@ -1,8 +1,17 @@
 .likes {
-    background: url("/content/images/heart-icon.png") no-repeat left top;
-    background-size: cover;
-    display: inline-block;
-    width: 28px;
-    color: white;
-    text-align: center;
+    color: $cms-color-text;
+    font-weight: bold;
+    float: right;
+
+    &:before {
+        content: "";
+        background: url("/content/images/heart-icon.png") no-repeat left top;
+        background-size: cover;
+        width: 15px;
+        height: 13px;
+        display: inline-block;    
+        margin-right: 12px;
+        top: 1px;
+        position: relative;
+    }
 }

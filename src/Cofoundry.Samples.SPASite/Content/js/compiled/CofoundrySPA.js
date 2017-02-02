@@ -19,8 +19,9 @@ this.activeTarget=b,this.clear();var c=this.selector+'[data-target="'+b+'"],'+th
 // Set global namespace
 var Helper = Helper || {};
 
-Helper.prefilter = function(token) {
+Helper.prefilter = function() {
     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+        var token = SPACatsState.csrfToken;
         return jqXHR.setRequestHeader('X-XSRF-Token', token);
     });
 };;"use strict";
@@ -311,9 +312,8 @@ var CofoundrySPA = CofoundrySPA || {};
     Backbone
 );        ;(function (pages, itemViews, models, app, $, _, Backbone) {
     pages.CatDetails = Backbone.View.extend({
-        el : 'main',
         tagName: 'div',
-        className: 'row',
+        className: 'container content-block',
         template: _.template($('#catDetails').html()),
         events: {
             'click .btn-love': 'handleLike'
@@ -323,16 +323,10 @@ var CofoundrySPA = CofoundrySPA || {};
         auth: false,
 
         initialize : function() {
-            this.model = new models.Cat({ id: this.id });
-
-            this.model.fetch();
-
             this.listenTo(this.model, 'change', this.render);
         },
         render : function() {
-            console.log(this, "render");
-
-            this.$el.empty().html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
 
             if (this.auth === false) {
                 this.checkAuth();
@@ -414,21 +408,17 @@ var CofoundrySPA = CofoundrySPA || {};
     Backbone
 );;(function (pages, collectionViews, components, collections, app, $, _, Backbone) {
     pages.Index = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#indexTemplate').html()),
 
         initialize : function() {
             this.catsView = new collectionViews.Cats();
-            this.checkAuth();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
+            this.$el.find('#cont .row').append(this.catsView.render().el);
 
-            this.$('.container').append(this.catsView.render().el);
-            return;
-        },
-        checkAuth: function() {
+            return this;
         }
     });
 })(
@@ -442,7 +432,7 @@ var CofoundrySPA = CofoundrySPA || {};
     Backbone
 );;(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Login = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#login').html()),
         events: {
             'submit .login-form': 'onFormSubmit'
@@ -450,10 +440,9 @@ var CofoundrySPA = CofoundrySPA || {};
 
         initialize : function() {
             this.model = new models.Login();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
             return this;
         },
         onFormSubmit: function(e) {
@@ -509,7 +498,7 @@ var CofoundrySPA = CofoundrySPA || {};
         handleLogin: function(token) {
             this.showLoginMessage();
 
-            helper.prefilter(token);
+            SPACatsState.csrfToken = token;
             app.User.set({authenticated: true, token: token});
         },
         showLoginMessage: function() {
@@ -528,7 +517,7 @@ var CofoundrySPA = CofoundrySPA || {};
     Helper
 );;(function (pages, itemViews, models, app, $, _, Backbone, helper) {
     pages.Register = Backbone.View.extend({
-        el : 'main',
+        tagName: 'div',
         template: _.template($('#register').html()),
         events: {
             'submit .register-form': 'onFormSubmit'
@@ -536,10 +525,9 @@ var CofoundrySPA = CofoundrySPA || {};
 
         initialize : function() {
             this.model = new models.Register();
-            this.render();
         },
         render : function() {
-            this.$el.empty().append(this.template);
+            this.$el.html(this.template());
             return this;
         },
         onFormSubmit: function(e) {
@@ -588,7 +576,7 @@ var CofoundrySPA = CofoundrySPA || {};
         handleRegister: function(token) {
             this.showRegisteredMessage();
 
-            helper.prefilter(token);
+            SPACatsState.csrfToken = token;
             app.User.set({authenticated: true, token: token});
         },
         showRegisteredMessage: function() {
@@ -607,22 +595,39 @@ var CofoundrySPA = CofoundrySPA || {};
     Helper
 );;(function (components, pages, app, $, _, Backbone) {
     app.SiteView = Backbone.View.extend({
-        el : 'html',
+        el : '.main',
         events : {
             
         },
         initialize : function() {
             this.menu = new components.Menu();
         },
-        render : function() {
-            if (this.currentPage) {
-                this.currentPage.render();
-            }
-            
-            return;
+        render : function() {          
+            return this;
         },
-        setCurrentPage : function(pageView) {
-            this.currentPage = pageView;
+        goto : function(view) {
+            var current = this.currentPage || null;
+            var next = view;
+
+            if (current) {
+                current.remove();
+            }
+
+            next.render();
+            this.$el.append(next.$el);
+
+            this.currentPage = next;
+
+            // if (this.currentPage) {
+            //     var prevView = this.currentPage;
+            //     this.currentPage = pageView;
+
+            //     console.log(prevView, this.currentPage);
+
+            //     prevView.remove();
+            // } else {
+            //     this.currentPage = pageView;                
+            // }
         },
         enterLoadingState : function() {
             this.$el.addClass('JS-loading');
@@ -649,10 +654,10 @@ var CofoundrySPA = CofoundrySPA || {};
         app.siteView = new app.SiteView();
 
         // Checks if user is logged in and if true sets the user data
-        helper.prefilter(SPACatsState.csrfToken);
+        helper.prefilter();
 
         if (SPACatsState.isLoggedIn === true) {
-            app.User.set({authenticated: true, token: SPACatsState.csrfToken});
+            app.User.set({authenticated: true});
             app.User.getFavourites();
         }
 
@@ -662,19 +667,27 @@ var CofoundrySPA = CofoundrySPA || {};
 
         // Page route functions
         app.router.on('route:index', function() {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Index());
+            app.homeView = new CofoundrySPA.PageViews.Index();
+            app.siteView.goto(app.homeView);
         });
 
         app.router.on('route:details', function(id) {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.CatDetails({ id: id }));
+            var cat = new models.Cat({ id: id });
+
+            cat.fetch().done(null, function() {
+                app.catView = new CofoundrySPA.PageViews.CatDetails({ model: cat });
+                app.siteView.goto(app.catView);
+            });
         });
 
-        app.router.on('route:login', function(urlslug) {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Login());
+        app.router.on('route:login', function() {
+            app.loginView = new CofoundrySPA.PageViews.Login();
+            app.siteView.goto(app.loginView);
         });
 
         app.router.on('route:register', function() {
-            app.siteView.setCurrentPage(new CofoundrySPA.PageViews.Register());
+            app.registerView = new CofoundrySPA.PageViews.Register();
+            app.siteView.goto(new CofoundrySPA.PageViews.Register());
         });
 
         // Start router

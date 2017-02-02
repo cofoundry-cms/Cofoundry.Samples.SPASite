@@ -74,28 +74,26 @@
     </script>
 
     <script id="catDetails" type="text/template">
-        <div class="container content-block">
-            <div class="col-sm-6 cat-images">
-                <% _.each(images, function(image) { %>
-                    <img src="<%= image %>?width=540&mode=crop">
-                <% }); %>
-            </div>
+        <div class="col-sm-6 cat-images">
+            <% _.each(images, function(image) { %>
+                <img src="<%= image %>?width=540&mode=crop">
+            <% }); %>
+        </div>
 
-            <div class="col-sm-6 cat-info">
-                <h2 class="name"><%= name %> <span class="likes"><%= totalLikes %></span></h2>
-                <% if (breed) { %>
-                <span class="breed"><%= breed.title %></span>
-                <% } %>
+        <div class="col-sm-6 cat-info">
+            <h2 class="name"><%= name %> <span class="likes--big"><%= totalLikes %></span></h2>
+            <% if (breed) { %>
+            <span class="breed"><%= breed.title %></span>
+            <% } %>
 
-                <div class="characteristics">
-                    <span class="title">Characteristics:</span>
-                    <% _.each(features, function(feature) { %>
-                        <span class="characteristic"><%= feature.title %></span>
-                    <% }); %> 
-                </div>
-                <p class="description"><%= description %></p>
-                <button id="like" class="btn btn-love hidden">I <span class="glyphicon glyphicon-heart"></span> <%= name %></button>
+            <div class="characteristics">
+                <span class="title">Characteristics:</span>
+                <% _.each(features, function(feature) { %>
+                    <span class="characteristic"><%= feature.title %></span>
+                <% }); %> 
             </div>
+            <p class="description"><%= description %></p>
+            <button id="like" class="btn btn-love hidden">I <span class="glyphicon glyphicon-heart"></span> <%= name %></button>
         </div>
     </script>
 

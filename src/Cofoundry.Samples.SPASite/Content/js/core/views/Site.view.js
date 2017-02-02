@@ -1,21 +1,38 @@
 (function (components, pages, app, $, _, Backbone) {
     app.SiteView = Backbone.View.extend({
-        el : 'html',
+        el : '.main',
         events : {
             
         },
         initialize : function() {
             this.menu = new components.Menu();
         },
-        render : function() {
-            if (this.currentPage) {
-                this.currentPage.render();
-            }
-            
-            return;
+        render : function() {          
+            return this;
         },
-        setCurrentPage : function(pageView) {
-            this.currentPage = pageView;
+        goto : function(view) {
+            var current = this.currentPage || null;
+            var next = view;
+
+            if (current) {
+                current.remove();
+            }
+
+            next.render();
+            this.$el.append(next.$el);
+
+            this.currentPage = next;
+
+            // if (this.currentPage) {
+            //     var prevView = this.currentPage;
+            //     this.currentPage = pageView;
+
+            //     console.log(prevView, this.currentPage);
+
+            //     prevView.remove();
+            // } else {
+            //     this.currentPage = pageView;                
+            // }
         },
         enterLoadingState : function() {
             this.$el.addClass('JS-loading');
