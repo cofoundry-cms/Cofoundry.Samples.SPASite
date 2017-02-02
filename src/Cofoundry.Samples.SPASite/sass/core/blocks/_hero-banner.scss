@@ -1,29 +1,22 @@
 .hero-banner {
     width: 100%;
-    height: 300px;
     overflow: hidden;
     position: relative;
 
-    img {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        width: auto;
-        height: 100%;
-        transform: translate(-50%, -50%);
+    img {        
+        width: 100%;
     }
 
-    @include respond-min(500px) {
+    @include respond-min($tablet) {
+        height: 400px;
+
         img {
+            position: absolute;
             left: 0;
-            width: 100%;
+            top: 50%;
             height: auto;
             transform: translateY(-50%);
         }
-    }
-
-    @include respond-min(800px) {
-        height: 400px;
     }
 }
 
@@ -33,11 +26,15 @@
 }
 
 .hero-banner__text {
-    background-color: white;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 30px;
-    width: 50%;
+    padding: 30px 15px 0;
+
+    @include respond-min($tablet) {
+        background-color: white;
+        padding: 30px;
+        width: 50%;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
 }

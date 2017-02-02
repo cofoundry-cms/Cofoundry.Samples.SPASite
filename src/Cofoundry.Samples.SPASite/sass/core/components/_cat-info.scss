@@ -1,4 +1,6 @@
 .cat-info {
+    padding-top: 30px;
+
     h2 {
         margin-bottom: 0;
         display: inline-block;
@@ -15,5 +17,9 @@
 
     .description {
         margin-bottom: 30px;
+    }
+
+    @include respond-min($tablet) {
+        padding-top: 0;
     }
 }

@@ -418,7 +418,7 @@ var CofoundrySPA = CofoundrySPA || {};
         },
         render : function() {
             this.$el.html(this.template());
-            this.$el.find('#cont .row').append(this.catsView.render().el);
+            this.$el.find('#cont').append(this.catsView.render().el);
 
             return this;
         }

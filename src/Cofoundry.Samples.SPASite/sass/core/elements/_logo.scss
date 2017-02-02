@@ -6,4 +6,9 @@
     width: 187px;
     height: 36px;
     @include hide-text();
+    margin-left: 15px;
+
+    @include respond-min($tablet) {
+        margin-left: 0;
+    }
 }

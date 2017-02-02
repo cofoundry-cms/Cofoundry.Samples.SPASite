@@ -37,5 +37,20 @@
         color: $cms-color-text;
         font-weight: 700;
         font-size: 1.125rem;
+        display: block;
+    }
+
+    .likes {
+        float: left;
+    }
+
+    @include respond-min(992px) {
+        .likes {
+            float: right;
+        }
+
+        .name {
+            display: inline-block;
+        }
     }
 }
