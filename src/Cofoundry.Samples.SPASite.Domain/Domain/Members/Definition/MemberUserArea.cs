@@ -13,7 +13,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// 
     /// For more info see https://github.com/cofoundry-cms/cofoundry/wiki/User-Areas
     /// </summary>
-    public class MemberUserArea : IUserArea
+    public class MemberUserArea : IUserAreaDefinition
     {
         public static string AreaCode = "SPA";
 

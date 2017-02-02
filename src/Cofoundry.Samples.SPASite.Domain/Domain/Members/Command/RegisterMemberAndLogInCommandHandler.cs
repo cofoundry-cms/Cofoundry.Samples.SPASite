@@ -42,13 +42,7 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         public async Task ExecuteAsync(RegisterMemberAndLogInCommand command, IExecutionContext executionContext)
         {
-            // TODO: Implement a better way to define, auto-populate and get ahold of roles programatically
-            var roleId = await _dbContext
-                .Roles
-                .AsNoTracking()
-                .Where(r => r.SpecialistRoleTypeCode == "USR" && r.UserAreaCode == MemberUserArea.AreaCode)
-                .Select(r => r.RoleId)
-                .SingleOrDefaultAsync();
+            int roleId = await GetMemberRoleId();
 
             var addUserCommand = MapAddUserCommand(command, roleId);
 
@@ -58,6 +52,21 @@ namespace Cofoundry.Samples.SPASite.Domain
             // Log the user in. Note that the new user id is set in the OutputUserId which is a 
             // convention used by the CQS framework (see https://github.com/cofoundry-cms/cofoundry/wiki/CQS)
             await _loginService.LogAuthenticatedUserInAsync(addUserCommand.OutputUserId, true);
+        }
+
+        /// <summary>
+        /// Every user needs to be assigned a role. We've created a MemberRole in 
+        /// code, so we can our code definition to find out the database id which 
+        /// we need to create the new user
+        /// </summary>
+        private async Task<int> GetMemberRoleId()
+        {
+            return await _dbContext
+                            .Roles
+                            .AsNoTracking()
+                            .Where(r => r.SpecialistRoleTypeCode == MemberRole.RoleCode && r.UserAreaCode == MemberUserArea.AreaCode)
+                            .Select(r => r.RoleId)
+                            .SingleOrDefaultAsync();
         }
 
         /// <summary>
