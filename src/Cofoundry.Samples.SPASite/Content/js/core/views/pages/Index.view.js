@@ -5,6 +5,8 @@
 
         initialize : function() {
             this.catsView = new collectionViews.Cats();
+
+            app.User.getFavourites();
         },
         render : function() {
             this.$el.html(this.template());
