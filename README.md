@@ -28,6 +28,6 @@ The application is also separated into two projects demonstrating an example of 
 
 To get you started we've put together some optional test data:
 
-1. Run `InitData\Init.sql` script against your db to populate some initial
+1. Run `InitData\Init.sql` script against your db to populate some initial cats and features
 2. Copy the images from *"\InitData\Images"* to *"\src\Cofoundry.Samples.SPASite\App_Data\Files\Images"*
 3. Restart the site. This is required to break the cache, but there will be an option in the UI to do this soon (see [issue #40](https://github.com/cofoundry-cms/cofoundry/issues/40))
