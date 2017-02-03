@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// Cofoundry has a number of apis to help you log users in, but how you 
+    /// compose them is down to your implementation.
+    /// </summary>
     public class LogMemberInCommandHandler
         : IAsyncCommandHandler<LogMemberInCommand>
         , IIgnorePermissionCheckHandler
