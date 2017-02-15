@@ -414,7 +414,7 @@ var CofoundrySPA = CofoundrySPA || {};
         initialize : function() {
             this.catsView = new collectionViews.Cats();
 
-            app.User.getFavourites();
+            if (app.User.authenticated) app.User.getFavourites();
         },
         render : function() {
             this.$el.html(this.template());
@@ -465,15 +465,11 @@ var CofoundrySPA = CofoundrySPA || {};
                     that.handleErrors(errors);
                 },
                 success: function(model, response) {
-                    var token = response.data.antiForgeryToken;
-
-                    that.handleLogin(token);
+                    that.getToken();
                 }
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 if (error.properties.length > 0) {
                     var name = error.properties[0].toLowerCase(),
@@ -495,6 +491,19 @@ var CofoundrySPA = CofoundrySPA || {};
             _.each(errorTexts, function(error) {
                 if (!$(error).hasClass('hidden')) $(error).addClass('hidden');
                 $(error).text('');
+            });
+        },
+        getToken: function() {
+            var url = '/api/auth/csrf-token',
+                that = this;
+
+            $.ajax({
+                url: url,
+                type: 'GET'
+            })
+            .done(function(data, response) {
+                var token = data.data;
+                that.handleLogin(token);
             });
         },
         handleLogin: function(token) {
@@ -550,15 +559,11 @@ var CofoundrySPA = CofoundrySPA || {};
                     that.handleErrors(errors);
                 },
                 success: function(model, response) {
-                    var token = response.data.antiForgeryToken;
-
-                    that.handleRegister(token);
+                    that.getToken();
                 }
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,
@@ -573,6 +578,19 @@ var CofoundrySPA = CofoundrySPA || {};
             _.each(errorTexts, function(error) {
                 if (!$(error).hasClass('hidden')) $(error).addClass('hidden');
                 $(error).text('');
+            });
+        },
+        getToken: function() {
+            var url = '/api/auth/csrf-token',
+                that = this;
+
+            $.ajax({
+                url: url,
+                type: 'GET'
+            })
+            .done(function(data, response) {
+                var token = data.data;
+                that.handleRegister(token);
             });
         },
         handleRegister: function(token) {

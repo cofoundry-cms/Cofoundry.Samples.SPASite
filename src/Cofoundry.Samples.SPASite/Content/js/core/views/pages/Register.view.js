@@ -31,15 +31,11 @@
                     that.handleErrors(errors);
                 },
                 success: function(model, response) {
-                    var token = response.data.antiForgeryToken;
-
-                    that.handleRegister(token);
+                    that.getToken();
                 }
             });
         },
         handleErrors: function(errors) {
-            console.log(errors);
-
             _.each(errors, function(error) {
                 var name = error.properties[0].toLowerCase(),
                     message = error.message,
@@ -54,6 +50,19 @@
             _.each(errorTexts, function(error) {
                 if (!$(error).hasClass('hidden')) $(error).addClass('hidden');
                 $(error).text('');
+            });
+        },
+        getToken: function() {
+            var url = '/api/auth/csrf-token',
+                that = this;
+
+            $.ajax({
+                url: url,
+                type: 'GET'
+            })
+            .done(function(data, response) {
+                var token = data.data;
+                that.handleRegister(token);
             });
         },
         handleRegister: function(token) {

@@ -6,7 +6,7 @@
         initialize : function() {
             this.catsView = new collectionViews.Cats();
 
-            app.User.getFavourites();
+            if (app.User.authenticated) app.User.getFavourites();
         },
         render : function() {
             this.$el.html(this.template());
