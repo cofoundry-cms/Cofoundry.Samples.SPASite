@@ -12,6 +12,11 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
+    /// <summary>
+    /// This command handler ties together a number of functions built
+    /// into Cofoundry such as saving a new user, sending a notification
+    /// and logging them in.
+    /// </summary>
     public class RegisterMemberAndLogInCommandHandler
         : IAsyncCommandHandler<RegisterMemberAndLogInCommand>
         , IIgnorePermissionCheckHandler

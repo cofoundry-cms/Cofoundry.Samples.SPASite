@@ -27,6 +27,7 @@ namespace Cofoundry.Samples.SPASite
         public string LastName { get; set; }
         
         [Required]
+        [StringLength(300, MinimumLength = 8)]
         [DataType(DataType.Password)]
         [AllowHtml]
         public string Password { get; set; }

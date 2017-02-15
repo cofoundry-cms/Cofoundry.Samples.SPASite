@@ -56,7 +56,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
+      <HintPath>..\packages\Autofac.Mvc5.4.0.1\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
@@ -68,31 +68,31 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0106\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0108\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0106\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0108\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0-beta0009\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0-beta0011\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.AutoFac.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0009\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0011\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.ImageResizing.ImageResizer, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0002\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0003\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0106\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0108\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web.Admin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0106\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0108\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
