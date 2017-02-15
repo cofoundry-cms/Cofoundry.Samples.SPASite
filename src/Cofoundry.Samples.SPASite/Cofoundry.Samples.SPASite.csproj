@@ -68,31 +68,31 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0099\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0106\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0099\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0106\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0-beta0008\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0-beta0009\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.AutoFac.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0008\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0009\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.ImageResizing.ImageResizer, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0001\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0002\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0099\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0106\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web.Admin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0099\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0106\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
@@ -328,6 +328,7 @@
     <Content Include="Content\js\third_party\backbone\underscore-min.js" />
     <Content Include="Content\js\third_party\bootstrap.min.js" />
     <Content Include="Global.asax" />
+    <Content Include="grunt\Gruntfile.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -354,6 +355,7 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Api\ReadMe.md" />
+    <Content Include="grunt\package.json" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

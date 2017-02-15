@@ -13,10 +13,6 @@ using Cofoundry.Core.Validation;
 
 namespace Cofoundry.Samples.SPASite
 {
-    /// <summary>
-    /// Our auth api has to work a bit differently to other api controllers because we
-    /// need to pass back the CSRF token once the user has been logged in.
-    /// </summary>
     [RoutePrefix("api/auth")]
     [ValidateApiAntiForgeryToken]
     public class AuthApiController : ApiController
@@ -36,33 +32,36 @@ namespace Cofoundry.Samples.SPASite
             _commandExecutor = commandExecutor;
         }
 
+        #region queries
+
+        /// <summary>
+        /// Once we have logged in we need to re-fetch the csrf token because
+        /// the user identity will have changed and the old token will be invalid
+        /// </summary>
+        [HttpGet]
+        [Route("csrf-token")]
+        public IHttpActionResult GetCsrfToken()
+        {
+            var token = _antiCSRFService.GetToken();
+            return _apiResponseHelper.SimpleQueryResponse(this, token);
+        }
+
+        #endregion
+
         #region commands
 
         [HttpPost]
         [Route("register")]
         public Task<IHttpActionResult> Register(RegisterMemberAndLogInCommand command)
         {
-            return _apiResponseHelper.RunWithResultAsync(this, () => RunCommandAndReturnLoginData(command));
+            return _apiResponseHelper.RunCommandAsync(this, command);
         }
 
         [HttpPost]
         [Route("login")]
         public Task<IHttpActionResult> Login(LogMemberInCommand command)
         {
-            return _apiResponseHelper.RunWithResultAsync(this, () => RunCommandAndReturnLoginData(command));
-        }
-
-        private async Task<object> RunCommandAndReturnLoginData<TCommand>(TCommand command) where TCommand : ICommand
-        {
-            await _commandExecutor.ExecuteAsync(command);
-
-            // In order to process further requests we need to pass back the new csrf token.
-            var data = new
-            {
-                AntiForgeryToken = _antiCSRFService.GetToken()
-            };
-
-            return data;
+            return _apiResponseHelper.RunCommandAsync(this, command);
         }
 
         #endregion
