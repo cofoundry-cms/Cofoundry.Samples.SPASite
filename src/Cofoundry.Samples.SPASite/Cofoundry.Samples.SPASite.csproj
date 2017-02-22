@@ -68,31 +68,31 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0108\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0108\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0-beta0011\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.AutoFac.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0-beta0011\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.Web.0.1.0\lib\net461\Cofoundry.Plugins.DependencyInjection.AutoFac.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.ImageResizing.ImageResizer, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0-beta0003\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0108\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web.Admin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0108\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
@@ -305,6 +305,9 @@
     <Content Include="Content\css\screen.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\images\cat-fight-hero.jpg" />
+    <Content Include="Content\images\cc-images.txt" />
+    <Content Include="Content\images\heart-icon.png" />
+    <Content Include="Content\images\spacats-logo.png" />
     <Content Include="Content\js\compiled\CofoundrySPA.js" />
     <Content Include="Content\js\core\app.js" />
     <Content Include="Content\js\core\collections\Cats.collection.js" />
@@ -356,6 +359,33 @@
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Api\ReadMe.md" />
     <Content Include="grunt\package.json" />
+    <Content Include="sass\core\base\_animations.scss" />
+    <Content Include="sass\core\base\_layout.scss" />
+    <Content Include="sass\core\base\_typography.scss" />
+    <Content Include="sass\core\blocks\_content-block.scss" />
+    <Content Include="sass\core\blocks\_hero-banner.scss" />
+    <Content Include="sass\core\blocks\_navbar.scss" />
+    <Content Include="sass\core\blocks\_welcome.scss" />
+    <Content Include="sass\core\components\_cat-images.scss" />
+    <Content Include="sass\core\components\_cat-info.scss" />
+    <Content Include="sass\core\components\_cat.scss" />
+    <Content Include="sass\core\components\_characteristics.scss" />
+    <Content Include="sass\core\config\_global.scss" />
+    <Content Include="sass\core\elements\_button.scss" />
+    <Content Include="sass\core\elements\_characteristic.scss" />
+    <Content Include="sass\core\elements\_error.scss" />
+    <Content Include="sass\core\elements\_likes--big.scss" />
+    <Content Include="sass\core\elements\_likes.scss" />
+    <Content Include="sass\core\elements\_logo.scss" />
+    <Content Include="sass\core\elements\_message.scss" />
+    <Content Include="sass\libs\_functions.scss" />
+    <Content Include="sass\libs\_mixins.scss" />
+    <Content Include="sass\libs\_retina-sprites.scss" />
+    <Content Include="sass\libs\_retina.scss" />
+    <Content Include="sass\libs\_sprites.scss" />
+    <Content Include="sass\screen.scss" />
+    <Content Include="sass\third_party\_jquery.tokenize.scss" />
+    <Content Include="sass\third_party\_swiper.min.scss" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

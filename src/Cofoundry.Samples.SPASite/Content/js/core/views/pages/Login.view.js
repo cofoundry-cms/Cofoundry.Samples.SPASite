@@ -74,7 +74,7 @@
         },
         handleLogin: function(token) {
             this.showLoginMessage();
-
+            
             SPACatsState.csrfToken = token;
             app.User.set({authenticated: true, token: token});
         },
