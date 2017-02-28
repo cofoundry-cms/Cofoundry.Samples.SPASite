@@ -1,6 +1,6 @@
 # Cofoundry.Samples.SPASite
 
-An example demonstrating how to use Cofoundry to create a SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features.
+An example demonstrating how to use Cofoundry to create an SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features.
 
 The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
 
@@ -21,7 +21,7 @@ Notable features include:
 
 #### To get started:
 
-1. Create a database named 'Cofoundry.Samples.SPASite' and check the Cofoundry connection string in the web.config file is correct for you sql server instance
+1. Create a database named 'Cofoundry.Samples.SPASite' and check the Cofoundry connection string in the web.config file is correct for your sql server instance
 2. Run the website and navigate to *"/admin"*, which will display the setup screen
 3. Enter an application name and setup your user account. Submit the form to complete the site setup. 
 4. Either log in and enter your own data or follow the steps below to import some test data
@@ -75,7 +75,7 @@ Because all our logic is in the domain layer, our website project is fairly simp
 
 ![Domain solution structure](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/readme/SpaCatsWeb.png)
 
-- **Api:** Contains our web api controllers. This are quite lightweight and mostly just wrap out domain queries and commands.
+- **Api:** Contains our web api controllers. These are quite lightweight and mostly just wrap our domain queries and commands.
 - **App_Start:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via an owin *startup.cs* file. We also register some [routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) which simply point to the home controller because our SPA app handles the routing on the client side.
 - **Content:** SPA Cats is written in [backbone.js](http://backbonejs.org/) to keep it simple, but you could use any framework you like. The css is compiled from sass. The front end build uses the grunt file in *\src\Cofoundry.Samples.SPASite\grunt*.
 - **Controllers/Models/Views:** The app runs entirely in JavaScript, so the home controller simply passes some basic user information and the XSRFToken through to the view, which is then rendered as a simple js state object that can be read by backbone.
