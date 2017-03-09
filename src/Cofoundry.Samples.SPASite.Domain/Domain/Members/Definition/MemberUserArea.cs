@@ -8,13 +8,17 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     /// <summary>
-    /// Defining a user area allows us to provide an enhanced
-    /// to people who have signed up to the site.
+    /// Defining a user area allows us to require users to
+    /// sign-up or log in to access certain features of the site.
     /// 
     /// For more info see https://github.com/cofoundry-cms/cofoundry/wiki/User-Areas
     /// </summary>
     public class MemberUserArea : IUserAreaDefinition
     {
+        /// <summary>
+        /// Static access to the area code to make querying
+        /// easier
+        /// </summary>
         public static string AreaCode = "SPA";
 
         /// <summary>
