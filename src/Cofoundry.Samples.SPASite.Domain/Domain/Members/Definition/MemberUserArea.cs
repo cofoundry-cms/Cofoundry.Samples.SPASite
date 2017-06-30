@@ -19,7 +19,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         /// Static access to the area code to make querying
         /// easier
         /// </summary>
-        public static string AreaCode = "SPA";
+        public const string AreaCode = "SPA";
 
         /// <summary>
         /// Indicates if users in this area can login using a password. If this is false
@@ -58,6 +58,21 @@ namespace Cofoundry.Samples.SPASite.Domain
         public string UserAreaCode
         {
             get { return AreaCode; }
+        }
+
+        public string LoginPath
+        {
+            get { return "/"; }
+        }
+
+        public string LogoutPath
+        {
+            get { return "/"; }
+        }
+
+        public string AccessDeniedPath
+        {
+            get { return null; }
         }
     }
 }

@@ -4,10 +4,10 @@ using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {

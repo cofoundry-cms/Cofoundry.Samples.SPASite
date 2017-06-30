@@ -1,25 +1,29 @@
 ﻿using Cofoundry.Domain.Data;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.ModelConfiguration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using Cofoundry.Core;
 
 namespace Cofoundry.Samples.SPASite.Data
 {
-    public class CatLikeMap : EntityTypeConfiguration<CatLike>
+    public class CatLikeMap : IEntityTypeConfiguration<CatLike>
     {
-        public CatLikeMap()
+        public void Create(EntityTypeBuilder<CatLike> builder)
         {
-            HasKey(e => new { e.CatCustomEntityId, e.UserId });
+            builder.ToTable("CatLike", DbConstants.DefaultAppSchema);
+
+            builder.HasKey(e => new { e.CatCustomEntityId, e.UserId });
 
             // Relationships
-            HasRequired(s => s.CatCustomEntity)
+            builder.HasOne(s => s.CatCustomEntity)
                 .WithMany()
                 .HasForeignKey(d => d.CatCustomEntityId);
 
-            HasRequired(s => s.User)
+            builder.HasOne(s => s.User)
                 .WithMany()
                 .HasForeignKey(d => d.UserId);
         }

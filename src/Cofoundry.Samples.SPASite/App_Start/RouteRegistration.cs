@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Routing;
 using Cofoundry.Web.ModularMvc;
+using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Builder;
 
 namespace Cofoundry.Samples.SPASite.App_Start
 {
@@ -16,41 +15,23 @@ namespace Cofoundry.Samples.SPASite.App_Start
     /// </summary>
     public class RouteRegistration : IRouteRegistration
     {
-        public void RegisterRoutes(RouteCollection routes)
+        public void RegisterRoutes(IRouteBuilder routeBuilder)
         {
             // For this application most of the routing is done by the backbone router so
             // we just need to point routes back to the home controller.
 
-            routes.MapRoute(
-                name: "Home",
-                url: "",
-                defaults: new { controller = "Home", action = "Index" }
-            );
-
-            routes.MapRoute(
-                name: "Login",
-                url: "login",
-                defaults: new { controller = "Home", action = "Index" }
-            );
-
-            routes.MapRoute(
-                name: "Register",
-                url: "register",
-                defaults: new { controller = "Home", action = "Index" }
-            );
-
-            routes.MapRoute(
-                name: "Cats",
-                url: "cat/{id}",
-                defaults: new { controller = "Home", action = "Index" }
-            );
+            RouteToHome(routeBuilder, "Home", "");
+            RouteToHome(routeBuilder, "Login", "login");
+            RouteToHome(routeBuilder, "Register", "register");
+            RouteToHome(routeBuilder, "Cats", "cat/{id}");
 
             // The signout route is the only route that is slightly different
-            routes.MapRoute(
-                name: "SignOut",
-                url: "sign-out",
-                defaults: new { controller = "Home", action = "SignOut" }
-            );
+            routeBuilder.MapRoute("SignOut", "sign-out", new { controller = "Home", action = "SignOut" });
+        }
+
+        private void RouteToHome(IRouteBuilder routeBuilder, string name, string path)
+        {
+            routeBuilder.MapRoute(name, path, new { controller = "Home", action = "Index" });
         }
     }
 }

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Web.WebApi;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cofoundry.Samples.SPASite
 {
-    [RoutePrefix("api/features")]
-    public class FeaturesApiController : ApiController
+    [Route("api/features")]
+    public class FeaturesApiController : Controller
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -27,9 +26,8 @@ namespace Cofoundry.Samples.SPASite
 
         #region queries
 
-        [HttpGet]
-        [Route]
-        public async Task<IHttpActionResult> Get()
+        [HttpGet("")]
+        public async Task<IActionResult> Get()
         {
             var query = new GetAllFeaturesQuery();
             var results = await _queryExecutor.ExecuteAsync(query);

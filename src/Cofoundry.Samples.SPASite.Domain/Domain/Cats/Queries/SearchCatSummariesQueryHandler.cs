@@ -2,9 +2,9 @@
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;

@@ -1,6 +1,7 @@
 ﻿using Cofoundry.Core.EntityFramework;
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
+using Cofoundry.Samples.SPASite.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -25,12 +26,15 @@ namespace Cofoundry.Samples.SPASite.Domain
         , ILoggedInPermissionCheckHandler
     {
         private readonly IEntityFrameworkSqlExecutor _entityFrameworkSqlExecutor;
+        private readonly SPASiteDbContext _spaSiteDbContext;
 
         public SetCatLikedCommandHandler(
-            IEntityFrameworkSqlExecutor entityFrameworkSqlExecutor
+            IEntityFrameworkSqlExecutor entityFrameworkSqlExecutor,
+            SPASiteDbContext spaSiteDbContext
             )
         {
             _entityFrameworkSqlExecutor = entityFrameworkSqlExecutor;
+            _spaSiteDbContext = spaSiteDbContext;
         }
 
         public Task ExecuteAsync(SetCatLikedCommand command, IExecutionContext executionContext)
@@ -40,7 +44,8 @@ namespace Cofoundry.Samples.SPASite.Domain
             // For more info see https://github.com/cofoundry-cms/cofoundry/wiki/Entity-Framework-&-DbContext-Tools#executing-stored-procedures--raw-sql
 
             return _entityFrameworkSqlExecutor
-                .ExecuteCommandAsync("app.CatLike_SetLiked",
+                .ExecuteCommandAsync(_spaSiteDbContext,
+                "app.CatLike_SetLiked",
                  new SqlParameter("@CatId", command.CatId),
                  new SqlParameter("@UserId", executionContext.UserContext.UserId),
                  new SqlParameter("@IsLiked", command.IsLiked),

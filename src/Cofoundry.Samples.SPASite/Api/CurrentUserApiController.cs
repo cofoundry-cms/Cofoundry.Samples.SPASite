@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Web.WebApi;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Cofoundry.Domain;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Cofoundry.Web.Admin;
 
 namespace Cofoundry.Samples.SPASite
 {
-    [Authorize]
-    [RoutePrefix("api/users/current")]
-    public class CurrentUserApiController : ApiController
+    [AuthorizeUserArea(MemberUserArea.AreaCode)]
+    [Route("api/users/current")]
+    public class CurrentUserApiController : Controller
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -32,14 +33,13 @@ namespace Cofoundry.Samples.SPASite
 
         #region queries
 
-        [HttpGet]
-        [Route("cats/liked")]
-        public async Task<IHttpActionResult> GetLikedCats()
+        [HttpGet("cats/liked")]
+        public async Task<IActionResult> GetLikedCats()
         {
             // Here we get the userId of the currently logged in user. We could have
             // done this in the query handler, but instead we've chosen to keep the query 
             // flexible so it can be re-used in a more generic fashion
-            var userContext = _userContextService.GetCurrentContext();
+            var userContext = await _userContextService.GetCurrentContextAsync();
             var query = new GetCatSummariesByUserLikedQuery(userContext.UserId.Value);
             var results = await _queryExecutor.ExecuteAsync(query);
 

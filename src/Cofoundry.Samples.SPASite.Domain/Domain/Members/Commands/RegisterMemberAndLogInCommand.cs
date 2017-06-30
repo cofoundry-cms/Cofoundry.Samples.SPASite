@@ -6,8 +6,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
-using System.Xml.Serialization;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -29,7 +27,6 @@ namespace Cofoundry.Samples.SPASite
         [Required]
         [StringLength(300, MinimumLength = 8)]
         [DataType(DataType.Password)]
-        [AllowHtml]
         public string Password { get; set; }
 
         #region Output
