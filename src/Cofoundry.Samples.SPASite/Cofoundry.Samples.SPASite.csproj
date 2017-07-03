@@ -67,13 +67,11 @@
       <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cofoundry.Core, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.8\lib\net461\Cofoundry.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cofoundry.Core, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Core.0.1.9\lib\net461\Cofoundry.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Cofoundry.Domain, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.8\lib\net461\Cofoundry.Domain.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cofoundry.Domain, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Domain.0.1.9\lib\net461\Cofoundry.Domain.dll</HintPath>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Cofoundry.Plugins.DependencyInjection.Autofac.0.1.0\lib\net461\Cofoundry.Plugins.DependencyInjection.Autofac.dll</HintPath>
@@ -87,13 +85,11 @@
       <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cofoundry.Web, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.8\lib\net461\Cofoundry.Web.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cofoundry.Web, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Web.0.1.9\lib\net461\Cofoundry.Web.dll</HintPath>
     </Reference>
-    <Reference Include="Cofoundry.Web.Admin, Version=0.1.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.8\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cofoundry.Web.Admin, Version=0.1.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.9\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Conditions.2.1.0\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\Conditions.dll</HintPath>
