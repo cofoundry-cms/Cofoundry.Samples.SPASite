@@ -35,7 +35,7 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummaryByIdQuery() { CustomEntityId = query.CatId };
+            var customEntityQuery = new GetCustomEntityRenderSummaryByIdQuery(query.CatId);
             var customEntity = await _customEntityRepository.GetCustomEntityRenderSummaryByIdAsync(customEntityQuery); ;
             if (customEntity == null) return null;
 

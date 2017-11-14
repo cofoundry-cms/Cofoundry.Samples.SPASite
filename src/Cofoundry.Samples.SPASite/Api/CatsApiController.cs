@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Web.WebApi;
+using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
 using Cofoundry.Web.Admin;
 
 namespace Cofoundry.Samples.SPASite
@@ -56,7 +55,7 @@ namespace Cofoundry.Samples.SPASite
         /// access to this endpoint because you need to be logged in to 'like' a 
         /// cat
         /// </summary>
-        [AuthorizeUserArea(MemberUserArea.AreaCode)]
+        [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
         [HttpPost("{catId:int}/likes")]
         public Task<IActionResult> Like(int catId)
         {
@@ -71,7 +70,7 @@ namespace Cofoundry.Samples.SPASite
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
 
-        [AuthorizeUserArea(MemberUserArea.AreaCode)]
+        [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
         [HttpDelete("{catId:int}/likes")]
         public Task<IActionResult> UnLike(int catId)
         {

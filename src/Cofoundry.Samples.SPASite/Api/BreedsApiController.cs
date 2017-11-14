@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Web.WebApi;
+using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;

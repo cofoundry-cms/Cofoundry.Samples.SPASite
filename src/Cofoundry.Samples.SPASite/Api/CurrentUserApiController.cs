@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Web.WebApi;
+using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Cofoundry.Domain;
@@ -12,7 +12,7 @@ using Cofoundry.Web.Admin;
 
 namespace Cofoundry.Samples.SPASite
 {
-    [AuthorizeUserArea(MemberUserArea.AreaCode)]
+    [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
     [Route("api/users/current")]
     public class CurrentUserApiController : Controller
     {

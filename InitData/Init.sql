@@ -86,34 +86,34 @@ GO
 SET IDENTITY_INSERT [Cofoundry].[CustomEntity] ON 
 GO
 
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (1, N'SPABRD', NULL, N'british-short-hair', CAST(N'2017-01-31T15:32:39.4578000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (2, N'SPABRD', NULL, N'persian', CAST(N'2017-01-31T15:32:46.0512000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (3, N'SPABRD', NULL, N'siamese', CAST(N'2017-01-31T15:32:55.2977000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (4, N'SPABRD', NULL, N'maine-coon', CAST(N'2017-01-31T15:33:07.5513000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (5, N'SPABRD', NULL, N'bengal', CAST(N'2017-01-31T15:33:16.3957000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (6, N'SPABRD', NULL, N'burmese', CAST(N'2017-01-31T15:33:33.3041000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (7, N'SPABRD', NULL, N'scottish-fold', CAST(N'2017-01-31T15:33:48.5555000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (8, N'SPAFET', NULL, N'fluffy', CAST(N'2017-01-31T15:34:06.0901000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (9, N'SPAFET', NULL, N'short-hair', CAST(N'2017-01-31T15:34:13.3748000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (10, N'SPAFET', NULL, N'long-hair', CAST(N'2017-01-31T15:34:20.8121000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (11, N'SPAFET', NULL, N'wise', CAST(N'2017-01-31T15:34:26.8442000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (12, N'SPAFET', NULL, N'bashful', CAST(N'2017-01-31T15:34:34.2911000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (13, N'SPAFET', NULL, N'cunning', CAST(N'2017-01-31T15:34:40.6317000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (14, N'SPAFET', NULL, N'derpy', CAST(N'2017-01-31T15:35:07.1484000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (15, N'SPAFET', NULL, N'well-groomed', CAST(N'2017-01-31T15:35:42.3773000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (16, N'SPAFET', NULL, N'regal', CAST(N'2017-01-31T15:35:54.2227000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (17, N'SPAFET', NULL, N'quick', CAST(N'2017-01-31T15:36:03.3354000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (18, N'SPAFET', NULL, N'adventurous', CAST(N'2017-01-31T15:36:17.3566000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (19, N'SPAFET', NULL, N'introverted', CAST(N'2017-01-31T15:36:39.9222000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (20, N'SPAFET', NULL, N'proud', CAST(N'2017-01-31T15:36:53.4680000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (21, N'SPACAT', NULL, N'toby', CAST(N'2017-01-31T15:51:22.6698000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (22, N'SPACAT', NULL, N'captain-fluffy', CAST(N'2017-01-31T15:53:13.1226000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (23, N'SPACAT', NULL, N'mr-tiddles', CAST(N'2017-01-31T15:56:06.9258000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (24, N'SPACAT', NULL, N'pants', CAST(N'2017-01-31T15:57:50.5204000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (25, N'SPACAT', NULL, N'pablo', CAST(N'2017-01-31T15:59:26.2968000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (26, N'SPACAT', NULL, N'mercedes', CAST(N'2017-01-31T16:01:14.9689000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (27, N'SPACAT', NULL, N'tigra', CAST(N'2017-01-31T16:02:52.9080000' AS DateTime2), 1, NULL)
-INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], [Ordering]) VALUES (28, N'SPACAT', NULL, N'chairman-meow', CAST(N'2017-01-31T16:04:30.9990000' AS DateTime2), 1, NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (1, N'SPABRD', NULL, N'british-short-hair', CAST(N'2017-01-31T15:32:39.4578000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:32:39.4578000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (2, N'SPABRD', NULL, N'persian', CAST(N'2017-01-31T15:32:46.0512000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:32:46.0512000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (3, N'SPABRD', NULL, N'siamese', CAST(N'2017-01-31T15:32:55.2977000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:32:55.2977000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (4, N'SPABRD', NULL, N'maine-coon', CAST(N'2017-01-31T15:33:07.5513000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:33:07.5513000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (5, N'SPABRD', NULL, N'bengal', CAST(N'2017-01-31T15:33:16.3957000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:33:16.3957000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (6, N'SPABRD', NULL, N'burmese', CAST(N'2017-01-31T15:33:33.3041000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:33:33.3041000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (7, N'SPABRD', NULL, N'scottish-fold', CAST(N'2017-01-31T15:33:48.5555000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:33:48.5555000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (8, N'SPAFET', NULL, N'fluffy', CAST(N'2017-01-31T15:34:06.0901000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:06.0901000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (9, N'SPAFET', NULL, N'short-hair', CAST(N'2017-01-31T15:34:13.3748000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:13.3748000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (10, N'SPAFET', NULL, N'long-hair', CAST(N'2017-01-31T15:34:20.8121000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:20.8121000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (11, N'SPAFET', NULL, N'wise', CAST(N'2017-01-31T15:34:26.8442000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:26.8442000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (12, N'SPAFET', NULL, N'bashful', CAST(N'2017-01-31T15:34:34.2911000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:34.2911000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (13, N'SPAFET', NULL, N'cunning', CAST(N'2017-01-31T15:34:40.6317000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:34:40.6317000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (14, N'SPAFET', NULL, N'derpy', CAST(N'2017-01-31T15:35:07.1484000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:35:07.1484000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (15, N'SPAFET', NULL, N'well-groomed', CAST(N'2017-01-31T15:35:42.3773000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:35:42.3773000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (16, N'SPAFET', NULL, N'regal', CAST(N'2017-01-31T15:35:54.2227000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:35:54.2227000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (17, N'SPAFET', NULL, N'quick', CAST(N'2017-01-31T15:36:03.3354000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:36:03.3354000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (18, N'SPAFET', NULL, N'adventurous', CAST(N'2017-01-31T15:36:17.3566000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:36:17.3566000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (19, N'SPAFET', NULL, N'introverted', CAST(N'2017-01-31T15:36:39.9222000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:36:39.9222000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (20, N'SPAFET', NULL, N'proud', CAST(N'2017-01-31T15:36:53.4680000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:36:53.4680000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (21, N'SPACAT', NULL, N'toby', CAST(N'2017-01-31T15:51:22.6698000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:51:22.6698000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (22, N'SPACAT', NULL, N'captain-fluffy', CAST(N'2017-01-31T15:53:13.1226000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:53:13.1226000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (23, N'SPACAT', NULL, N'mr-tiddles', CAST(N'2017-01-31T15:56:06.9258000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:56:06.9258000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (24, N'SPACAT', NULL, N'pants', CAST(N'2017-01-31T15:57:50.5204000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:57:50.5204000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (25, N'SPACAT', NULL, N'pablo', CAST(N'2017-01-31T15:59:26.2968000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T15:59:26.2968000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (26, N'SPACAT', NULL, N'mercedes', CAST(N'2017-01-31T16:01:14.9689000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T16:01:14.9689000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (27, N'SPACAT', NULL, N'tigra', CAST(N'2017-01-31T16:02:52.9080000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T16:02:52.9080000' AS DateTime2), NULL)
+INSERT [Cofoundry].[CustomEntity] ([CustomEntityId], [CustomEntityDefinitionCode], [LocaleId], [UrlSlug], [CreateDate], [CreatorId], PublishStatusCode, PublishDate, [Ordering]) VALUES (28, N'SPACAT', NULL, N'chairman-meow', CAST(N'2017-01-31T16:04:30.9990000' AS DateTime2), 1, 'P', CAST(N'2017-01-31T16:04:30.9990000' AS DateTime2), NULL)
 GO
 
 SET IDENTITY_INSERT [Cofoundry].[CustomEntity] OFF
@@ -201,3 +201,34 @@ INSERT [Cofoundry].[UnstructuredDataDependency] ([RootEntityDefinitionCode], [Ro
 INSERT [Cofoundry].[UnstructuredDataDependency] ([RootEntityDefinitionCode], [RootEntityId], [RelatedEntityDefinitionCode], [RelatedEntityId], [RelatedEntityCascadeActionId]) VALUES (N'COFCEV', 28, N'SPAFET', 13, 2)
 INSERT [Cofoundry].[UnstructuredDataDependency] ([RootEntityDefinitionCode], [RootEntityId], [RelatedEntityDefinitionCode], [RelatedEntityId], [RelatedEntityCascadeActionId]) VALUES (N'COFCEV', 28, N'SPAFET', 18, 2)
 GO
+
+/* Update versioning lookup tables */
+
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 1
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 2
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 3
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 4
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 5
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 6
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 7
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 8
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 9
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 10
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 11
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 12
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 13
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 14
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 15
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 16
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 17
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 18
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 19
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 20
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 21
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 22
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 23
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 24
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 25
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 26
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 27
+exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 28

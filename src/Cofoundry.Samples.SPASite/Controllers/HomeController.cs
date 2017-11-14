@@ -1,4 +1,5 @@
 ﻿using Cofoundry.Domain;
+using Cofoundry.Samples.SPASite.Domain;
 using Microsoft.AspNetCore.Antiforgery;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -44,7 +45,7 @@ namespace Cofoundry.Samples.SPASite.Controllers
         [HttpPost]
         public async Task<ActionResult> SignOut()
         {
-            await _loginService.SignOutAsync();
+            await _loginService.SignOutAsync(MemberUserArea.MemberUserAreaCode);
 
             return Redirect("/");
         }

@@ -37,7 +37,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             {
                 Username = command.Email,
                 Password = command.Password,
-                UserAreaCode = MemberUserArea.AreaCode,
+                UserAreaCode = MemberUserArea.MemberUserAreaCode,
                 RememberUser = true
             };
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class FeatureDataModel : ICustomEntityVersionDataModel
+    public class FeatureDataModel : ICustomEntityDataModel
     {
     }
 }

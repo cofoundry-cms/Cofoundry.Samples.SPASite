@@ -18,7 +18,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// relationships are stored separately which allows us to provide a certain
     /// amount of data integrity.
     /// </summary>
-    public class CatDataModel : ICustomEntityVersionDataModel
+    public class CatDataModel : ICustomEntityDataModel
     {
         [Display(Description = "A short description or tag-line to describe the cat")]
         public string Description { get; set; }

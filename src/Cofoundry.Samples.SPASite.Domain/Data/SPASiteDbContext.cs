@@ -46,8 +46,8 @@ namespace Cofoundry.Samples.SPASite.Data
             modelBuilder
                 .UseDefaultConfig()
                 .MapCofoundryContent()
-                .Map(new CatLikeMap())
-                .Map(new CatLikeCountMap());
+                .ApplyConfiguration(new CatLikeMap())
+                .ApplyConfiguration(new CatLikeCountMap());
         }
 
         #endregion

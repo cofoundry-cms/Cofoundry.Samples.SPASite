@@ -67,11 +67,11 @@ namespace Cofoundry.Samples.SPASite.Domain
         private async Task<int> GetMemberRoleId()
         {
             return await _dbContext
-                            .Roles
-                            .AsNoTracking()
-                            .Where(r => r.SpecialistRoleTypeCode == MemberRole.RoleCode && r.UserAreaCode == MemberUserArea.AreaCode)
-                            .Select(r => r.RoleId)
-                            .SingleOrDefaultAsync();
+                .Roles
+                .AsNoTracking()
+                .Where(r => r.RoleCode == MemberRole.MemberRoleCode && r.UserAreaCode == MemberUserArea.MemberUserAreaCode)
+                .Select(r => r.RoleId)
+                .SingleOrDefaultAsync();
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             addUserCommand.LastName = command.LastName;
             addUserCommand.Password = command.Password;
             addUserCommand.RoleId = roleId;
-            addUserCommand.UserAreaCode = MemberUserArea.AreaCode;
+            addUserCommand.UserAreaCode = MemberUserArea.MemberUserAreaCode;
 
             return addUserCommand;
         }

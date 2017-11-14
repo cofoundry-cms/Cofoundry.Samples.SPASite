@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Domain" Version="0.2.0-beta0004" />
+    <PackageReference Include="Cofoundry.Domain" Version="0.2.0-beta0063" />
   </ItemGroup>
 
   <ItemGroup>

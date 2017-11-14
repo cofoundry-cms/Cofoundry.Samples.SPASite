@@ -1,5 +1,4 @@
-﻿using Cofoundry.Domain.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +11,7 @@ namespace Cofoundry.Samples.SPASite.Data
 {
     public class CatLikeCountMap : IEntityTypeConfiguration<CatLikeCount>
     {
-        public void Create(EntityTypeBuilder<CatLikeCount> builder)
+        public void Configure(EntityTypeBuilder<CatLikeCount> builder)
         {
             builder.ToTable("CatLikeCount", DbConstants.DefaultAppSchema);
 
