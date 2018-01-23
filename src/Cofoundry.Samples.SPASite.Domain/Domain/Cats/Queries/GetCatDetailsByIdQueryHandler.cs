@@ -95,7 +95,9 @@ namespace Cofoundry.Samples.SPASite.Domain
 
             var images = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
 
-            return images.ToFilteredAndOrderedCollection(imageAssetIds);
+            return images
+                .FilterAndOrderByKeys(imageAssetIds)
+                .ToList();
         }
     }
 }

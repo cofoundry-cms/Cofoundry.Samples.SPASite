@@ -45,7 +45,9 @@ namespace Cofoundry.Samples.SPASite.Domain
 
             // GetByIdRange queries return a dictionary to make lookups easier, so we 
             // have an extra step to do if we want to set the ordering
-            var orderedCats = catCustomEntities.ToFilteredAndOrderedCollection(userCatIds);
+            var orderedCats = catCustomEntities
+                .FilterAndOrderByKeys(userCatIds)
+                .ToList();
 
             var allMainImages = await GetMainImages(orderedCats);
             var allLikeCounts = await GetLikeCounts(orderedCats);
