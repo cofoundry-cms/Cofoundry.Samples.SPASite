@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetCatSummariesByUserLikedQueryHandler
-        : IAsyncQueryHandler<GetCatSummariesByUserLikedQuery, IEnumerable<CatSummary>>
+        : IAsyncQueryHandler<GetCatSummariesByUserLikedQuery, ICollection<CatSummary>>
         , ILoggedInPermissionCheckHandler
     {
         private readonly SPASiteDbContext _dbContext;
@@ -30,7 +30,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<CatSummary>> ExecuteAsync(GetCatSummariesByUserLikedQuery query, IExecutionContext executionContext)
+        public async Task<ICollection<CatSummary>> ExecuteAsync(GetCatSummariesByUserLikedQuery query, IExecutionContext executionContext)
         {
             var userCatIds = await _dbContext
                 .CatLikes
@@ -55,7 +55,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             return MapCats(orderedCats, allMainImages, allLikeCounts);
         }
 
-        private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(IEnumerable<CustomEntityRenderSummary> customEntities)
+        private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(ICollection<CustomEntityRenderSummary> customEntities)
         {
             var imageAssetIds = customEntities
                 .Select(i => (CatDataModel)i.Model)
@@ -66,7 +66,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             return _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
         }
 
-        private Task<Dictionary<int, int>> GetLikeCounts(IEnumerable<CustomEntityRenderSummary> customEntities)
+        private Task<Dictionary<int, int>> GetLikeCounts(ICollection<CustomEntityRenderSummary> customEntities)
         {
             var catIds = customEntities
                 .Select(i => i.CustomEntityId)
@@ -81,7 +81,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         }
 
         private List<CatSummary> MapCats(
-            IEnumerable<CustomEntityRenderSummary> customEntities,
+            ICollection<CustomEntityRenderSummary> customEntities,
             IDictionary<int, ImageAssetRenderDetails> images,
             IDictionary<int, int> allLikeCounts
             )

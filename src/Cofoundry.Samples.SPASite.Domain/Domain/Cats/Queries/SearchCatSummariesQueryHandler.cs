@@ -37,7 +37,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             customEntityQuery.PageSize = query.PageSize = query.PageSize;
             customEntityQuery.PageNumber = query.PageNumber;
             customEntityQuery.PublishStatus = PublishStatusQuery.Published;
-            //customEntityQuery.SortBy == CustomEntityQuerySortType.PublishDate;
+            customEntityQuery.SortBy = CustomEntityQuerySortType.PublishDate;
 
             var catCustomEntities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(customEntityQuery);
             var allMainImages = await GetMainImages(catCustomEntities);

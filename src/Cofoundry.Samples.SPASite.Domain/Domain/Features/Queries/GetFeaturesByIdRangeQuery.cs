@@ -12,11 +12,11 @@ namespace Cofoundry.Samples.SPASite.Domain
     {
         public GetFeaturesByIdRangeQuery() { }
 
-        public GetFeaturesByIdRangeQuery(int[] ids)
+        public GetFeaturesByIdRangeQuery(ICollection<int> ids)
         {
             FeatureIds = ids;
         }
 
-        public int[] FeatureIds { get; set; }
+        public ICollection<int> FeatureIds { get; set; }
     }
 }

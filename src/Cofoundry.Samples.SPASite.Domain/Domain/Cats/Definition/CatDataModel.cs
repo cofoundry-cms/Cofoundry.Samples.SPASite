@@ -29,10 +29,10 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         [Display(Name = "Features", Description = "Extra features or properties that help categorize this cat")]
         [CustomEntityCollection(FeatureCustomEntityDefinition.DefinitionCode)]
-        public int[] FeatureIds { get; set; }
+        public ICollection<int> FeatureIds { get; set; }
 
         [Display(Name = "Images", Description = "The top image will be the main image that displays in the grid")]
         [ImageCollection]
-        public int[] ImageAssetIds { get; set; }
+        public ICollection<int> ImageAssetIds { get; set; }
     }
 }

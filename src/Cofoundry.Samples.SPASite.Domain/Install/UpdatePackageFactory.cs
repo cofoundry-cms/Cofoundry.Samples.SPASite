@@ -33,12 +33,6 @@ namespace Cofoundry.Samples.SPASite.Domain.Install
         /// on. In this case we are dependent on the Cofoundry installation
         /// being run before this one
         /// </summary>
-        public override IEnumerable<string> DependentModules
-        {
-            get
-            {
-                yield return CofoundryModuleInfo.ModuleIdentifier;
-            }
-        }
+        public override ICollection<string> DependentModules { get; } = new string[] { CofoundryModuleInfo.ModuleIdentifier };
     }
 }
