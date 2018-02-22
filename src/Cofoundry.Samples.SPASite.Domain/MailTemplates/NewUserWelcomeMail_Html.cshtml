@@ -1,11 +1,8 @@
 ﻿@model NewUserWelcomeMailTemplate
-
+@inject ICofoundryMailTemplateHelper Cofoundry
 @*
-    TODO: Doc template files in netcore (in summary: templates now use razor proper, but with a fake request context).
-
-    Template view files can be placed in your website views directory which gives you better
-    syntax highlighting in VS2017, but this example demonstrates how you can keep them organized
-    in your domain layer.
+    Template view files can be placed in your website views directory, but this example 
+    demonstrates how you can keep them organized in your domain layer.
 
     To use these embedded view files you need to give them a build action of 'Embedded Resource' in
     the properties panel and include a class that implements IAssemblyResourceRegistration in this
