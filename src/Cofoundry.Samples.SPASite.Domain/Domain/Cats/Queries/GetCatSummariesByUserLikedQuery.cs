@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class GetCatSummariesByUserLikedQuery : IQuery<IEnumerable<CatSummary>>
+    public class GetCatSummariesByUserLikedQuery : IQuery<ICollection<CatSummary>>
     {
         public GetCatSummariesByUserLikedQuery() {}
 

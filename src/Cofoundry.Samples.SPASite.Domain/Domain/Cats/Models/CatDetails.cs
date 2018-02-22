@@ -24,8 +24,8 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         public Breed Breed { get; set; }
 
-        public IEnumerable<Feature> Features { get; set; }
+        public ICollection<Feature> Features { get; set; }
 
-        public IEnumerable<ImageAssetRenderDetails> Images { get; set; }
+        public ICollection<ImageAssetRenderDetails> Images { get; set; }
     }
 }

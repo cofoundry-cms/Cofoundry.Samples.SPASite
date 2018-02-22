@@ -2,9 +2,9 @@
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetCatSummariesByUserLikedQueryHandler
-        : IAsyncQueryHandler<GetCatSummariesByUserLikedQuery, IEnumerable<CatSummary>>
+        : IAsyncQueryHandler<GetCatSummariesByUserLikedQuery, ICollection<CatSummary>>
         , ILoggedInPermissionCheckHandler
     {
         private readonly SPASiteDbContext _dbContext;
@@ -30,7 +30,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             _dbContext = dbContext;
         }
 
-        public async Task<IEnumerable<CatSummary>> ExecuteAsync(GetCatSummariesByUserLikedQuery query, IExecutionContext executionContext)
+        public async Task<ICollection<CatSummary>> ExecuteAsync(GetCatSummariesByUserLikedQuery query, IExecutionContext executionContext)
         {
             var userCatIds = await _dbContext
                 .CatLikes
@@ -45,7 +45,9 @@ namespace Cofoundry.Samples.SPASite.Domain
 
             // GetByIdRange queries return a dictionary to make lookups easier, so we 
             // have an extra step to do if we want to set the ordering
-            var orderedCats = catCustomEntities.ToFilteredAndOrderedCollection(userCatIds);
+            var orderedCats = catCustomEntities
+                .FilterAndOrderByKeys(userCatIds)
+                .ToList();
 
             var allMainImages = await GetMainImages(orderedCats);
             var allLikeCounts = await GetLikeCounts(orderedCats);
@@ -53,7 +55,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             return MapCats(orderedCats, allMainImages, allLikeCounts);
         }
 
-        private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(IEnumerable<CustomEntityRenderSummary> customEntities)
+        private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(ICollection<CustomEntityRenderSummary> customEntities)
         {
             var imageAssetIds = customEntities
                 .Select(i => (CatDataModel)i.Model)
@@ -64,7 +66,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             return _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
         }
 
-        private Task<Dictionary<int, int>> GetLikeCounts(IEnumerable<CustomEntityRenderSummary> customEntities)
+        private Task<Dictionary<int, int>> GetLikeCounts(ICollection<CustomEntityRenderSummary> customEntities)
         {
             var catIds = customEntities
                 .Select(i => i.CustomEntityId)
@@ -79,7 +81,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         }
 
         private List<CatSummary> MapCats(
-            IEnumerable<CustomEntityRenderSummary> customEntities,
+            ICollection<CustomEntityRenderSummary> customEntities,
             IDictionary<int, ImageAssetRenderDetails> images,
             IDictionary<int, int> allLikeCounts
             )

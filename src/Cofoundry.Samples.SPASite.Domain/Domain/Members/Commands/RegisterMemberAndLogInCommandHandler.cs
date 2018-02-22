@@ -3,9 +3,9 @@ using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Domain.Data;
 using Cofoundry.Web;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,7 +56,7 @@ namespace Cofoundry.Samples.SPASite.Domain
 
             // Log the user in. Note that the new user id is set in the OutputUserId which is a 
             // convention used by the CQS framework (see https://github.com/cofoundry-cms/cofoundry/wiki/CQS)
-            await _loginService.LogAuthenticatedUserInAsync(addUserCommand.OutputUserId, true);
+            await _loginService.LogAuthenticatedUserInAsync(addUserCommand.UserAreaCode, addUserCommand.OutputUserId, true);
         }
 
         /// <summary>
@@ -67,11 +67,11 @@ namespace Cofoundry.Samples.SPASite.Domain
         private async Task<int> GetMemberRoleId()
         {
             return await _dbContext
-                            .Roles
-                            .AsNoTracking()
-                            .Where(r => r.SpecialistRoleTypeCode == MemberRole.RoleCode && r.UserAreaCode == MemberUserArea.AreaCode)
-                            .Select(r => r.RoleId)
-                            .SingleOrDefaultAsync();
+                .Roles
+                .AsNoTracking()
+                .Where(r => r.RoleCode == MemberRole.MemberRoleCode && r.UserAreaCode == MemberUserArea.MemberUserAreaCode)
+                .Select(r => r.RoleId)
+                .SingleOrDefaultAsync();
         }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             addUserCommand.LastName = command.LastName;
             addUserCommand.Password = command.Password;
             addUserCommand.RoleId = roleId;
-            addUserCommand.UserAreaCode = MemberUserArea.AreaCode;
+            addUserCommand.UserAreaCode = MemberUserArea.MemberUserAreaCode;
 
             return addUserCommand;
         }

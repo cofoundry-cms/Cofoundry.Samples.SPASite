@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetAllFeaturesQueryHandler
-        : IAsyncQueryHandler<GetAllFeaturesQuery, IEnumerable<Feature>>
+        : IAsyncQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
         , IIgnorePermissionCheckHandler
     {
         private readonly ICustomEntityRepository _customEntityRepository;
@@ -22,12 +22,14 @@ namespace Cofoundry.Samples.SPASite.Domain
             _customEntityRepository = customEntityRepository;
         }
 
-        public async Task<IEnumerable<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
+        public async Task<ICollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
         {
             var customEntityQuery = new GetCustomEntityRenderSummariesByDefinitionCodeQuery(FeatureCustomEntityDefinition.DefinitionCode);
             var customEntities = await _customEntityRepository.GetCustomEntityRenderSummariesByDefinitionCodeAsync(customEntityQuery); ;
 
-            var features = customEntities.Select(MapFeature);
+            var features = customEntities
+                .Select(MapFeature)
+                .ToList();
 
             return features;
         }

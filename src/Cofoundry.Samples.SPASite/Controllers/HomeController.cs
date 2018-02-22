@@ -1,10 +1,11 @@
 ﻿using Cofoundry.Domain;
-using Cofoundry.Web;
+using Cofoundry.Samples.SPASite.Domain;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Controllers
 {
@@ -16,34 +17,35 @@ namespace Cofoundry.Samples.SPASite.Controllers
     {
         private readonly ILoginService _loginService;
         private readonly IUserContextService _userContextService;
-        private readonly IAntiCSRFService _antiCSRFService;
+        private readonly IAntiforgery _antiforgery;
 
         public HomeController(
             ILoginService loginService,
             IUserContextService userContextService,
-            IAntiCSRFService antiCSRFService
+            IAntiforgery antiforgery
             )
         {
             _loginService = loginService;
             _userContextService = userContextService;
-            _antiCSRFService = antiCSRFService;
+            _antiforgery = antiforgery;
         }
 
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            var currentUser = _userContextService.GetCurrentContext();
-            
+            var currentUser = await _userContextService.GetCurrentContextAsync();
+            var token = _antiforgery.GetAndStoreTokens(HttpContext);
+
             var vm = new HomeViewModel();
             vm.IsLoggedIn = currentUser.UserId.HasValue;
-            vm.XSRFToken = _antiCSRFService.GetToken();
+            vm.XSRFToken = token.RequestToken;
 
             return View(vm);
         }
 
         [HttpPost]
-        public ActionResult SignOut()
+        public async Task<ActionResult> SignOut()
         {
-            _loginService.SignOut();
+            await _loginService.SignOutAsync(MemberUserArea.MemberUserAreaCode);
 
             return Redirect("/");
         }

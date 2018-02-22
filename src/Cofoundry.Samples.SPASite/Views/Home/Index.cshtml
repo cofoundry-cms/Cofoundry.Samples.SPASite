@@ -6,8 +6,8 @@
     <title>Cofoundry SPA Sample</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/Content/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/Content/css/screen.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/screen.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,700" rel="stylesheet">
 </head>
 
@@ -43,7 +43,7 @@
     <!-- TEMPLATES -->
     <script id="indexTemplate" type="text/template">
         <div class="hero-banner">
-            <img src="/Content/images/cat-fight-hero.jpg">
+            <img src="/images/cat-fight-hero.jpg">
 
             <div class="container hero-banner__overlay">
                 <div class="hero-banner__text">
@@ -61,7 +61,7 @@
     <script id="catItem" type="text/template">
         <a href="/cat/<%= catId %>">
             <div class="cat__image">
-                <img src="<%= mainImage %>?width=263&height=263&mode=crop?width=263&height=263&mode=crop">
+                <img src="<%= mainImage %>?width=263&height=263">
             </div>
             <div class="cat__details">
                 <span class="name"><%= name %></span>
@@ -171,7 +171,7 @@
         };
     </script>
 
-    <script src="/Content/js/compiled/CofoundrySPA.js"></script>
+    <script src="/js/compiled/CofoundrySPA.js"></script>
 
 </body>
 </html>

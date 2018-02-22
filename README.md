@@ -62,7 +62,7 @@ In this example we demonstrate separating your application into two projects to 
 
 Contains domain logic and data access.
 
-![Domain solution structure](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/readme/SpaCatsDomain.png)
+![Domain solution structure](readme/SpaCatsDomain.png)
 
 -  **Data:** We use some custom sql tables to store cat popularity data. An Entity Framework DbContext is used to access the custom tables, which demonstrates integrating custom sql tables with Cofoundry sql tables.
 - **Domain:** The domain contains all the models, [queries and commands](https://github.com/cofoundry-cms/cofoundry/wiki/CQS) that we use to retrieve and store data. It also contains the [Custom Entity Definitions](https://github.com/cofoundry-cms/cofoundry/wiki/Custom-Entities) that define the *Breed*, *Cat* and *Features* custom entities, and the [User Area Definition](https://github.com/cofoundry-cms/cofoundry/wiki/User-Areas) that defines the *Members* login area. Structuring our code in this way gives us a clean separation between our domain logic layer and our application layer.
@@ -73,9 +73,9 @@ Contains domain logic and data access.
 
 Because all our logic is in the domain layer, our website project is fairly simple.
 
-![Domain solution structure](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/readme/SpaCatsWeb.png)
+![Web solution structure](readme/SpaCatsWeb.png)
 
 - **Api:** Contains our web api controllers. These are quite lightweight and mostly just wrap our domain queries and commands.
-- **App_Start:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via an owin *startup.cs* file. We also register some [routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) which simply point to the home controller because our SPA app handles the routing on the client side.
-- **Content:** SPA Cats is written in [backbone.js](http://backbonejs.org/) to keep it simple, but you could use any framework you like. The css is compiled from sass. The front end build uses the grunt file in *\src\Cofoundry.Samples.SPASite\grunt*.
+- **App_Start:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via the standard *startup.cs* file in the application root, but here we also register some [routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) which simply point to the home controller because our SPA app handles the routing on the client side.
 - **Controllers/Models/Views:** The app runs entirely in JavaScript, so the home controller simply passes some basic user information and the XSRFToken through to the view, which is then rendered as a simple js state object that can be read by backbone.
+- **sass/grunt:** SPA Cats is written in [backbone.js](http://backbonejs.org/) to keep it simple, but you could use any framework you like. The css is compiled from sass and the build process uses grunt.

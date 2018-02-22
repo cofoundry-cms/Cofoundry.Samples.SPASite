@@ -17,7 +17,7 @@ namespace Cofoundry.Samples.SPASite.Data
     {
         public void Register(IContainerRegister container)
         {
-            container.RegisterDatabase<SPASiteDbContext>();
+            container.RegisterScoped<SPASiteDbContext>();
         }
     }
 }

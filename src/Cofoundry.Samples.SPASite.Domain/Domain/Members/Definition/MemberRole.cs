@@ -17,7 +17,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// </summary>
     public class MemberRole : IRoleDefinition
     {
-        public const string RoleCode = "MEM";
+        public const string MemberRoleCode = "MEM";
 
         /// <summary>
         /// The role title is used to identify the role and select it in the admin 
@@ -30,11 +30,11 @@ namespace Cofoundry.Samples.SPASite.Domain
         /// can be used to reference the role programatically. The code must be unique
         /// and convention is to use upper case, although code matching is case insensitive.
         /// </summary>
-        public string SpecialistRoleTypeCode { get { return RoleCode; } }
+        public string RoleCode { get { return MemberRoleCode; } }
 
         /// <summary>
         /// A role must be assigned to a user area, in this case the role is used for members
         /// </summary
-        public string UserAreaCode { get { return MemberUserArea.AreaCode; } }
+        public string UserAreaCode { get { return MemberUserArea.MemberUserAreaCode; } }
     }
 }

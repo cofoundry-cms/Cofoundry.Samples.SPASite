@@ -6,10 +6,10 @@ require 'breakpoint'
 
 # Set this to the root of your project when deployed:
 http_path = "/"
-css_dir = "Content/css"
+css_dir = "wwwroot/css"
 sass_dir = "sass"
-images_dir = "Content/css/img"
-javascripts_dir = "Content/js"
+images_dir = "wwwroot/css/img"
+javascripts_dir = "wwwroot/js"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed

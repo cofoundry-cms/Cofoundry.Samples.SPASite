@@ -1,8 +1,8 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,20 +16,38 @@ namespace Cofoundry.Samples.SPASite.Data
     /// 
     /// See https://github.com/cofoundry-cms/cofoundry/wiki/Entity-Framework-&-DbContext-Tools
     /// </summary>
-    public partial class SPASiteDbContext : DbContext
+    public class SPASiteDbContext : DbContext
     {
         #region constructor
 
-        static SPASiteDbContext()
+        private readonly DatabaseSettings _databaseSettings;
+
+        public SPASiteDbContext(DatabaseSettings databaseSettings)
         {
-            Database.SetInitializer<SPASiteDbContext>(null);
+            _databaseSettings = databaseSettings;
         }
 
-        public SPASiteDbContext()
-            : base(DbConstants.ConnectionStringName)
+        #endregion
+
+        #region config
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // This helper just turns off LazyLoading and adds a console debug logger.
-            DbContextConfigurationHelper.SetDefaults(this);
+            optionsBuilder.UseSqlServer(_databaseSettings.ConnectionString);
+        }
+
+        /// <summary>
+        /// We use the Cofoundry suggested config here which removes the PluralizingTableNameConvention
+        /// and makes "app" the default schema. We also use the helper to map Cofoundry objects to this 
+        /// DbContext so we can use them as relations on our data model.
+        /// </summary>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .UseDefaultConfig()
+                .MapCofoundryContent()
+                .ApplyConfiguration(new CatLikeMap())
+                .ApplyConfiguration(new CatLikeCountMap());
         }
 
         #endregion
@@ -38,25 +56,6 @@ namespace Cofoundry.Samples.SPASite.Data
 
         public DbSet<CatLike> CatLikes { get; set; }
         public DbSet<CatLikeCount> CatLikeCounts { get; set; }
-
-        #endregion
-
-        #region mapping
-
-        /// <summary>
-        /// We use the Cofoundry suggested config here which removes the PluralizingTableNameConvention
-        /// and makes "app" the default schema. We also use the helper to map Cofoundry objects to this 
-        /// DbContext so we can use them as relations on our data model.
-        /// </summary>
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-
-            modelBuilder
-                .UseDefaultConfig()
-                .MapCofoundryContent()
-                .Map(new CatLikeMap())
-                .Map(new CatLikeCountMap());
-        }
 
         #endregion
     }

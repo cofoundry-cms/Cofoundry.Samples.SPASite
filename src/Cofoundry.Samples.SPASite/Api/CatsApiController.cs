@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Http;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Web.WebApi;
+using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Cofoundry.Web.Admin;
 
 namespace Cofoundry.Samples.SPASite
 {
-    [RoutePrefix("api/cats")]
-    [ValidateApiAntiForgeryToken]
-    public class CatsApiController : ApiController
+    [Route("api/cats")]
+    [AutoValidateAntiforgeryToken]
+    public class CatsApiController : Controller
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -28,9 +28,8 @@ namespace Cofoundry.Samples.SPASite
 
         #region queries
 
-        [HttpGet]
-        [Route]
-        public async Task<IHttpActionResult> Get([FromUri] SearchCatSummariesQuery query)
+        [HttpGet("")]
+        public async Task<IActionResult> Get([FromQuery] SearchCatSummariesQuery query)
         {
             if (query == null) query = new SearchCatSummariesQuery();
             var results = await _queryExecutor.ExecuteAsync(query);
@@ -38,9 +37,8 @@ namespace Cofoundry.Samples.SPASite
             return _apiResponseHelper.SimpleQueryResponse(this, results);
         }
 
-        [HttpGet]
-        [Route("{catId:int}")]
-        public async Task<IHttpActionResult> Get(int catId)
+        [HttpGet("{catId:int}")]
+        public async Task<IActionResult> Get(int catId)
         {
             var query = new GetCatDetailsByIdQuery(catId);
             var results = await _queryExecutor.ExecuteAsync(query);
@@ -57,10 +55,9 @@ namespace Cofoundry.Samples.SPASite
         /// access to this endpoint because you need to be logged in to 'like' a 
         /// cat
         /// </summary>
-        [Authorize]
-        [HttpPost]
-        [Route("{catId:int}/likes")]
-        public Task<IHttpActionResult> Like(int catId)
+        [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
+        [HttpPost("{catId:int}/likes")]
+        public Task<IActionResult> Like(int catId)
         {
             var command = new SetCatLikedCommand()
             {
@@ -73,10 +70,9 @@ namespace Cofoundry.Samples.SPASite
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
 
-        [Authorize]
-        [HttpDelete]
-        [Route("{catId:int}/likes")]
-        public Task<IHttpActionResult> UnLike(int catId)
+        [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
+        [HttpDelete("{catId:int}/likes")]
+        public Task<IActionResult> UnLike(int catId)
         {
             var command = new SetCatLikedCommand()
             {

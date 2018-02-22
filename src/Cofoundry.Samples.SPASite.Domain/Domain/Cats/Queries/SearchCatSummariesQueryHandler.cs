@@ -2,9 +2,9 @@
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +36,8 @@ namespace Cofoundry.Samples.SPASite.Domain
             customEntityQuery.CustomEntityDefinitionCode = CatCustomEntityDefinition.DefinitionCode;
             customEntityQuery.PageSize = query.PageSize = query.PageSize;
             customEntityQuery.PageNumber = query.PageNumber;
+            customEntityQuery.PublishStatus = PublishStatusQuery.Published;
+            customEntityQuery.SortBy = CustomEntityQuerySortType.PublishDate;
 
             var catCustomEntities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(customEntityQuery);
             var allMainImages = await GetMainImages(catCustomEntities);
