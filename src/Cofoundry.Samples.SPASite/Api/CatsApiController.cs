@@ -6,7 +6,6 @@ using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Cofoundry.Web.Admin;
 
 namespace Cofoundry.Samples.SPASite
 {
