@@ -48,8 +48,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0012" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.3.1" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0013" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.3.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
   </ItemGroup>
   
