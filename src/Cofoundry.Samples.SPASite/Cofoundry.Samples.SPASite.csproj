@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
 	<MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
@@ -9,48 +9,11 @@
   <ItemGroup>
     <EmbeddedResource Include="Views\_ViewImports.cshtml" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Include="wwwroot\css\bootstrap.min.css" />
-    <None Include="wwwroot\css\core\components\cat.css" />
-    <None Include="wwwroot\css\screen.css" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.svg" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="wwwroot\fonts\glyphicons-halflings-regular.woff2" />
-    <None Include="wwwroot\images\cat-fight-hero.jpg" />
-    <None Include="wwwroot\images\cc-images.txt" />
-    <None Include="wwwroot\images\heart-icon.png" />
-    <None Include="wwwroot\images\spacats-logo.png" />
-    <None Include="wwwroot\js\compiled\CofoundrySPA.js" />
-    <None Include="wwwroot\js\core\app.js" />
-    <None Include="wwwroot\js\core\collections\Cats.collection.js" />
-    <None Include="wwwroot\js\core\helper.js" />
-    <None Include="wwwroot\js\core\init.js" />
-    <None Include="wwwroot\js\core\models\Cat.model.js" />
-    <None Include="wwwroot\js\core\models\Login.model.js" />
-    <None Include="wwwroot\js\core\models\Register.model.js" />
-    <None Include="wwwroot\js\core\models\User.model.js" />
-    <None Include="wwwroot\js\core\views\collectionViews\Cats.view.js" />
-    <None Include="wwwroot\js\core\views\components\Component.view.js" />
-    <None Include="wwwroot\js\core\views\components\Menu.view.js" />
-    <None Include="wwwroot\js\core\views\itemViews\Cat.view.js" />
-    <None Include="wwwroot\js\core\views\pages\CatDetails.view.js" />
-    <None Include="wwwroot\js\core\views\pages\Index.view.js" />
-    <None Include="wwwroot\js\core\views\pages\Login.view.js" />
-    <None Include="wwwroot\js\core\views\pages\Register.view.js" />
-    <None Include="wwwroot\js\core\views\Site.view.js" />
-    <None Include="wwwroot\js\third_party\backbone\backbone-min.js" />
-    <None Include="wwwroot\js\third_party\backbone\jquery-2.1.4.min.js" />
-    <None Include="wwwroot\js\third_party\backbone\underscore-min.js" />
-    <None Include="wwwroot\js\third_party\bootstrap.min.js" />
-  </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0013" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.3.2" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.4.0-beta0001" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.4.0-beta0026" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   
   <ItemGroup>

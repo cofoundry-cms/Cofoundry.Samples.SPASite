@@ -14,7 +14,9 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// This definition uses ICustomisedTermCustomEntityDefinition to change
     /// the display name for the title property to be 'Name'.
     /// </summary>
-    public class CatCustomEntityDefinition : ICustomizedTermCustomEntityDefinition<CatDataModel>
+    public class CatCustomEntityDefinition 
+        : ICustomEntityDefinition<CatDataModel>
+        , ICustomizedTermCustomEntityDefinition
     {
         /// <summary>
         /// This constant is a convention that allows us to reference this definition code 
