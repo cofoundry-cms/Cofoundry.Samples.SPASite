@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Cofoundry.Web;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -25,8 +26,14 @@ namespace Cofoundry.Samples.SPASite
                 .AddCofoundry(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            if (!env.IsDevelopment())
+            {
+                app.UseHsts();
+            }
+
+            app.UseHttpsRedirection();
             app.UseCofoundry();
         }
     }
