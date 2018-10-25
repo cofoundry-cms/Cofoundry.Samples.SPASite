@@ -36,7 +36,7 @@ module.exports = function (grunt) {
                 }
             }
         },
-        // JS concatenation and minification is handled by the .NET build process
+		
         concat: {
             options: {
                 // define a string to put between each file in the concatenated output

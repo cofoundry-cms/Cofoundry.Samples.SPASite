@@ -28,7 +28,6 @@ namespace Cofoundry.Samples.SPASite.App_Start
             // The signout route is the only route that is slightly different
             routeBuilder.MapRoute("SignOut", "sign-out", new { controller = "Home", action = "SignOut" });
 
-
             routeBuilder.MapRoute(
                 "Default", 
                 "{controller}/{action}/{id?}",

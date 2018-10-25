@@ -58,10 +58,6 @@ var CofoundrySPA = CofoundrySPA || {};
 
             if (this.id) {
                 parsedResponse = response.data;
-                parsedResponse.images = this.formatImages(parsedResponse);
-            }
-            else {
-                parsedResponse.mainImage = this.formatMainImage(parsedResponse);       
             }
 
             return parsedResponse;
