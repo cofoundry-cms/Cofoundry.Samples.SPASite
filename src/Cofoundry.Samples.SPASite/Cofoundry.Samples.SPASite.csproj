@@ -12,7 +12,7 @@
   
   <ItemGroup>
     <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0017" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.5.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   
