@@ -10,7 +10,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// <summary>
     /// Roles can be defined in code as well as in the admin panel. Defining
     /// a role in code means that it gets added automatically at startup. 
-    /// Additionally we have a SpecialistRoleTypeCode that we can use to query 
+    /// Additionally we have a RoleCode that we can use to query 
     /// the role programatically.
     /// 
     /// See https://github.com/cofoundry-cms/cofoundry/wiki/Roles-&-Permissions
@@ -26,9 +26,9 @@ namespace Cofoundry.Samples.SPASite.Domain
         public string Title { get { return "Member"; } }
 
         /// <summary>
-        /// The specialist role type code is a unique three letter code that
-        /// can be used to reference the role programatically. The code must be unique
-        /// and convention is to use upper case, although code matching is case insensitive.
+        /// The role code is a unique three letter code that can be used to reference 
+        /// the role programatically. The code must be unique and convention is to use 
+        /// upper case, although code matching is case insensitive.
         /// </summary>
         public string RoleCode { get { return MemberRoleCode; } }
 
