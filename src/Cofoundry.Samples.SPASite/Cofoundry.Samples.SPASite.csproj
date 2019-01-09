@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
 	<MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
@@ -11,8 +11,8 @@
   </ItemGroup>
   
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0017" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.5.1" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0019" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
   
