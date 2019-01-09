@@ -36,7 +36,7 @@ To get you started we've put together some optional test data:
 
 ## App Overview
 
-*SPA Cats* is a simple site that let's you browse and rate cats. Cat data is entered into the Cofoundry CMS, which is then displayed on the homepage. People can browse the data, register as a member and vote for their favorite cat.
+*SPA Cats* is a simple site that lets you browse and rate cats. Cat data is entered into the Cofoundry CMS, which is then displayed on the homepage. People can browse the data, register as a member and vote for their favorite cat.
 
 ### Managing Content
 
