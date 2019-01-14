@@ -11,14 +11,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cofoundry.Samples.SPASite
 {
     [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
-    [Route("api/users/current")]
-    public class CurrentUserApiController : Controller
+    [Route("api/members/current")]
+    public class CurrentMemberApiController : Controller
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IUserContextService _userContextService;
 
-        public CurrentUserApiController(
+        public CurrentMemberApiController(
             IQueryExecutor queryExecutor,
             IApiResponseHelper apiResponseHelper,
             IUserContextService userContextService
@@ -34,11 +34,11 @@ namespace Cofoundry.Samples.SPASite
         [HttpGet("cats/liked")]
         public async Task<IActionResult> GetLikedCats()
         {
-            // Here we get the userId of the currently logged in user. We could have
+            // Here we get the userId of the currently logged in member. We could have
             // done this in the query handler, but instead we've chosen to keep the query 
             // flexible so it can be re-used in a more generic fashion
             var userContext = await _userContextService.GetCurrentContextAsync();
-            var query = new GetCatSummariesByUserLikedQuery(userContext.UserId.Value);
+            var query = new GetCatSummariesByMemberLikedQuery(userContext.UserId.Value);
             var results = await _queryExecutor.ExecuteAsync(query);
 
             return _apiResponseHelper.SimpleQueryResponse(this, results);
