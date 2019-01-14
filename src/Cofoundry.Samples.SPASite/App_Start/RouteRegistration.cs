@@ -20,19 +20,19 @@ namespace Cofoundry.Samples.SPASite.App_Start
             // For this application most of the routing is done by the backbone router so
             // we just need to point routes back to the home controller.
 
-            RouteToHome(routeBuilder, "Home", "");
-            RouteToHome(routeBuilder, "Login", "login");
-            RouteToHome(routeBuilder, "Register", "register");
-            RouteToHome(routeBuilder, "Cats", "cat/{id}");
+            //RouteToHome(routeBuilder, "Home", "");
+            //RouteToHome(routeBuilder, "Login", "login");
+            //RouteToHome(routeBuilder, "Register", "register");
+            //RouteToHome(routeBuilder, "Cats", "cat/{id}");
 
-            // The signout route is the only route that is slightly different
-            routeBuilder.MapRoute("SignOut", "sign-out", new { controller = "Home", action = "SignOut" });
+            //// The signout route is the only route that is slightly different
+            //routeBuilder.MapRoute("SignOut", "sign-out", new { controller = "Home", action = "SignOut" });
 
-            routeBuilder.MapRoute(
-                "Default", 
-                "{controller}/{action}/{id?}",
-                new { controller = "Home", action = "Index" }
-            );
+            //routeBuilder.MapRoute(
+            //    "Default", 
+            //    "{controller}/{action}/{id?}",
+            //    new { controller = "Home", action = "Index" }
+            //);
         }
 
         private void RouteToHome(IRouteBuilder routeBuilder, string name, string path)
