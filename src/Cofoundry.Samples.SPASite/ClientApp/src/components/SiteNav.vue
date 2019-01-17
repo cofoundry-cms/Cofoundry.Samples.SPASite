@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-default navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
@@ -14,14 +14,10 @@
 
         <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
             <ul class="navbar__menu">
-<!--               
-      <router-link to="/">Cats</router-link> |
-      <router-link to="/login">Login</router-link>
-      <router-link to="/register">Register</router-link> -->
-                <li><a href="/" class="navbar__link">Cats</a></li>
-                <li><a href="/login" class="navbar__link unauth">Login</a></li>
-                <li><a href="/register" class="navbar__link unauth">Register</a></li>
-                <li><form action="/sign-out" method="POST"><button class="navbar__link logout auth hidden" type="submit">Logout</button></form></li>
+                <li><router-link to="/" class="navbar__link">Cats</router-link></li>
+                <li><router-link to="/login" class="navbar__link" v-if="!member">Login</router-link></li>
+                <li><router-link to="/register" class="navbar__link" v-if="!member">Register</router-link></li>
+                <li><button class="navbar__link logout" v-if="member" @click="signOut">Logout</button></li>
             </ul>
         </div>
     </div>
@@ -29,8 +25,16 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+
 export default {
-  name: 'SiteNav'
+    name: 'SiteNav',
+    computed: mapState('auth', {
+        member: state => state.member
+    }),
+    methods: mapActions('auth', [
+        'signOut'
+    ])
 }
 </script>
 

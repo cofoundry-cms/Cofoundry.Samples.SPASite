@@ -1,0 +1,44 @@
+import axios from 'axios'
+
+const BASE_URI = '/api/auth/';
+const XSRF_HEADERS = ['post','put','patch','delete'];
+
+function mapSessionInfoResponse(response) {
+    const sessionInfo = response.data.data;
+
+    for (const verb of XSRF_HEADERS) {
+        axios.defaults.headers[verb]['RequestVerificationToken'] = sessionInfo.antiForgeryToken;
+    }
+
+    return sessionInfo.member;
+}
+
+export default {
+
+    getSession() {
+        return axios
+            .get(BASE_URI + 'session')
+            .then(mapSessionInfoResponse);
+    },
+
+    login(command) {
+        return axios
+            .post(BASE_URI + 'login', command)
+            .then(mapSessionInfoResponse)
+            .then(this.getSession);
+    },
+
+    register(command) {
+        return axios
+            .post(BASE_URI + 'register', command)
+            .then(mapSessionInfoResponse)
+            .then(this.getSession);
+    },
+
+    signOut() {
+        return axios
+        .post(BASE_URI + 'sign-out')
+        .then(mapSessionInfoResponse)
+        .then(this.getSession);
+    }
+}

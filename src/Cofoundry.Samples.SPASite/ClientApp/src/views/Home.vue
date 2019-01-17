@@ -47,6 +47,7 @@ export default {
   methods: {
     loadGrid () {
       this.loading = true;
+      
       catsApi.searchCats().then(result => {
         this.loading = false;
         this.searchResult = result;

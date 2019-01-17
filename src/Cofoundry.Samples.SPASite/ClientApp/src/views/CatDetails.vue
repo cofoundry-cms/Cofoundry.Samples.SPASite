@@ -53,7 +53,6 @@
         this.loading = true;
         catsApi.getCatById(this.$route.params.id)
           .then(result => {
-            console.log(result);
             this.cat = result;
             this.loading = false;
           });

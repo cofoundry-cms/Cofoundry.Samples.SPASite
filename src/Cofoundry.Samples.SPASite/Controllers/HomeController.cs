@@ -41,13 +41,5 @@ namespace Cofoundry.Samples.SPASite.Controllers
 
             return View(vm);
         }
-
-        [HttpPost]
-        public async Task<ActionResult> SignOut()
-        {
-            await _loginService.SignOutAsync(MemberUserArea.MemberUserAreaCode);
-
-            return Redirect("/");
-        }
     }
 }
