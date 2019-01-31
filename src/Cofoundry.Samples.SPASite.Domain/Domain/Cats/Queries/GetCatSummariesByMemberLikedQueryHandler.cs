@@ -11,15 +11,15 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class GetCatSummariesByUserLikedQueryHandler
-        : IAsyncQueryHandler<GetCatSummariesByUserLikedQuery, ICollection<CatSummary>>
+    public class GetCatSummariesByMemberLikedQueryHandler
+        : IAsyncQueryHandler<GetCatSummariesByMemberLikedQuery, ICollection<CatSummary>>
         , ILoggedInPermissionCheckHandler
     {
         private readonly SPASiteDbContext _dbContext;
         private readonly ICustomEntityRepository _customEntityRepository;
         private readonly IImageAssetRepository _imageAssetRepository;
 
-        public GetCatSummariesByUserLikedQueryHandler(
+        public GetCatSummariesByMemberLikedQueryHandler(
             ICustomEntityRepository customEntityRepository,
             IImageAssetRepository imageAssetRepository,
             SPASiteDbContext dbContext
@@ -30,7 +30,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             _dbContext = dbContext;
         }
 
-        public async Task<ICollection<CatSummary>> ExecuteAsync(GetCatSummariesByUserLikedQuery query, IExecutionContext executionContext)
+        public async Task<ICollection<CatSummary>> ExecuteAsync(GetCatSummariesByMemberLikedQuery query, IExecutionContext executionContext)
         {
             var userCatIds = await _dbContext
                 .CatLikes

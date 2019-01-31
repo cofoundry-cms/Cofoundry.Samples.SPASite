@@ -1,5 +1,4 @@
-﻿using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
+﻿using Cofoundry.Domain.CQS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class GetCatSummariesByUserLikedQuery : IQuery<ICollection<CatSummary>>
+    public class GetCatSummariesByMemberLikedQuery : IQuery<ICollection<CatSummary>>
     {
-        public GetCatSummariesByUserLikedQuery() {}
+        public GetCatSummariesByMemberLikedQuery() {}
 
-        public GetCatSummariesByUserLikedQuery(int id)
+        public GetCatSummariesByMemberLikedQuery(int id)
         {
             UserId = id;
         }

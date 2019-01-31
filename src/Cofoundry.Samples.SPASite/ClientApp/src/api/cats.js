@@ -15,5 +15,13 @@ export default {
         .then(response => {
             return response.data.data;
         });
+    },
+
+    like(id) {
+        return axios.post(BASE_URI + id + '/likes');
+    },
+    
+    unlike(id) {
+        return axios.delete(BASE_URI + id + '/likes');
     }
 }

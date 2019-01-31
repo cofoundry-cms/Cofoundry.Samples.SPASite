@@ -5,10 +5,6 @@
 	<MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Views\_ViewImports.cshtml" />
-  </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0019" />

@@ -1,10 +1,16 @@
 import authApi from '@/api/auth';
 
+function loadAdditionalSessionData(context) {
+  return context.dispatch('cats/loadSession', null, { root: true });  
+}
+
 export default {
   namespaced: true,
+
   state: {
     member: null
   },
+
   mutations: {
     setMember(state, member) {
       state.member = member;
@@ -13,6 +19,8 @@ export default {
 
   actions: {
     loadSession(context) {
+      loadAdditionalSessionData(context);
+
       return authApi
         .getSession()
         .then(member => {
@@ -24,7 +32,10 @@ export default {
       return authApi
         .register(command)
         .then(member => {
-          context.commit('setMember', member);
+          loadAdditionalSessionData(context)
+            .then(() => {
+              context.commit('setMember', member);
+            });
         })
     },
 
@@ -32,7 +43,10 @@ export default {
       return authApi
         .login(command)
         .then(member => {
-          context.commit('setMember', member);
+          loadAdditionalSessionData(context)
+            .then(() => {
+              context.commit('setMember', member);
+            });
         })
     },
 
@@ -40,7 +54,10 @@ export default {
       return authApi
         .signOut()
         .then(member => {
-          context.commit('setMember', member);
+          context.dispatch('cats/clearSession', null, { root: true })
+            .then(() => {
+              context.commit('setMember', member);
+            });
         })
     }
   }

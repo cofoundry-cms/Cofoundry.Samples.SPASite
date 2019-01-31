@@ -24,21 +24,18 @@ export default {
     login(command) {
         return axios
             .post(BASE_URI + 'login', command)
-            .then(mapSessionInfoResponse)
             .then(this.getSession);
     },
 
     register(command) {
         return axios
             .post(BASE_URI + 'register', command)
-            .then(mapSessionInfoResponse)
             .then(this.getSession);
     },
 
     signOut() {
         return axios
         .post(BASE_URI + 'sign-out')
-        .then(mapSessionInfoResponse)
         .then(this.getSession);
     }
 }

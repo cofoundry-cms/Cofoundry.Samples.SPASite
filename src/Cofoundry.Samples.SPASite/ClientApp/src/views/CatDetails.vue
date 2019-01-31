@@ -26,7 +26,16 @@
                     :key="feature.featureId">{{ feature.title }}</span>
           </div>
           <p class="description">{{cat.description}}</p>
-          <button id="like" class="btn btn-love hidden" @click="handleLike">I <span class="glyphicon glyphicon-heart"></span> {{cat.name}}</button>
+          <button class="btn btn-love" 
+                  @click="handleLike"
+                  v-if="member && !isLiked">
+            I <span class="glyphicon glyphicon-heart"></span> {{cat.name}}
+          </button>
+          <button class="btn btn-love" 
+                  @click="handleLike"
+                  v-if="member && isLiked">
+            I dont <span class="glyphicon glyphicon-heart"></span> {{cat.name}}
+          </button>
       </div>
 
     </div>
@@ -34,8 +43,9 @@
 </template>
 
 <script>
-  import catsApi from '@/api/cats'
-  import ImageAsset from '@/components/ImageAsset'
+  import { mapState } from 'vuex';
+  import catsApi from '@/api/cats';
+  import ImageAsset from '@/components/ImageAsset';
   
   export default {
     name: 'catDetails',
@@ -44,6 +54,14 @@
         loading: false,
         cat: null
       };
+    },
+    computed: {
+      isLiked () {
+        return this.cat != null && this.$store.state.cats.likedCatIds.indexOf(this.cat.catId) !== -1;
+      },
+      ...mapState('auth', [
+        'member'
+      ])
     },
     created () {
       this.loadCat();
@@ -58,7 +76,13 @@
           });
       },
       handleLike () {
-        //todo
+        const actionName = this.isLiked ? 'unlike' : 'like';
+        const likeModifier = this.isLiked ? -1 : 1;
+
+        this.$store.dispatch('cats/' + actionName, this.cat.catId)
+          .then(() => {
+            this.cat.totalLikes += likeModifier;
+          });
       }
     },
     components: {

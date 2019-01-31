@@ -8,8 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <a href="/" class="site-logo">SPA Cats</a>
+            <router-link to="/" class="site-logo">SPA Cats</router-link>
         </div>
 
         <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
@@ -29,9 +28,9 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
     name: 'SiteNav',
-    computed: mapState('auth', {
-        member: state => state.member
-    }),
+    computed: mapState('auth', [
+        'member'
+    ]),
     methods: mapActions('auth', [
         'signOut'
     ])
