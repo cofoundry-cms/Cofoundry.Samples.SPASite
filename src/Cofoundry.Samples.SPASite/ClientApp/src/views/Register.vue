@@ -55,8 +55,6 @@
 
 <script>
 
-import accountApi from '@/api/auth'
-
 export default {
   name: 'registration',
   data () {

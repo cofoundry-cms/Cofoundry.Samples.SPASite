@@ -8,15 +8,19 @@
                   <form class="login-form" @submit.prevent="submitLogin" v-if="!loginComplete">
                       <div class="form-group">
                           <label for="inputEmail">Email</label>
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" v-model="command.email">
+                          <input type="email" class="form-control" id="inputEmail" placeholder="Email" 
+                            required
+                            v-model="command.email">
                           <span class="error hidden"></span>
                       </div>
                       <div class="form-group">
                           <label for="inputPassword">Password</label>
-                          <input type="password" class="form-control" id="inputPassword" placeholder="Password" v-model="command.password">
+                          <input type="password" class="form-control" id="inputPassword" placeholder="Password" 
+                            required
+                            v-model="command.password">
                           <span class="error hidden"></span>
                       </div>
-                      <span class="error form-error hidden"></span>
+                      <validation-summary :errors="errors" />
                       <button type="submit" class="btn btn-default">Submit</button>
                   </form>
                   <div class="message" v-if="loginComplete">
@@ -31,24 +35,39 @@
 
 <script>
 
-import accountApi from '@/api/auth'
+import accountApi from '@/api/auth';
+import ValidationSummary from '@/components/ValidationSummary';
 
 export default {
   name: 'login',
   data () {
     return {
       loginComplete: false,
-      command: {}
+      command: {},
+      errors: []
     }
   },
   methods: {
     submitLogin () {
+      const me = this;
+      
+      this.$store
+        .dispatch('auth/login', this.command)
+        .then(loginComplete)
+        .catch(loginFailed);
 
-      this.$store.dispatch('auth/login', this.command).then(() => {
-        // todo
-        this.loginComplete = true;
-      });
+      function loginComplete() {
+        me.loginComplete = true;
+        me.errors = [];
+      }
+
+      function loginFailed(errors) {
+        me.errors = errors;
+      }
     }
+  },
+  components: {
+    ValidationSummary
   }
 }
 </script>

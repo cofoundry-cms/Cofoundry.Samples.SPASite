@@ -2,7 +2,7 @@
   <main class="main">
     <div class="hero-banner">
 
-      <img src="/images/cat-fight-hero.jpg">
+      <img src="@/assets/cat-fight-hero.jpg">
 
       <div class="container hero-banner__overlay">
         <div class="hero-banner__text">
@@ -56,3 +56,48 @@ export default {
   }
 }
 </script>
+
+<style scoped lang="scss">
+
+.hero-banner {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    img {        
+        width: 100%;
+    }
+
+    @include respond-min($tablet) {
+        height: 400px;
+
+        img {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: auto;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+.hero-banner__overlay {
+    position: relative;
+    height: 100%;
+}
+
+.hero-banner__text {
+    padding: 30px 15px 0;
+
+    @include respond-min($tablet) {
+        background-color: white;
+        padding: 30px;
+        width: 50%;
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+
+</style>

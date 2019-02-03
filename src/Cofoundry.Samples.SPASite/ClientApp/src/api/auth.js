@@ -22,15 +22,37 @@ export default {
     },
 
     login(command) {
-        return axios
-            .post(BASE_URI + 'login', command)
-            .then(this.getSession);
+        return new Promise((resolve, reject) => {
+            // todo yah: sort UI and refactor this
+            axios
+                .post(BASE_URI + 'login', command)
+                .then(() => {
+                    this.getSession().then(resolve);
+                })
+                .catch(error => {
+                    const response = error.response;
+
+                    console.log('error', response);
+                    if (response.status === 400) {
+
+                        reject(response.data.errors);
+                    }
+                    else {
+                        // todo: handle error globally
+                        alert('An unhandled error has occured');
+                        reject();
+                    }
+                });
+        });
     },
 
     register(command) {
         return axios
             .post(BASE_URI + 'register', command)
-            .then(this.getSession);
+            .then(this.getSession)
+            .catch(response => {
+                console.log(response);
+            });
     },
 
     signOut() {

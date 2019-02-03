@@ -1,3 +1,19 @@
+<template>
+    <span class="likes">{{ numLikes }}</span>
+</template>
+
+<script>
+
+export default {
+  name: 'LikesCounter',
+  props: {
+    numLikes: Number
+  }
+}
+</script>
+
+<style scoped lang="scss">
+
 .likes {
     color: $cms-color-text;
     font-weight: bold;
@@ -14,3 +30,4 @@
         position: relative;
     }
 }
+</style>

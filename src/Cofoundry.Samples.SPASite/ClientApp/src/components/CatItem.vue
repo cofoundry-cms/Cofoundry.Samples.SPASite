@@ -6,7 +6,7 @@
       </div>
       <div class="cat__details">
           <span class="name">{{ cat.name }}</span>
-          <span class="likes">{{ cat.totalLikes }}</span>
+          <likes-counter :num-likes="cat.totalLikes"/>
       </div>
     </router-link>
   </div>
@@ -14,6 +14,7 @@
 
 <script>
 import ImageAsset from '@/components/ImageAsset'
+import LikesCounter from '@/components/LikesCounter'
 
 export default {
   name: 'CatItem',
@@ -21,12 +22,67 @@ export default {
     cat: Object
   },
   components: {
-    ImageAsset
+    ImageAsset,
+    LikesCounter
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+.cat {
+    margin-bottom: 30px;
 
+    &:hover {
+        .cat__image img {
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .name {
+            color: $cms-color-secondary;
+        }
+    }
+}
+
+.cat__image {
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    position: relative;
+
+    img {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: auto;
+        height: 100%;
+        transform: translate(-50%, -50%);
+        transform-origin: 50% 50%;
+        transition: transform  1s linear;
+    }
+}
+
+.cat__details {
+    margin-top: 10px;
+
+    .name {
+        color: $cms-color-text;
+        font-weight: 700;
+        font-size: 1.125rem;
+        display: block;
+    }
+
+    .likes {
+        float: left;
+    }
+
+    @include respond-min(992px) {
+        .likes {
+            float: right;
+        }
+
+        .name {
+            display: inline-block;
+        }
+    }
+}
 </style>

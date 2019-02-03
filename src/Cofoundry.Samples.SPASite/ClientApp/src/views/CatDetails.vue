@@ -90,3 +90,75 @@
     }
   }
 </script>
+
+<style scoped lang="scss">
+
+.cat-images {
+    position: relative;
+    
+    img {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.cat-info {
+    padding-top: 30px;
+
+    h2 {
+        margin-bottom: 0;
+        display: inline-block;
+        position: relative;
+        padding-right: 65px;
+    }
+
+    .breed {
+        display: block;
+        margin-bottom: 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    .description {
+        margin-bottom: 30px;
+    }
+
+    @include respond-min($tablet) {
+        padding-top: 0;
+    }
+}
+
+.characteristics {
+    margin-bottom: 30px;
+
+    .title {
+        display: block;
+    }
+}
+
+.btn-love {
+    background-color: $cms-color-secondary;
+    color: white;
+    transition: background-color 0.2s ease-out;
+
+    &:hover,
+    &:active {
+        background-color: $cms-color-primary;
+        color: white;
+    }
+}
+.likes--big {
+    background: url("/images/heart-icon.png") no-repeat left top;
+    background-size: cover;
+    width: 45px;
+    height: 39px;
+    line-height: 39px;
+    text-align: center;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    font-weight: bold;
+}
+</style>
