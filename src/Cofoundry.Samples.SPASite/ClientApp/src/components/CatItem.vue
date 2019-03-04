@@ -1,31 +1,31 @@
 <template>
-  <div class="col-sm-3 cat">
-    <router-link :to="{ name: 'catDetails', params: { id: cat.catId }}">
-      <div class="cat__image">
-          <image-asset :image="cat.mainImage" :width="263" :height="263" />
-      </div>
-      <div class="cat__details">
-          <span class="name">{{ cat.name }}</span>
-          <likes-counter :num-likes="cat.totalLikes"/>
-      </div>
-    </router-link>
-  </div>
+    <div class="col-sm-3 cat">
+        <router-link :to="{ name: 'catDetails', params: { id: cat.catId }}">
+            <div class="cat__image">
+                <image-asset :image="cat.mainImage" :width="263" :height="263"/>
+            </div>
+            <div class="cat__details">
+                <span class="name">{{ cat.name }}</span>
+                <likes-counter :num-likes="cat.totalLikes"/>
+            </div>
+        </router-link>
+    </div>
 </template>
 
 <script>
-import ImageAsset from '@/components/ImageAsset'
-import LikesCounter from '@/components/LikesCounter'
+import ImageAsset from "@/components/ImageAsset";
+import LikesCounter from "@/components/LikesCounter";
 
 export default {
-  name: 'CatItem',
-  props: {
-    cat: Object
-  },
-  components: {
-    ImageAsset,
-    LikesCounter
-  }
-}
+    name: "CatItem",
+    components: {
+        ImageAsset,
+        LikesCounter
+    },
+    props: {
+        cat: Object
+    }
+};
 </script>
 
 <style scoped lang="scss">
@@ -57,7 +57,7 @@ export default {
         height: 100%;
         transform: translate(-50%, -50%);
         transform-origin: 50% 50%;
-        transition: transform  1s linear;
+        transition: transform 1s linear;
     }
 }
 

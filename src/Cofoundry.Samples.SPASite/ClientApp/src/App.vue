@@ -1,28 +1,27 @@
 <template>
-  <div>
-    <site-nav/>
-    <router-view/>
-  </div>
+    <div>
+        <site-nav/>
+        <router-view/>
+    </div>
 </template>
 
 <script>
-
-import SiteNav from '@/components/SiteNav.vue'
+import SiteNav from "@/components/SiteNav.vue";
 
 export default {
-  data() {
-      return {
-        loading: false
-      };
-  },
-  components: {
-    SiteNav
-  },
-  created() {
-    this.loading = true;
-    this.$store.dispatch('auth/loadSession');
-  }
-}
+    data() {
+        return {
+            loading: false
+        };
+    },
+    components: {
+        SiteNav
+    },
+    created() {
+        this.loading = true;
+        this.$store.dispatch("auth/loadSession");
+    }
+};
 </script>
 
 <style lang="scss">
@@ -37,17 +36,19 @@ export default {
 /* Typography */
 html {
     font-size: 100%;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     line-height: 1.5em;
     color: $cms-color-text;
     font-weight: 300;
 }
 
-strong, b {
+strong,
+b {
     font-weight: bold;
 }
 
-i, em {
+i,
+em {
     font-style: italic;
 }
 

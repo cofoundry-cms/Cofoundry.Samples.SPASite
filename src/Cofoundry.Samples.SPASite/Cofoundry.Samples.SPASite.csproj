@@ -16,11 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj" />
   </ItemGroup>
-
+  
   <ItemGroup>
-    <Compile Remove="grunt\node_modules\**" />
-    <EmbeddedResource Remove="grunt\node_modules\**" />
-    <None Remove="grunt\node_modules\**" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
   
 </Project>

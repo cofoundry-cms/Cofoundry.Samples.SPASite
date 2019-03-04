@@ -3,17 +3,15 @@
 </template>
 
 <script>
-
 export default {
-  name: 'LikesCounter',
-  props: {
-    numLikes: Number
-  }
-}
+    name: "LikesCounter",
+    props: {
+        numLikes: Number
+    }
+};
 </script>
 
 <style scoped lang="scss">
-
 .likes {
     color: $cms-color-text;
     font-weight: bold;
@@ -24,7 +22,7 @@ export default {
         background-size: cover;
         width: 15px;
         height: 13px;
-        display: inline-block;    
+        display: inline-block;
         margin-right: 12px;
         top: 1px;
         position: relative;
