@@ -1,44 +1,43 @@
 <template>
-    <div class="container content-block">
+    <content-panel>
         <loader :is-loading="loading" />
 
         <div v-if="cat">
-            <div class="col-sm-6 cat-images">
+
+            <div class="heading">
+                <h1 class="title">{{cat.name}}</h1>
+                <!-- <span class="like-count">{{cat.totalLikes}}</span> -->
+                <likes-counter :num-likes="cat.totalLikes" class="num-likes"/>
+            </div>
+
+            <dl class="info">
+                <dt v-if="cat.breed">Breed:</dt>
+                <dd v-if="cat.breed">{{cat.breed.title}}</dd>
+
+                <dt>Characteristics:</dt>
+                <dd>{{formattedCharacteristics}}</dd>
+                <dt>Description:</dt>
+                <dd>{{cat.description}}</dd>
+            </dl>
+            
+            <div class="actions">
+                <button class="btn-love" @click="handleLike" v-if="member && !isLiked">Like</button>
+
+                <button class="btn-love" @click="handleLike" v-if="member && isLiked">Un-like</button>
+            </div>
+                
+            <div class="cat-images">
                 <image-asset
                     v-for="image in cat.images"
                     :key="image.imageAssetId"
                     :image="image"
-                    :width="540"
+                    :width="640"
+                    :height="480"
                 />
             </div>
 
-            <div class="col-sm-6 cat-info">
-                <h2 class="name">
-                    {{cat.name}}
-                    <span class="likes--big">{{cat.totalLikes}}</span>
-                </h2>
-                <span class="breed" v-if="cat.breed">{{cat.breed.title}}</span>
-
-                <div class="characteristics">
-                    <span class="title">Characteristics:</span>
-                    <span
-                        class="characteristic"
-                        v-for="feature in cat.features"
-                        :key="feature.featureId"
-                    >{{ feature.title }}</span>
-                </div>
-                <p class="description">{{cat.description}}</p>
-                <button class="btn btn-love" @click="handleLike" v-if="member && !isLiked">I
-                    <span class="glyphicon glyphicon-heart"></span>
-                    {{cat.name}}
-                </button>
-                <button class="btn btn-love" @click="handleLike" v-if="member && isLiked">I dont
-                    <span class="glyphicon glyphicon-heart"></span>
-                    {{cat.name}}
-                </button>
-            </div>
         </div>
-    </div>
+    </content-panel>
 </template>
 
 <script>
@@ -46,12 +45,16 @@ import { mapState } from "vuex";
 import catsApi from "@/api/cats";
 import ImageAsset from "@/components/ImageAsset";
 import Loader from "@/components/Loader";
+import LikesCounter from "@/components/LikesCounter";
+import ContentPanel from "@/components/ContentPanel";
 
 export default {
     name: "catDetails",
     components: {
         ImageAsset,
-        Loader
+        Loader,
+        LikesCounter,
+        ContentPanel
     },
     data() {
         return {
@@ -63,6 +66,11 @@ export default {
         isLiked() {
             return this.cat !== null 
                 && this.$store.state.cats.likedCatIds.indexOf(this.cat.catId) !== -1;
+        },
+        formattedCharacteristics() {
+            if (!this.cat) return '';
+
+            return this.cat.features.map(f => f.title).join(', ');
         },
         ...mapState("auth", ["member"])
     },
@@ -92,72 +100,86 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.cat-images {
-    position: relative;
 
+.heading {
+    display: block;
+
+    @include respond-min($tablet) {
+        display: flex;
+    }
+}
+
+.title {
+    margin: 0;
+    flex-grow: 1;
+    font-size: 1.6rem;
+
+    @include respond-min($tablet) {
+        font-size: 2rem;
+    }
+}
+
+.num-likes {
+    font-size: 1.6rem;
+    
+    @include respond-min($tablet) {
+        font-size: 2rem;
+    }
+}
+
+.info {
+    dt {
+        margin-top: 1rem;
+        font-weight: bold;
+    }
+    dd {
+        margin: 0;
+    }
+}
+
+.cat-images {
+    display: flex;
+    flex-direction: column;
+    
     img {
         width: 100%;
         height: auto;
+        margin-bottom: 1rem;
     }
-}
-
-.cat-info {
-    padding-top: 30px;
-
-    h2 {
-        margin-bottom: 0;
-        display: inline-block;
-        position: relative;
-        padding-right: 65px;
-    }
-
-    .breed {
-        display: block;
-        margin-bottom: 30px;
-        font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    .description {
-        margin-bottom: 30px;
-    }
-
+    
     @include respond-min($tablet) {
-        padding-top: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-auto-rows: minmax(150px, auto);
+        grid-gap: 2rem;
+
+        img {
+            margin-bottom: 0;
+        }
     }
 }
 
-.characteristics {
-    margin-bottom: 30px;
-
-    .title {
-        display: block;
-    }
+.actions {
+    margin: 2rem 0;
 }
 
 .btn-love {
-    background-color: $cms-color-secondary;
+    background-color: $color-secondary;
     color: white;
+    padding: 0.6rem 4rem;
+    border: none;
+    border-radius: 30px;
     transition: background-color 0.2s ease-out;
+    width: 100%;
 
-    &:hover,
-    &:active {
-        background-color: $cms-color-primary;
+    &:hover {
+        background-color: $color-primary;
         color: white;
     }
+    
+    @include respond-min($tablet) {
+        width: unset;
+    }
 }
-.likes--big {
-    background: url("/images/heart-icon.png") no-repeat left top;
-    background-size: cover;
-    width: 45px;
-    height: 39px;
-    line-height: 39px;
-    text-align: center;
-    font-size: 20px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: white;
-    font-weight: bold;
-}
+
 </style>

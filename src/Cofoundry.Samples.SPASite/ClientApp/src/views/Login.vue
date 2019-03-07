@@ -1,60 +1,63 @@
 <template>
-    <main class="main">
-        <div>
-            <div class="container content-block">
-                <div class="row">
-                    <div class="col-md-6 col-md-offset-3">
-                        <h2>Login</h2>
-                        <form
-                            class="login-form"
-                            @submit.prevent="submitLogin"
-                            v-if="!loginComplete"
-                        >
-                            <div class="form-group">
-                                <label for="inputEmail">Email</label>
-                                <input
-                                    type="email"
-                                    class="form-control"
-                                    id="inputEmail"
-                                    placeholder="Email"
-                                    required
-                                    v-model="command.email"
-                                >
-                                <span class="error hidden"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="inputPassword">Password</label>
-                                <input
-                                    type="password"
-                                    class="form-control"
-                                    id="inputPassword"
-                                    placeholder="Password"
-                                    required
-                                    v-model="command.password"
-                                >
-                                <span class="error hidden"></span>
-                            </div>
-                            <validation-summary :errors="errors"/>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                        <div class="message" v-if="loginComplete">
-                            <p>Login successful!</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <content-panel>
+        <h1>Login</h1>
+
+        <form
+            @submit.prevent="submitLogin"
+            v-if="!loginComplete"
+        >
+            <form-group :title="'Email'" :id="'inputEmail'">
+                <input
+                    type="email"
+                    class="form-control"
+                    id="inputEmail"
+                    placeholder="Email"
+                    required
+                    v-model="command.email"
+                >
+            </form-group>
+
+            <form-group :title="'Password'" :id="'inputPassword'">
+                <input
+                    type="password"
+                    class="form-control"
+                    id="inputPassword"
+                    placeholder="Password"
+                    required
+                    v-model="command.password"
+                >
+            </form-group>
+
+            <validation-summary :errors="errors"/>
+
+            <form-actions>
+                <submit-button title="Login"/>
+            </form-actions>
+        </form>
+
+        <div class="message" v-if="loginComplete">
+            <p>Login successful!</p>
+            <p><router-link to="/">View the cats</router-link></p>
         </div>
-    </main>
+    </content-panel>
 </template>
 
 <script>
 import accountApi from "@/api/auth";
 import ValidationSummary from "@/components/ValidationSummary";
+import FormGroup from "@/components/FormGroup";
+import ContentPanel from "@/components/ContentPanel";
+import FormActions from "@/components/FormActions";
+import SubmitButton from "@/components/SubmitButton";
 
 export default {
     name: "login",
     components: {
-        ValidationSummary
+        ValidationSummary,
+        FormGroup,
+        ContentPanel,
+        FormActions,
+        SubmitButton
     },
     data() {
         return {
@@ -84,3 +87,7 @@ export default {
     }
 };
 </script>
+
+<style scoped lang="scss">
+
+</style>

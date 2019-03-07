@@ -15,10 +15,12 @@ export default {
             let url = this.image.url;
 
             if (this.width > 0 || this.height > 0) {
-                url += "?";
+                let parts = [];
 
-                if (this.width > 0) url += "width=" + this.width;
-                if (this.height > 0) url += "height=" + this.height;
+                if (this.width > 0) parts.push("width=" + this.width);
+                if (this.height > 0) parts.push("height=" + this.height);
+
+                url += "?" + parts.join("&");
             }
 
             return url;

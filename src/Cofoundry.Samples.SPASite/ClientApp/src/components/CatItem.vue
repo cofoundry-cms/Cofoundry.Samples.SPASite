@@ -1,15 +1,13 @@
 <template>
-    <div class="col-sm-3 cat">
-        <router-link :to="{ name: 'catDetails', params: { id: cat.catId }}">
-            <div class="cat__image">
-                <image-asset :image="cat.mainImage" :width="263" :height="263"/>
-            </div>
-            <div class="cat__details">
-                <span class="name">{{ cat.name }}</span>
-                <likes-counter :num-likes="cat.totalLikes"/>
-            </div>
-        </router-link>
-    </div>
+    <router-link :to="{ name: 'catDetails', params: { id: cat.catId }}" class="cat">
+        <div class="image">
+            <image-asset :image="cat.mainImage" :width="263" :height="263"/>
+        </div>
+        <div class="details">
+            <span class="name">{{ cat.name }}</span>
+            <likes-counter :num-likes="cat.totalLikes"/>
+        </div>
+    </router-link>
 </template>
 
 <script>
@@ -30,24 +28,28 @@ export default {
 
 <style scoped lang="scss">
 .cat {
-    margin-bottom: 30px;
 
+    background-color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+    
     &:hover {
-        .cat__image img {
+        img {
             transform: translate(-50%, -50%) scale(1.1);
         }
 
         .name {
-            color: $cms-color-secondary;
+            color: $color-secondary;
         }
     }
 }
 
-.cat__image {
+.image {
     width: 100%;
     padding-bottom: 100%;
     overflow: hidden;
     position: relative;
+    border-radius: 3px 3px 0 0;
 
     img {
         position: absolute;
@@ -61,23 +63,23 @@ export default {
     }
 }
 
-.cat__details {
-    margin-top: 10px;
+.details {
+
+    padding: 1rem;
+    display: flex;
 
     .name {
-        color: $cms-color-text;
-        font-weight: 700;
+        color: $color-text;
+        font-weight: bold;
         font-size: 1.125rem;
-        display: block;
+        flex-grow: 1;
     }
 
     .likes {
-        float: left;
     }
 
     @include respond-min(992px) {
         .likes {
-            float: right;
         }
 
         .name {

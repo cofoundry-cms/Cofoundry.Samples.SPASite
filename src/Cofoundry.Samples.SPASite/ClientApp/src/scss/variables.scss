@@ -1,18 +1,14 @@
 // colors
-$cms-color-primary:     #2C2233;
-$cms-color-secondary:   #5E0042;
-$cms-color-tertiary:    #005869;
+$color-primary:     #2C2233;
+$color-secondary:   #5E0042;
+$color-tertiary:    #005869;
 
-$cms-color-hightlight:  #00856A;
-$cms-color-lowlight:    #8DB500;
+$color-highlight:   #00856A;
+$color-lowlight:    #8DB500;
 
-$cms-color-text:        #000;
-$cms-color-border:      #ccc;
+$color-text:        #000;
 
 // dimensions
-$breakpoint-max-width: 1100px;
-$breakpoint-narrow-tablet: 650px;
-$breakpoint-wide-mobile: 480px;
-$breakpoint-min-width: 320px;
-
 $tablet: 768px;
+
+$layout-max-width: 1260px;

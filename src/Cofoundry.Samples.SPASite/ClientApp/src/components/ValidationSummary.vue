@@ -23,6 +23,6 @@ export default {
     color: red;
     border: solid 1px rgb(255, 129, 129);
     background-color: rgb(255, 238, 238);
-    margin-bottom: 1rem;
+    margin: 2rem 0;
 }
 </style>

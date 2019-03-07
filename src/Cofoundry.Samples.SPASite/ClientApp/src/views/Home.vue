@@ -1,25 +1,25 @@
 <template>
-    <main class="main">
-        <div class="hero-banner">
-            <img src="@/assets/cat-fight-hero.jpg">
+    <main>
 
-            <div class="container hero-banner__overlay">
-                <div class="hero-banner__text">
-                    <h1>Cats SPArring!</h1>
-                    <p>Welcome to SPA cats, the site where beautiful moggies SPA for your affections. We have some of the smartest, fluffies kitties battling to become top cat.</p>
-                    <p>Register now and you can help your favourite cat in the race to become most loved.</p>
-                </div>
+        <div class="hero">
+            <div class="logo">
+                <img src="../assets/heart-icon.png" alt="Heart symbol" />
+            </div>
+            <div class="intro">
+                <p>Welcome to SPA Cats, the site where beautiful moggies SPA for your affections. We have some of the smartest, fluffiest kitties battling to become top cat.</p>
+                <p>Register now and you can help your favourite cat in the race to become most loved.</p>
             </div>
         </div>
 
-        <loader :is-loading="loading"/>
-
-        <cat-grid v-if="searchResult" :result="searchResult"/>
+        <div class="cat-grid">
+            <loader :is-loading="loading"/>
+            <cat-grid v-if="searchResult" :result="searchResult"/>
+        </div>
     </main>
 </template>
 
 <script>
-import CatGrid from "@/components/CatGrid.vue";
+import CatGrid from "@/components/CatGrid";
 import catsApi from "@/api/cats";
 import Loader from "@/components/Loader";
 
@@ -55,44 +55,43 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.hero-banner {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-
-    img {
-        width: 100%;
-    }
+.hero {
+    padding: 0 2rem 2rem 2rem;
+    background-color: $color-primary;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     @include respond-min($tablet) {
-        height: 400px;
+        padding: 1rem 2rem 4rem 2rem;
+    }
+}
+        
+.logo {
+    display: inline-block;
+    margin-top: 2rem;
 
-        img {
-            position: absolute;
-            left: 0;
-            top: 50%;
-            height: auto;
-            transform: translateY(-50%);
-        }
+    @include respond-min($tablet) {
     }
 }
 
-.hero-banner__overlay {
-    position: relative;
-    height: 100%;
-}
-
-.hero-banner__text {
-    padding: 30px 15px 0;
+.intro {
+    display: inline-block;
+    margin: 1rem 2rem 0 2rem;
+    font-size: 1.2rem;
+    text-align: center;
 
     @include respond-min($tablet) {
-        background-color: white;
-        padding: 30px;
-        width: 50%;
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        transform: translateY(-50%);
+        max-width: 45rem;
+    }
+}
+
+.cat-grid {
+    
+    @include respond-min($tablet) {
+        max-width: $layout-max-width;
+        margin: 0 auto;
     }
 }
 </style>

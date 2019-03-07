@@ -13,18 +13,18 @@ export default {
 
 <style scoped lang="scss">
 .likes {
-    color: $cms-color-text;
+    color: $color-text;
     font-weight: bold;
 
     &:before {
         content: "";
-        background: url("/images/heart-icon.png") no-repeat left top;
-        background-size: cover;
-        width: 15px;
-        height: 13px;
+        background: url("../assets/heart-icon.png") no-repeat left top;
+        background-size: contain;
+        width: 0.8em;
+        height: 0.8em;
         display: inline-block;
-        margin-right: 12px;
-        top: 1px;
+        margin-right: 0.5em;
+        top: 0.1em;
         position: relative;
     }
 }

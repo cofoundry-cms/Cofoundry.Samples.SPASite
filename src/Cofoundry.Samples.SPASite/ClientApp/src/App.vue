@@ -1,12 +1,14 @@
 <template>
-    <div>
+    <div class="site-wrapper">
         <site-nav/>
         <router-view/>
+        <site-footer/>
     </div>
 </template>
 
 <script>
-import SiteNav from "@/components/SiteNav.vue";
+import SiteNav from "@/components/SiteNav";
+import SiteFooter from "@/components/SiteFooter";
 
 export default {
     data() {
@@ -15,7 +17,8 @@ export default {
         };
     },
     components: {
-        SiteNav
+        SiteNav,
+        SiteFooter
     },
     created() {
         this.loading = true;
@@ -25,58 +28,30 @@ export default {
 </script>
 
 <style lang="scss">
-.content-block {
-    margin-top: 30px;
 
-    @include respond-min($tablet) {
-        margin-top: 60px;
-    }
-}
-
-/* Typography */
 html {
-    font-size: 100%;
-    font-family: "Roboto", sans-serif;
-    line-height: 1.5em;
-    color: $cms-color-text;
-    font-weight: 300;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    line-height: 1.6;
+    color: $color-text;
+    height: 100%;
+}
+body {
+    background-color: $color-tertiary;
+    height: 100%;
 }
 
-strong,
-b {
-    font-weight: bold;
+* {
+    box-sizing: border-box;
 }
 
-i,
-em {
-    font-style: italic;
+a {
+    color: $color-primary;
 }
 
-u {
-    text-decoration: underline;
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-p {
-    font-size: 1rem;
-    line-height: 1.5rem;
-    margin-bottom: 1.5rem;
-
-    a {
-        color: $cms-color-primary;
-    }
-}
-
-h1 {
-    font-weight: 700;
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    margin-bottom: 2rem;
-}
-
-h2 {
-    font-weight: 700;
-    font-size: 2.5rem;
-    line-height: 2.5rem;
-    margin-bottom: 2rem;
-}
 </style>
