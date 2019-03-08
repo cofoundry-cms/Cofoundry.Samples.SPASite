@@ -10,11 +10,12 @@
     <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0019" />
     <PackageReference Include="Cofoundry.Web.Admin" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="VueCliMiddleware" Version="2.2.0" />
+    <!--<PackageReference Include="VueCliMiddleware" Version="2.2.0" />-->
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj" />
+    <ProjectReference Include="..\VueCliMiddleware\VueCliMiddleware.csproj" />
   </ItemGroup>
   
   <ItemGroup>

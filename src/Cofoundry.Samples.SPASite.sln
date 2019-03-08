@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cofoundry.Samples.SPASite.Domain", "Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj", "{21E17F9F-79A3-4AFE-A119-7EE71F150634}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Samples.SPASite.Domain", "Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj", "{21E17F9F-79A3-4AFE-A119-7EE71F150634}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cofoundry.Samples.SPASite", "Cofoundry.Samples.SPASite\Cofoundry.Samples.SPASite.csproj", "{7A3FB263-7844-4008-9F6B-488145C95CA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cofoundry.Samples.SPASite", "Cofoundry.Samples.SPASite\Cofoundry.Samples.SPASite.csproj", "{7A3FB263-7844-4008-9F6B-488145C95CA3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VueCliMiddleware", "VueCliMiddleware\VueCliMiddleware.csproj", "{74D1C097-1729-4FC3-8C7B-7E6E2993124F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{7A3FB263-7844-4008-9F6B-488145C95CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A3FB263-7844-4008-9F6B-488145C95CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A3FB263-7844-4008-9F6B-488145C95CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74D1C097-1729-4FC3-8C7B-7E6E2993124F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74D1C097-1729-4FC3-8C7B-7E6E2993124F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74D1C097-1729-4FC3-8C7B-7E6E2993124F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74D1C097-1729-4FC3-8C7B-7E6E2993124F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D945901-0AAF-43C5-859D-4C3ED67601C7}
 	EndGlobalSection
 EndGlobal
