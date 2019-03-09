@@ -1,10 +1,8 @@
 # Cofoundry.Samples.SPASite
 
-This sample shows how to use Cofoundry to create a SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features.
+This sample shows how to use Cofoundry to create a SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features. The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
 
-The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
-
-This sample uses Vue.js as the SPA framework, but this is easily swapped out for another SPA framework as all interactions are made over an REST API.
+This sample uses Vue.js as the SPA framework, but this is easily swapped out for another SPA framework as all interactions are made over a REST API.
 
 Notable features include:
 
@@ -38,9 +36,9 @@ To get you started we've put together some optional test data:
 
 ## App Overview
 
-*SPA Cats* is a simple site that lets you browse and rate cats. Cat data is entered into the Cofoundry CMS, which is then displayed on the homepage. Users can browse the data, register as a member and vote for their favorite cat.
+*SPA Cats* is a simple site that lets you browse and rate cats. Cat data can be entered into the Cofoundry CMS admin panel, which is then displayed on the homepage. Users can browse the data, register as a member and vote for their favorite cat.
 
-![SPA Cats Homepage](readme/homepage.jpg)
+![SPA Cats Homepage](readme/Homepage.jpg)
 
 ### Managing Content
 
