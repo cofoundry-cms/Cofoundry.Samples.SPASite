@@ -6,7 +6,6 @@
 
             <div class="heading">
                 <h1 class="title">{{cat.name}}</h1>
-                <!-- <span class="like-count">{{cat.totalLikes}}</span> -->
                 <likes-counter :num-likes="cat.totalLikes" class="num-likes"/>
             </div>
 
@@ -171,6 +170,7 @@ export default {
     border-radius: 30px;
     transition: background-color 0.2s ease-out;
     width: 100%;
+    cursor: pointer;
 
     &:hover {
         background-color: $color-primary;
