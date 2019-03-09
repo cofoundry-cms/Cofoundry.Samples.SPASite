@@ -7,8 +7,7 @@ This sample uses Vue.js as the SPA framework, but this is easily swapped out for
 Notable features include:
 
 - Startup registration
-- Route Registration
-- Web Api and use of `IApiResponseHelper`
+- Web Api, use of `IApiResponseHelper` and managing command validation errors in a SPA
 - Structuring commands and queries using CQS 
 - Multiple related custom entities - Cats, Breeds and Features
 - A member area with a sign-up and login process
