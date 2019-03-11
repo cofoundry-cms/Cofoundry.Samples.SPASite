@@ -1,4 +1,4 @@
-# spa-site
+# SPASite Vue CLI App
 
 ## Project setup
 ```
