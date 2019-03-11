@@ -1,14 +1,13 @@
 # Cofoundry.Samples.SPASite
 
-An example demonstrating how to use Cofoundry to create an SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features.
+This sample shows how to use Cofoundry to create a SPA (Single Page Application) with WebApi endpoints as well as demonstrating some advanced Cofoundry features. The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
 
-The application is also separated into two projects demonstrating an example of how you might structure your domain layer to keep this separate from your web layer.
+This sample uses Vue.js as the SPA framework, but this is easily swapped out for another SPA framework as all interactions are made over a REST API.
 
 Notable features include:
 
 - Startup registration
-- Route Registration
-- Web Api and use of `IApiResponseHelper`
+- Web Api, use of `IApiResponseHelper` and managing command validation errors in a SPA
 - Structuring commands and queries using CQS 
 - Multiple related custom entities - Cats, Breeds and Features
 - A member area with a sign-up and login process
@@ -36,7 +35,9 @@ To get you started we've put together some optional test data:
 
 ## App Overview
 
-*SPA Cats* is a simple site that lets you browse and rate cats. Cat data is entered into the Cofoundry CMS, which is then displayed on the homepage. People can browse the data, register as a member and vote for their favorite cat.
+*SPA Cats* is a simple site that lets you browse and rate cats. Cat data can be entered into the Cofoundry CMS admin panel, which is then displayed on the homepage. Users can browse the data, register as a member and vote for their favorite cat.
+
+![SPA Cats Homepage](readme/Homepage.jpg)
 
 ### Managing Content
 
@@ -44,11 +45,11 @@ To manage content you'll need to log in to the admin panel by navigating to **/a
 
 #### Adding New Cats
 
-![Domain solution structure](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/readme/AdminCatList.png)
+![Domain solution structure](readme/AdminCatList.png)
 
 Once logged in, navigate to **Content > Cats**. This section is generated automatically based on the [`CatCustomEntityDefinition`](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/src/Cofoundry.Samples.SPASite.Domain/Domain/Cats/Definition/CatCustomEntityDefinition.cs) class in the Domain project. Click on the **Create** button to add a new Cat.
 
-![Domain solution structure](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/readme/AdminCatCreate.png)
+![Domain solution structure](readme/AdminCatCreate.png)
 
 The data entry form is generated based on the [`CatDataModel`](https://github.com/cofoundry-cms/Cofoundry.Samples.SPASite/blob/master/src/Cofoundry.Samples.SPASite.Domain/Domain/Cats/Definition/CatDataModel.cs), a simple class with annotated properties. The Cat custom entity type has versioning enabled, so we can either save the new cat as a draft version or make it live by publishing it.
 
@@ -76,6 +77,6 @@ Because all our logic is in the domain layer, our website project is fairly simp
 ![Web solution structure](readme/SpaCatsWeb.png)
 
 - **Api:** Contains our web api controllers. These are quite lightweight and mostly just wrap our domain queries and commands.
-- **App_Start:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via the standard *startup.cs* file in the application root, but here we also register some [routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) which simply point to the home controller because our SPA app handles the routing on the client side.
-- **Controllers/Models/Views:** The app runs entirely in JavaScript, so the home controller simply passes some basic user information and the XSRFToken through to the view, which is then rendered as a simple js state object that can be read by backbone.
-- **sass/grunt:** SPA Cats is written in [backbone.js](http://backbonejs.org/) to keep it simple, but you could use any framework you like. The css is compiled from sass and the build process uses grunt.
+- **App_Data:** This folder contains any asset files uploaded to the CMS.
+- **ClientApp:** SPA Cats is written in [Vue.js](https://vuejs.org/), but you could use any framework you like. The ClientApp folder contains all the Vue.js front-end code and build files.
+- **Startup.cs:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via the standard .NET Core *startup.cs* file in the application root. There's some additional code here to bootstrap the Vue project using the [VueCliMiddleware](https://github.com/EEParker/aspnetcore-vueclimiddleware) NuGet package.
