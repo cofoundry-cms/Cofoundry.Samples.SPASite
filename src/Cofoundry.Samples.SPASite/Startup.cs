@@ -24,7 +24,7 @@ namespace Cofoundry.Samples.SPASite
         {
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/build";
+                configuration.RootPath = "ClientApp/dist";
             });
 
             services
@@ -50,7 +50,10 @@ namespace Cofoundry.Samples.SPASite
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseVueCli(npmScript: "serve", port: 8080); // optional port
+                    // Un-comment this to run the vue cli automatically when debugging
+                    // You'll need to install the vue cli, see https://cli.vuejs.org/guide/installation.html 
+
+                    // spa.UseVueCli(npmScript: "serve", port: 8080); // optional port
                 }
             });
         }
