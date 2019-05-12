@@ -13,7 +13,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// Additionally we have a RoleCode that we can use to query 
     /// the role programatically.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Roles-&-Permissions
+    /// See https://www.cofoundry.org/docs/framework/roles-and-permissions
     /// </summary>
     public class MemberRole : IRoleDefinition
     {

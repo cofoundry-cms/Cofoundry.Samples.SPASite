@@ -14,7 +14,7 @@ namespace Cofoundry.Samples.SPASite.Data
     /// to make setting it up a bit easier, especially when including with Cofoundry 
     /// data. You can of course do data access any way you like.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Entity-Framework-&-DbContext-Tools
+    /// See https://www.cofoundry.org/docs/framework/entity-framework-and-dbcontext-tools
     /// </summary>
     public class SPASiteDbContext : DbContext
     {

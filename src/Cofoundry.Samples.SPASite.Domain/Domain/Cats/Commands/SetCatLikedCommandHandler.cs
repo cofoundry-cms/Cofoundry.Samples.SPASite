@@ -19,7 +19,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// but that isn't neccessary here because any logged in user
     /// can perform this action.
     /// 
-    /// For more on permission see https://github.com/cofoundry-cms/cofoundry/wiki/Permissions
+    /// For more on permissions see https://www.cofoundry.org/docs/framework/roles-and-permissions
     /// </summary>
     public class SetCatLikedCommandHandler
         : IAsyncCommandHandler<SetCatLikedCommand>
@@ -41,7 +41,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         {
             // We could use the EF DbContext here, but it's faster to make this change using a 
             // stored procedure. We use IEntityFrameworkSqlExecutor here to simplify this.
-            // For more info see https://github.com/cofoundry-cms/cofoundry/wiki/Entity-Framework-&-DbContext-Tools#executing-stored-procedures--raw-sql
+            // For more info see https://www.cofoundry.org/docs/framework/entity-framework-and-dbcontext-tools#executing-stored-procedures--raw-sql
 
             return _entityFrameworkSqlExecutor
                 .ExecuteCommandAsync(_spaSiteDbContext,

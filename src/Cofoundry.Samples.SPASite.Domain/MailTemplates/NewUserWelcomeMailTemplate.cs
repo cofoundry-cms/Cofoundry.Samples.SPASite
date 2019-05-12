@@ -11,7 +11,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// Cofoundry includes a framework for sending mail based around template
     /// classes and view files rendered using RazorEngine.
     /// 
-    /// For more information see https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+    /// For more information see https://www.cofoundry.org/docs/framework/mail
     /// </summary>
     public class NewUserWelcomeMailTemplate : IMailTemplate
     {

@@ -15,7 +15,7 @@ namespace Cofoundry.Samples.SPASite.Domain.Install
     /// to run updates. This example uses a base class to use the default
     /// process for updating a database using sql scripts.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Auto-Update
+    /// See https://www.cofoundry.org/docs/framework/auto-update
     /// </summary>
     public class UpdatePackageFactory : BaseDbOnlyUpdatePackageFactory
     {

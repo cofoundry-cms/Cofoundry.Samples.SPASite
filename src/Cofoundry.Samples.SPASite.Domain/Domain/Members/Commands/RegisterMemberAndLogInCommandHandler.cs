@@ -55,7 +55,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             await SendWelcomeNotification(command);
 
             // Log the user in. Note that the new user id is set in the OutputUserId which is a 
-            // convention used by the CQS framework (see https://github.com/cofoundry-cms/cofoundry/wiki/CQS)
+            // convention used by the CQS framework (see https://www.cofoundry.org/docs/framework/cqs)
             await _loginService.LogAuthenticatedUserInAsync(addUserCommand.UserAreaCode, addUserCommand.OutputUserId, true);
         }
 
@@ -111,7 +111,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         }
 
         /// <summary>
-        /// For more info on sending mail with Cofoundry see https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+        /// For more info on sending mail with Cofoundry see https://www.cofoundry.org/docs/framework/mail
         /// </summary>
         private async Task SendWelcomeNotification(RegisterMemberAndLogInCommand command)
         {

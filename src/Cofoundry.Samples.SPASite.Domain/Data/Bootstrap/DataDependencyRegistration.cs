@@ -11,7 +11,7 @@ namespace Cofoundry.Samples.SPASite.Data
     /// An IDependencyRegistration class allows us to automatically register 
     /// services with the DI container in a modular way.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Dependency-Injection
+    /// See https://www.cofoundry.org/docs/framework/dependency-injection
     /// </summary>
     public class DataDependencyRegistration : IDependencyRegistration
     {
