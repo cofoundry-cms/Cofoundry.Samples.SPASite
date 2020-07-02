@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Cofoundry.Web;
 using Microsoft.AspNetCore.Hosting;
 using VueCliMiddleware;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.SpaServices;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -28,12 +30,12 @@ namespace Cofoundry.Samples.SPASite
             });
 
             services
-                .AddMvc()
+                .AddControllersWithViews()
                 .AddCofoundry(Configuration)
                 ;
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (!env.IsDevelopment())
             {
@@ -44,17 +46,17 @@ namespace Cofoundry.Samples.SPASite
             app.UseSpaStaticFiles();
             app.UseCofoundry();
 
-            app.UseSpa(spa =>
+            // Un-comment this to run the vue cli automatically when debugging
+            // You'll need to install the vue cli, see https://cli.vuejs.org/guide/installation.html 
+            app.UseEndpoints(endpoints =>
             {
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    // Un-comment this to run the vue cli automatically when debugging
-                    // You'll need to install the vue cli, see https://cli.vuejs.org/guide/installation.html 
-
-                    // spa.UseVueCli(npmScript: "serve", port: 8080); // optional port
-                }
+                endpoints.MapToVueCliProxy(
+                    "{*path}",
+                    new SpaOptions { SourcePath = "ClientApp" },
+                    npmScript: null, //(System.Diagnostics.Debugger.IsAttached) ? "serve" : null,
+                    regex: "Compiled successfully",
+                    forceKill: true
+                    );
             });
         }
     }
