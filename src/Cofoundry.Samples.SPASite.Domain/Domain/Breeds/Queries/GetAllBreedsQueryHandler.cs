@@ -1,5 +1,4 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
+﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using System;
 using System.Collections.Generic;
@@ -14,24 +13,26 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// are already checked by the underlying custom entity query.
     /// </summary>
     public class GetAllBreedsQueryHandler
-        : IAsyncQueryHandler<GetAllBreedsQuery, IEnumerable<Breed>>
+        : IQueryHandler<GetAllBreedsQuery, IEnumerable<Breed>>
         , IIgnorePermissionCheckHandler
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
+        private readonly IContentRepository _contentRepository;
 
         public GetAllBreedsQueryHandler(
-            ICustomEntityRepository customEntityRepository
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
+            _contentRepository = contentRepository;
         }
 
         public async Task<IEnumerable<Breed>> ExecuteAsync(GetAllBreedsQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummariesByDefinitionCodeQuery(BreedCustomEntityDefinition.DefinitionCode);
-            var customEntities = await _customEntityRepository.GetCustomEntityRenderSummariesByDefinitionCodeAsync(customEntityQuery); ;
-
-            var breeds = customEntities.Select(MapBreed);
+            var breeds = await _contentRepository
+                .CustomEntities()
+                .GetByDefinition<BreedCustomEntityDefinition>()
+                .AsRenderSummary()
+                .MapItem(MapBreed)
+                .ExecuteAsync();
 
             return breeds;
         }

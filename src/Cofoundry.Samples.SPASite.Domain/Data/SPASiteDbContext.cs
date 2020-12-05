@@ -44,7 +44,7 @@ namespace Cofoundry.Samples.SPASite.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .UseDefaultConfig()
+                .HasAppSchema()
                 .MapCofoundryContent()
                 .ApplyConfiguration(new CatLikeMap())
                 .ApplyConfiguration(new CatLikeCountMap());

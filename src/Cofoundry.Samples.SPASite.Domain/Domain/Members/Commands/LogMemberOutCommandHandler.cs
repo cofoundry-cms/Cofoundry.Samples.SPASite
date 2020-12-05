@@ -17,7 +17,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// with the reset of the domain logic.
     /// </summary>
     public class LogMemberOutCommandHandler
-        : IAsyncCommandHandler<LogMemberOutCommand>
+        : ICommandHandler<LogMemberOutCommand>
         , IIgnorePermissionCheckHandler
     {
         private readonly ILoginService _loginService;

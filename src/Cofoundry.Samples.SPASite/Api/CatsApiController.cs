@@ -11,7 +11,7 @@ namespace Cofoundry.Samples.SPASite
 {
     [Route("api/cats")]
     [AutoValidateAntiforgeryToken]
-    public class CatsApiController : Controller
+    public class CatsApiController : ControllerBase
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -24,8 +24,6 @@ namespace Cofoundry.Samples.SPASite
             _queryExecutor = queryExecutor;
             _apiResponseHelper = apiResponseHelper;
         }
-
-        #region queries
 
         [HttpGet("")]
         public async Task<IActionResult> Get([FromQuery] SearchCatSummariesQuery query)
@@ -44,10 +42,6 @@ namespace Cofoundry.Samples.SPASite
 
             return _apiResponseHelper.SimpleQueryResponse(this, results);
         }
-
-        #endregion
-
-        #region commands
 
         /// <summary>
         /// Note that here we use the standard Authorize attribute to restrict
@@ -79,7 +73,5 @@ namespace Cofoundry.Samples.SPASite
             };
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
-
-        #endregion
     }
 }

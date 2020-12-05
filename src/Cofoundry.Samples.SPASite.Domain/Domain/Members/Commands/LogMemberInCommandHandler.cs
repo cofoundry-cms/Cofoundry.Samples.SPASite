@@ -19,7 +19,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// such as preventing excessive login attempts.
     /// </summary>
     public class LogMemberInCommandHandler
-        : IAsyncCommandHandler<LogMemberInCommand>
+        : ICommandHandler<LogMemberInCommand>
         , IIgnorePermissionCheckHandler
     {
         private readonly ICommandExecutor _commandExecutor;

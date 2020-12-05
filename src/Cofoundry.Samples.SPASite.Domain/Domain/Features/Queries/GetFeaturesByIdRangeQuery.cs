@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
-    public class GetFeaturesByIdRangeQuery : IQuery<Dictionary<int, Feature>>
+    public class GetFeaturesByIdRangeQuery : IQuery<IDictionary<int, Feature>>
     {
         public GetFeaturesByIdRangeQuery() { }
 

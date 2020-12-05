@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Cofoundry.Samples.SPASite
 {
     [Route("api/features")]
-    public class FeaturesApiController : Controller
+    public class FeaturesApiController : ControllerBase
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -24,8 +24,6 @@ namespace Cofoundry.Samples.SPASite
             _apiResponseHelper = apiResponseHelper;
         }
 
-        #region queries
-
         [HttpGet("")]
         public async Task<IActionResult> Get()
         {
@@ -34,7 +32,5 @@ namespace Cofoundry.Samples.SPASite
 
             return _apiResponseHelper.SimpleQueryResponse(this, results);
         }
-
-        #endregion
     }
 }

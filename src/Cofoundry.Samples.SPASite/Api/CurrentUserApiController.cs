@@ -12,7 +12,7 @@ namespace Cofoundry.Samples.SPASite
 {
     [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
     [Route("api/members/current")]
-    public class CurrentMemberApiController : Controller
+    public class CurrentMemberApiController : ControllerBase
     {
         private readonly IQueryExecutor _queryExecutor;
         private readonly IApiResponseHelper _apiResponseHelper;
@@ -29,8 +29,6 @@ namespace Cofoundry.Samples.SPASite
             _userContextService = userContextService;
         }
 
-        #region queries
-
         [HttpGet("cats/liked")]
         public async Task<IActionResult> GetLikedCats()
         {
@@ -43,7 +41,5 @@ namespace Cofoundry.Samples.SPASite
 
             return _apiResponseHelper.SimpleQueryResponse(this, results);
         }
-
-        #endregion
     }
 }

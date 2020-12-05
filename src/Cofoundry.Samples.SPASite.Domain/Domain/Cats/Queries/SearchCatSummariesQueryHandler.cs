@@ -12,34 +12,36 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class SearchCatSummariesQueryHandler
-        : IAsyncQueryHandler<SearchCatSummariesQuery, PagedQueryResult<CatSummary>>
+        : IQueryHandler<SearchCatSummariesQuery, PagedQueryResult<CatSummary>>
         , IIgnorePermissionCheckHandler
     {
         private readonly SPASiteDbContext _dbContext;
-        private readonly ICustomEntityRepository _customEntityRepository;
-        private readonly IImageAssetRepository _imageAssetRepository;
+        private readonly IContentRepository _contentRepository;
 
         public SearchCatSummariesQueryHandler(
-            ICustomEntityRepository customEntityRepository,
-            IImageAssetRepository imageAssetRepository,
-            SPASiteDbContext dbContext
+            SPASiteDbContext dbContext,
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
-            _imageAssetRepository = imageAssetRepository;
             _dbContext = dbContext;
+            _contentRepository = contentRepository;
         }
 
         public async Task<PagedQueryResult<CatSummary>> ExecuteAsync(SearchCatSummariesQuery query, IExecutionContext executionContext)
         {
             var customEntityQuery = new SearchCustomEntityRenderSummariesQuery();
             customEntityQuery.CustomEntityDefinitionCode = CatCustomEntityDefinition.DefinitionCode;
-            customEntityQuery.PageSize = query.PageSize = query.PageSize;
+            customEntityQuery.PageSize = query.PageSize;
             customEntityQuery.PageNumber = query.PageNumber;
             customEntityQuery.PublishStatus = PublishStatusQuery.Published;
             customEntityQuery.SortBy = CustomEntityQuerySortType.PublishDate;
 
-            var catCustomEntities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(customEntityQuery);
+            var catCustomEntities = await _contentRepository
+                .CustomEntities()
+                .Search()
+                .AsRenderSummaries(customEntityQuery)
+                .ExecuteAsync();
+
             var allMainImages = await GetMainImages(catCustomEntities);
             var allLikeCounts = await GetLikeCounts(catCustomEntities);
 
@@ -55,7 +57,11 @@ namespace Cofoundry.Samples.SPASite.Domain
                 .Select(m => m.ImageAssetIds.First())
                 .Distinct();
 
-            return _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
+            return _contentRepository
+                .ImageAssets()
+                .GetByIdRange(imageAssetIds)
+                .AsRenderDetails()
+                .ExecuteAsync();
         }
 
         private Task<Dictionary<int, int>> GetLikeCounts(PagedQueryResult<CustomEntityRenderSummary> customEntityResult)

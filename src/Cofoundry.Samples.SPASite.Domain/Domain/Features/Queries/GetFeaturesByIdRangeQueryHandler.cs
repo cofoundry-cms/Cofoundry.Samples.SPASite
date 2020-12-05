@@ -1,5 +1,4 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
+﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using System;
 using System.Collections.Generic;
@@ -10,26 +9,26 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetFeaturesByIdRangeQueryHandler
-        : IAsyncQueryHandler<GetFeaturesByIdRangeQuery, Dictionary<int, Feature>>
+        : IQueryHandler<GetFeaturesByIdRangeQuery, IDictionary<int, Feature>>
         , IIgnorePermissionCheckHandler
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
+        private readonly IContentRepository _contentRepository;
 
         public GetFeaturesByIdRangeQueryHandler(
-            ICustomEntityRepository customEntityRepository
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
+            _contentRepository = contentRepository;
         }
 
-        public async Task<Dictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
+        public async Task<IDictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(query.FeatureIds);
-            var customEntities = await _customEntityRepository.GetCustomEntityRenderSummariesByIdRangeAsync(customEntityQuery); ;
-
-            var features = customEntities
-                .Select(d => MapFeature(d.Value))
-                .ToDictionary(f => f.FeatureId);
+            var features = await _contentRepository
+                .CustomEntities()
+                .GetByIdRange(query.FeatureIds)
+                .AsRenderSummaries()
+                .MapItem(MapFeature)
+                .ExecuteAsync();
 
             return features;
         }

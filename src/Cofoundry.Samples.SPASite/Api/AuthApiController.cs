@@ -12,7 +12,7 @@ namespace Cofoundry.Samples.SPASite
 {
     [Route("api/auth")]
     [AutoValidateAntiforgeryToken]
-    public class AuthApiController : Controller
+    public class AuthApiController : ControllerBase
     {
         private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IAntiforgery _antiforgery;
@@ -28,8 +28,6 @@ namespace Cofoundry.Samples.SPASite
             _antiforgery = antiforgery;
             _queryExecutor = queryExecutor;
         }
-
-        #region queries
 
         /// <summary>
         /// Once we have logged in we need to re-fetch the csrf token because
@@ -50,10 +48,6 @@ namespace Cofoundry.Samples.SPASite
             return _apiResponseHelper.SimpleQueryResponse(this, sessionInfo);
         }
 
-        #endregion
-
-        #region commands
-
         [HttpPost("register")]
         public Task<IActionResult> Register([FromBody] RegisterMemberAndLogInCommand command)
         {
@@ -72,7 +66,5 @@ namespace Cofoundry.Samples.SPASite
             var command = new LogMemberOutCommand();
             return _apiResponseHelper.RunCommandAsync(this, command);
         }
-
-        #endregion
     }
 }

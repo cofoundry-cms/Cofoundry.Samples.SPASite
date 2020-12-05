@@ -1,9 +1,6 @@
 ﻿using Cofoundry.Core.Mail;
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
-using Cofoundry.Domain.Data;
-using Cofoundry.Web;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,40 +15,36 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// and logging them in.
     /// </summary>
     public class RegisterMemberAndLogInCommandHandler
-        : IAsyncCommandHandler<RegisterMemberAndLogInCommand>
+        : ICommandHandler<RegisterMemberAndLogInCommand>
         , IIgnorePermissionCheckHandler
     {
-        private readonly CofoundryDbContext _dbContext;
-        private readonly ICommandExecutor _commandExecutor;
-        private readonly IUserContextService _userContextService;
+        private readonly IAdvancedContentRepository _contentRepository;
+
         private readonly ILoginService _loginService;
-        private readonly IExecutionContextFactory _executionContextFactory;
         private readonly IMailService _mailService;
         
         public RegisterMemberAndLogInCommandHandler(
-            CofoundryDbContext dbContext,
-            ICommandExecutor commandExecutor,
-            IUserContextService userContextService,
+            IAdvancedContentRepository contentRepository,
             ILoginService loginService,
-            IExecutionContextFactory executionContextFactory,
             IMailService mailService
             )
         {
-            _dbContext = dbContext;
-            _commandExecutor = commandExecutor;
-            _userContextService = userContextService;
+            _contentRepository = contentRepository;
             _loginService = loginService;
-            _executionContextFactory = executionContextFactory;
             _mailService = mailService;
         }
 
         public async Task ExecuteAsync(RegisterMemberAndLogInCommand command, IExecutionContext executionContext)
         {
-            int roleId = await GetMemberRoleId();
-
+            var roleId = await GetMemberRoleId();
             var addUserCommand = MapAddUserCommand(command, roleId);
+            
+            // Because we're not logged in, we'll need to elevate permissions to add a new user account.
+            await _contentRepository
+                .WithElevatedPermissions()
+                .Users()
+                .AddAsync(addUserCommand);
 
-            await SaveNewUser(executionContext, addUserCommand);
             await SendWelcomeNotification(command);
 
             // Log the user in. Note that the new user id is set in the OutputUserId which is a 
@@ -61,30 +54,18 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         /// <summary>
         /// Every user needs to be assigned a role. We've created a MemberRole in 
-        /// code, so we can our code definition to find out the database id which 
+        /// code, so we can use our code definition to find out the database id which 
         /// we need to create the new user
         /// </summary>
         private async Task<int> GetMemberRoleId()
         {
-            return await _dbContext
-                .Roles
-                .AsNoTracking()
-                .Where(r => r.RoleCode == MemberRole.MemberRoleCode && r.UserAreaCode == MemberUserArea.MemberUserAreaCode)
-                .Select(r => r.RoleId)
-                .SingleOrDefaultAsync();
-        }
+            var role = await _contentRepository
+                .Roles()
+                .GetByCode(MemberRole.MemberRoleCode)
+                .AsDetails()
+                .ExecuteAsync();
 
-        /// <summary>
-        /// Because we're not logged in, we'll need to elevate permissions to 
-        /// add a new user account. IExecutionContextFactory can be used to get 
-        /// an execution context for the system user, which we then use to
-        /// execute the command.
-        /// </summary>
-        private async Task SaveNewUser(IExecutionContext executionContext, AddUserCommand addUserCommand)
-        {
-            var systemExecutionContext = await _executionContextFactory.CreateSystemUserExecutionContextAsync(executionContext);
-
-            await _commandExecutor.ExecuteAsync(addUserCommand, systemExecutionContext);
+            return role.RoleId;
         }
 
         /// <summary>

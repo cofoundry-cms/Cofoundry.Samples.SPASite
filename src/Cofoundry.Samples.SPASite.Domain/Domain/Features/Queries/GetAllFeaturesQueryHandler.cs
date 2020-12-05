@@ -10,26 +10,26 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetAllFeaturesQueryHandler
-        : IAsyncQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
+        : IQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
         , IIgnorePermissionCheckHandler
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
+        private readonly IContentRepository _contentRepository;
 
         public GetAllFeaturesQueryHandler(
-            ICustomEntityRepository customEntityRepository
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
+            _contentRepository = contentRepository;
         }
 
         public async Task<ICollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummariesByDefinitionCodeQuery(FeatureCustomEntityDefinition.DefinitionCode);
-            var customEntities = await _customEntityRepository.GetCustomEntityRenderSummariesByDefinitionCodeAsync(customEntityQuery); ;
-
-            var features = customEntities
-                .Select(MapFeature)
-                .ToList();
+            var features = await _contentRepository
+                .CustomEntities()
+                .GetByDefinition<FeatureCustomEntityDefinition>()
+                .AsRenderSummary()
+                .MapItem(MapFeature)
+                .ExecuteAsync();
 
             return features;
         }

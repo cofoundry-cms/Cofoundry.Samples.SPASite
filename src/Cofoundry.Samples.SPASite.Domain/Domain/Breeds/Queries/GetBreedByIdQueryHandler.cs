@@ -1,5 +1,4 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
+﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using System;
 using System.Collections.Generic;
@@ -10,25 +9,28 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetBreedByIdQueryHandler
-        : IAsyncQueryHandler<GetBreedByIdQuery, Breed>
+        : IQueryHandler<GetBreedByIdQuery, Breed>
         , IIgnorePermissionCheckHandler
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
+        private readonly IContentRepository _contentRepository;
 
         public GetBreedByIdQueryHandler(
-            ICustomEntityRepository customEntityRepository
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
+            _contentRepository = contentRepository;
         }
 
         public async Task<Breed> ExecuteAsync(GetBreedByIdQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummaryByIdQuery() { CustomEntityId = query.BreedId };
-            var customEntity = await _customEntityRepository.GetCustomEntityRenderSummaryByIdAsync(customEntityQuery); ;
-            if (customEntity == null) return null;
+            var breed = await _contentRepository
+                .CustomEntities()
+                .GetById(query.BreedId)
+                .AsRenderSummary()
+                .Map(MapBreed)
+                .ExecuteAsync();
 
-            return MapBreed(customEntity);
+            return breed;
         }
 
         /// <summary>

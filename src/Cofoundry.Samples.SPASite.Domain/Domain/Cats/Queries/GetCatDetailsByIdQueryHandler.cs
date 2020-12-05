@@ -12,37 +12,34 @@ using Microsoft.EntityFrameworkCore;
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetCatDetailsByIdQueryHandler
-        : IAsyncQueryHandler<GetCatDetailsByIdQuery, CatDetails>
+        : IQueryHandler<GetCatDetailsByIdQuery, CatDetails>
         , IIgnorePermissionCheckHandler
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
-        private readonly IImageAssetRepository _imageAssetRepository;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IContentRepository _contentRepository;
         private readonly SPASiteDbContext _dbContext;
 
         public GetCatDetailsByIdQueryHandler(
-            ICustomEntityRepository customEntityRepository,
-            IImageAssetRepository imageAssetRepository,
-            IQueryExecutor queryExecutor,
+            IContentRepository contentRepository,
             SPASiteDbContext dbContext
             )
         {
-            _customEntityRepository = customEntityRepository;
-            _imageAssetRepository = imageAssetRepository;
-            _queryExecutor = queryExecutor;
+            _contentRepository = contentRepository;
             _dbContext = dbContext;
         }
 
         public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
         {
-            var customEntityQuery = new GetCustomEntityRenderSummaryByIdQuery(query.CatId);
-            var customEntity = await _customEntityRepository.GetCustomEntityRenderSummaryByIdAsync(customEntityQuery); ;
-            if (customEntity == null) return null;
+            var cat = await _contentRepository
+                .CustomEntities()
+                .GetById(query.CatId)
+                .AsRenderSummary()
+                .Map(MapCatAsync)
+                .ExecuteAsync();
 
-            return await MapCat(customEntity);
+            return cat;
         }
 
-        private async Task<CatDetails> MapCat(CustomEntityRenderSummary customEntity)
+        private async Task<CatDetails> MapCatAsync(CustomEntityRenderSummary customEntity)
         {
             var model = customEntity.Model as CatDataModel;
             var cat = new CatDetails();
@@ -73,7 +70,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             if (!breedId.HasValue) return null;
             var query = new GetBreedByIdQuery(breedId.Value);
 
-            return await _queryExecutor.ExecuteAsync(query);
+            return await _contentRepository.ExecuteQueryAsync(query);
         }
 
         private async Task<ICollection<Feature>> GetFeaturesAsync(ICollection<int> featureIds)
@@ -81,7 +78,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             if (EnumerableHelper.IsNullOrEmpty(featureIds)) return Array.Empty<Feature>();
             var query = new GetFeaturesByIdRangeQuery(featureIds);
 
-            var features = await _queryExecutor.ExecuteAsync(query);
+            var features = await _contentRepository.ExecuteQueryAsync(query);
 
             return features
                 .Select(f => f.Value)
@@ -93,11 +90,14 @@ namespace Cofoundry.Samples.SPASite.Domain
         {
             if (EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Array.Empty<ImageAssetRenderDetails>();
 
-            var images = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
-
-            return images
+            var images = await _contentRepository
+                .ImageAssets()
+                .GetByIdRange(imageAssetIds)
+                .AsRenderDetails()
                 .FilterAndOrderByKeys(imageAssetIds)
-                .ToList();
+                .ExecuteAsync();
+
+            return images;
         }
     }
 }

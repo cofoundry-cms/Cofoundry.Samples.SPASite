@@ -13,23 +13,27 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// we return null, so there's no need for a permission check.
     /// </summary>
     public class GetCurrentMemberSummaryQueryHandler
-        : IAsyncQueryHandler<GetCurrentMemberSummaryQuery, MemberSummary>
+        : IQueryHandler<GetCurrentMemberSummaryQuery, MemberSummary>
         , IIgnorePermissionCheckHandler
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IContentRepository _contentRepository;
 
         public GetCurrentMemberSummaryQueryHandler(
-            IUserRepository userRepository
+            IContentRepository contentRepository
             )
         {
-            _userRepository = userRepository;
+            _contentRepository = contentRepository;
         }
 
         public async Task<MemberSummary> ExecuteAsync(GetCurrentMemberSummaryQuery query, IExecutionContext executionContext)
         {
             if (!IsLoggedInMember(executionContext.UserContext)) return null;
 
-            var user = await _userRepository.GetCurrentUserMicroSummaryAsync();
+            var user = await _contentRepository
+                .Users()
+                .GetCurrent()
+                .AsMicroSummary()
+                .ExecuteAsync();
 
             return new MemberSummary()
             {
@@ -41,7 +45,6 @@ namespace Cofoundry.Samples.SPASite.Domain
         private bool IsLoggedInMember(IUserContext userContext)
         {
             return userContext.UserId.HasValue && userContext.UserArea.UserAreaCode == MemberUserArea.MemberUserAreaCode;
-
         }
     }
 }
