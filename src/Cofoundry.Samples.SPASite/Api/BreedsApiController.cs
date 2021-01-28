@@ -6,40 +6,41 @@ using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Cofoundry.Domain;
 
 namespace Cofoundry.Samples.SPASite
 {
     [Route("api/breeds")]
     public class BreedsApiController : ControllerBase
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IDomainRepository _domainRepository;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public BreedsApiController(
-            IQueryExecutor queryExecutor,
+            IDomainRepository domainRepository,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _domainRepository = domainRepository;
             _apiResponseHelper = apiResponseHelper;
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> Get()
+        public async Task<JsonResult> Get()
         {
             var query = new GetAllBreedsQuery();
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _domainRepository.ExecuteQueryAsync(query);
 
-            return _apiResponseHelper.SimpleQueryResponse(this, results);
+            return _apiResponseHelper.SimpleQueryResponse(results);
         }
 
         [HttpGet("{breedId:int}")]
-        public async Task<IActionResult> Get(int breedId)
+        public async Task<JsonResult> Get(int breedId)
         {
             var query = new GetBreedByIdQuery(breedId);
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _domainRepository.ExecuteQueryAsync(query);
 
-            return _apiResponseHelper.SimpleQueryResponse(this, results);
+            return _apiResponseHelper.SimpleQueryResponse(results);
         }
     }
 }

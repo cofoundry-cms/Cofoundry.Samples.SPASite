@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cofoundry.Domain.CQS;
 using Cofoundry.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Antiforgery;
 using Cofoundry.Samples.SPASite.Domain;
+using Cofoundry.Domain;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -16,17 +16,17 @@ namespace Cofoundry.Samples.SPASite
     {
         private readonly IApiResponseHelper _apiResponseHelper;
         private readonly IAntiforgery _antiforgery;
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IDomainRepository _domainRepository;
 
         public AuthApiController(
             IApiResponseHelper apiResponseHelper,
             IAntiforgery antiforgery,
-            IQueryExecutor queryExecutor
+            IDomainRepository domainRepository
             )
         {
             _apiResponseHelper = apiResponseHelper;
             _antiforgery = antiforgery;
-            _queryExecutor = queryExecutor;
+            _domainRepository = domainRepository;
         }
 
         /// <summary>
@@ -34,9 +34,9 @@ namespace Cofoundry.Samples.SPASite
         /// the user identity will have changed and the old token will be invalid
         /// </summary>
         [HttpGet("session")]
-        public async Task<IActionResult> GetAuthSession()
+        public async Task<JsonResult> GetAuthSession()
         {
-            var member = await _queryExecutor.ExecuteAsync(new GetCurrentMemberSummaryQuery());
+            var member = await _domainRepository.ExecuteQueryAsync(new GetCurrentMemberSummaryQuery());
             var token = _antiforgery.GetAndStoreTokens(HttpContext);
 
             var sessionInfo = new
@@ -45,26 +45,26 @@ namespace Cofoundry.Samples.SPASite
                 AntiForgeryToken = token.RequestToken
             };
 
-            return _apiResponseHelper.SimpleQueryResponse(this, sessionInfo);
+            return _apiResponseHelper.SimpleQueryResponse(sessionInfo);
         }
 
         [HttpPost("register")]
-        public Task<IActionResult> Register([FromBody] RegisterMemberAndLogInCommand command)
+        public Task<JsonResult> Register([FromBody] RegisterMemberAndLogInCommand command)
         {
-            return _apiResponseHelper.RunCommandAsync(this, command);
+            return _apiResponseHelper.RunCommandAsync(command);
         }
 
         [HttpPost("login")]
-        public Task<IActionResult> Login([FromBody] LogMemberInCommand command)
+        public Task<JsonResult> Login([FromBody] LogMemberInCommand command)
         {
-            return _apiResponseHelper.RunCommandAsync(this, command);
+            return _apiResponseHelper.RunCommandAsync(command);
         }
 
         [HttpPost("sign-out")]
-        public Task<IActionResult> SignOut()
+        public Task<JsonResult> SignOut()
         {
             var command = new LogMemberOutCommand();
-            return _apiResponseHelper.RunCommandAsync(this, command);
+            return _apiResponseHelper.RunCommandAsync(command);
         }
     }
 }

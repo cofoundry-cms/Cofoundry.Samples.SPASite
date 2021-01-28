@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Cofoundry.Domain.CQS;
 using Cofoundry.Web;
 using Cofoundry.Samples.SPASite.Domain;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Cofoundry.Domain;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -13,34 +13,34 @@ namespace Cofoundry.Samples.SPASite
     [AutoValidateAntiforgeryToken]
     public class CatsApiController : ControllerBase
     {
-        private readonly IQueryExecutor _queryExecutor;
+        private readonly IDomainRepository _domainRepository;
         private readonly IApiResponseHelper _apiResponseHelper;
 
         public CatsApiController(
-            IQueryExecutor queryExecutor,
+            IDomainRepository domainRepository,
             IApiResponseHelper apiResponseHelper
             )
         {
-            _queryExecutor = queryExecutor;
+            _domainRepository = domainRepository;
             _apiResponseHelper = apiResponseHelper;
         }
 
         [HttpGet("")]
-        public async Task<IActionResult> Get([FromQuery] SearchCatSummariesQuery query)
+        public async Task<JsonResult> Get([FromQuery] SearchCatSummariesQuery query)
         {
             if (query == null) query = new SearchCatSummariesQuery();
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _domainRepository.ExecuteQueryAsync(query);
 
-            return _apiResponseHelper.SimpleQueryResponse(this, results);
+            return _apiResponseHelper.SimpleQueryResponse(results);
         }
 
         [HttpGet("{catId:int}")]
-        public async Task<IActionResult> Get(int catId)
+        public async Task<JsonResult> Get(int catId)
         {
             var query = new GetCatDetailsByIdQuery(catId);
-            var results = await _queryExecutor.ExecuteAsync(query);
+            var results = await _domainRepository.ExecuteQueryAsync(query);
 
-            return _apiResponseHelper.SimpleQueryResponse(this, results);
+            return _apiResponseHelper.SimpleQueryResponse(results);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Cofoundry.Samples.SPASite
         /// </summary>
         [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
         [HttpPost("{catId:int}/likes")]
-        public Task<IActionResult> Like(int catId)
+        public Task<JsonResult> Like(int catId)
         {
             var command = new SetCatLikedCommand()
             {
@@ -60,18 +60,18 @@ namespace Cofoundry.Samples.SPASite
 
             // IApiResponseHelper will validate the command and permissions before executing it
             // and return any validation errors in a formatted data object
-            return _apiResponseHelper.RunCommandAsync(this, command);
+            return _apiResponseHelper.RunCommandAsync(command);
         }
 
         [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
         [HttpDelete("{catId:int}/likes")]
-        public Task<IActionResult> UnLike(int catId)
+        public Task<JsonResult> UnLike(int catId)
         {
             var command = new SetCatLikedCommand()
             {
                 CatId = catId
             };
-            return _apiResponseHelper.RunCommandAsync(this, command);
+            return _apiResponseHelper.RunCommandAsync(command);
         }
     }
 }
