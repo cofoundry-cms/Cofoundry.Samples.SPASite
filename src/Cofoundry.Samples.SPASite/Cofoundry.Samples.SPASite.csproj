@@ -8,7 +8,7 @@
   
   <ItemGroup>
     <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.3.1" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.9.1" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.9.2" />
     <PackageReference Include="VueCliMiddleware" Version="3.1.2" />
   </ItemGroup>
   
