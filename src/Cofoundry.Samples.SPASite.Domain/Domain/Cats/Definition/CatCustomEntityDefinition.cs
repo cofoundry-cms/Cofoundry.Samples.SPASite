@@ -1,9 +1,5 @@
 ﻿using Cofoundry.Domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
@@ -14,7 +10,7 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// This definition uses ICustomisedTermCustomEntityDefinition to change
     /// the display name for the title property to be 'Name'.
     /// </summary>
-    public class CatCustomEntityDefinition 
+    public class CatCustomEntityDefinition
         : ICustomEntityDefinition<CatDataModel>
         , ICustomizedTermCustomEntityDefinition
     {
@@ -22,12 +18,12 @@ namespace Cofoundry.Samples.SPASite.Domain
         /// This constant is a convention that allows us to reference this definition code 
         /// in other parts of the application (e.g. querying)
         /// </summary>
-        public const string DefinitionCode = "SPACAT";
+        public const string Code = "SPACAT";
 
         /// <summary>
         /// Unique 6 letter code representing the module (the convention is to use uppercase)
         /// </summary>
-        public string CustomEntityDefinitionCode => DefinitionCode;
+        public string CustomEntityDefinitionCode => Code;
 
         /// <summary>
         /// Singlar name of the entity

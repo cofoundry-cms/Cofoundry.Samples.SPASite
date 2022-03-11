@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Cofoundry.Samples.SPASite.Domain
+﻿namespace Cofoundry.Samples.SPASite.Domain
 {
     /// <summary>
     /// A small model projection of the a member
@@ -11,6 +7,6 @@ namespace Cofoundry.Samples.SPASite.Domain
     {
         public int UserId { get; set; }
 
-        public string Name { get; set; }
+        public string DisplayName { get; set; }
     }
 }

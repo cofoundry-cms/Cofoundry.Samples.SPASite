@@ -1,9 +1,4 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
@@ -17,12 +12,12 @@ namespace Cofoundry.Samples.SPASite.Domain
         /// This constant is a convention that allows us to reference this definition code 
         /// in other parts of the application (e.g. querying)
         /// </summary>
-        public const string DefinitionCode = "SPAFET";
+        public const string Code = "SPAFET";
 
         /// <summary>
         /// Unique 6 letter code representing the module (the convention is to use uppercase)
         /// </summary>
-        public string CustomEntityDefinitionCode => DefinitionCode;
+        public string CustomEntityDefinitionCode => Code;
 
         /// <summary>
         /// Singlar name of the entity

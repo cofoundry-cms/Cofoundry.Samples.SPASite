@@ -1,9 +1,4 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
@@ -17,24 +12,41 @@ namespace Cofoundry.Samples.SPASite.Domain
     /// </summary>
     public class MemberRole : IRoleDefinition
     {
-        public const string MemberRoleCode = "MEM";
-
         /// <summary>
-        /// The role title is used to identify the role and select it in the admin 
-        /// UI and therefore must be unique. Max 50 characters.
+        /// By convention we add a constant for the role code
+        /// to make it easier to reference.
         /// </summary>
-        public string Title { get { return "Member"; } }
+        public const string Code = "MEM";
 
         /// <summary>
         /// The role code is a unique three letter code that can be used to reference 
         /// the role programatically. The code must be unique and convention is to use 
         /// upper case, although code matching is case insensitive.
         /// </summary>
-        public string RoleCode { get { return MemberRoleCode; } }
+        public string RoleCode => Code;
+
+        /// <summary>
+        /// The role title is used to identify the role and select it in the admin 
+        /// UI and therefore must be unique. Max 50 characters.
+        /// </summary>
+        public string Title => "Member";
 
         /// <summary>
         /// A role must be assigned to a user area, in this case the role is used for members
         /// </summary
-        public string UserAreaCode { get { return MemberUserArea.MemberUserAreaCode; } }
+        public string UserAreaCode => MemberUserArea.Code;
+
+        /// <summary>
+        /// This method determines which permissions the role is granted when it is first created. 
+        /// To help do this you are provided with a builder that contains all permissions in the 
+        /// system which you can use to either include or exclude permissions based on rules.
+        /// </summary>
+        public void ConfigurePermissions(IPermissionSetBuilder builder)
+        {
+            // In this example application we don't require any additional permissions for members
+            // so we can re-use the permission set on the anonymous role which include read access 
+            // to most entities.
+            builder.ApplyAnonymousRoleConfiguration();
+        }
     }
 }

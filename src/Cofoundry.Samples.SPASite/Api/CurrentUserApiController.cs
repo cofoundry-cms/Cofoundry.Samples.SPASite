@@ -1,44 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cofoundry.Web;
+﻿using Cofoundry.Domain;
 using Cofoundry.Samples.SPASite.Domain;
-using System.Threading.Tasks;
-using Cofoundry.Domain;
+using Cofoundry.Web;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite
 {
-    [AuthorizeUserArea(MemberUserArea.MemberUserAreaCode)]
+    [AuthorizeUserArea(MemberUserArea.Code)]
     [Route("api/members/current")]
     public class CurrentMemberApiController : ControllerBase
     {
-        private readonly IDomainRepository _domainRepository;
+        private readonly IContentRepository _contentRepository;
         private readonly IApiResponseHelper _apiResponseHelper;
-        private readonly IUserContextService _userContextService;
 
         public CurrentMemberApiController(
-            IDomainRepository domainRepository,
-            IApiResponseHelper apiResponseHelper,
-            IUserContextService userContextService
+            IContentRepository contentRepository,
+            IApiResponseHelper apiResponseHelper
             )
         {
-            _domainRepository = domainRepository;
+            _contentRepository = contentRepository;
             _apiResponseHelper = apiResponseHelper;
-            _userContextService = userContextService;
         }
 
         [HttpGet("cats/liked")]
         public async Task<JsonResult> GetLikedCats()
         {
-            // Here we get the userId of the currently logged in member. We could have
+            // Here we get the userId of the currently signed in member. We could have
             // done this in the query handler, but instead we've chosen to keep the query 
             // flexible so it can be re-used in a more generic fashion
-            var userContext = await _userContextService.GetCurrentContextAsync();
-            var query = new GetCatSummariesByMemberLikedQuery(userContext.UserId.Value);
-            var results = await _domainRepository.ExecuteQueryAsync(query);
+            var userContext = await _contentRepository
+                .Users()
+                .Current()
+                .Get()
+                .AsUserContext()
+                .ExecuteAsync();
 
-            return _apiResponseHelper.SimpleQueryResponse(results);
+            var query = new GetCatSummariesByMemberLikedQuery(userContext.UserId.Value);
+
+            return await _apiResponseHelper.RunQueryAsync(query);
         }
     }
 }

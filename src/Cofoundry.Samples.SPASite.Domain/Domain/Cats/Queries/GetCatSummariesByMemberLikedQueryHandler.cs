@@ -3,17 +3,15 @@ using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
     public class GetCatSummariesByMemberLikedQueryHandler
         : IQueryHandler<GetCatSummariesByMemberLikedQuery, ICollection<CatSummary>>
-        , ILoggedInPermissionCheckHandler
+        , ISignedInPermissionCheckHandler
     {
         private readonly IContentRepository _contentRepository;
         private readonly SPASiteDbContext _dbContext;

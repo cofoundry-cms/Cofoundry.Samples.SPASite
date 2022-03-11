@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cofoundry.Web;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Antiforgery;
+﻿using Cofoundry.Domain;
 using Cofoundry.Samples.SPASite.Domain;
-using Cofoundry.Domain;
+using Cofoundry.Web;
+using Microsoft.AspNetCore.Antiforgery;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite
 {
@@ -36,35 +33,39 @@ namespace Cofoundry.Samples.SPASite
         [HttpGet("session")]
         public async Task<JsonResult> GetAuthSession()
         {
-            var member = await _domainRepository.ExecuteQueryAsync(new GetCurrentMemberSummaryQuery());
-            var token = _antiforgery.GetAndStoreTokens(HttpContext);
-
-            var sessionInfo = new
+            return await _apiResponseHelper.RunWithResultAsync(async () =>
             {
-                Member = member,
-                AntiForgeryToken = token.RequestToken
-            };
+                var member = await _domainRepository.ExecuteQueryAsync(new GetCurrentMemberSummaryQuery());
+                var token = _antiforgery.GetAndStoreTokens(HttpContext);
 
-            return _apiResponseHelper.SimpleQueryResponse(sessionInfo);
+                var sessionInfo = new
+                {
+                    Member = member,
+                    AntiForgeryToken = token.RequestToken
+                };
+
+                return sessionInfo;
+            });
         }
 
         [HttpPost("register")]
-        public Task<JsonResult> Register([FromBody] RegisterMemberAndLogInCommand command)
+        public async Task<JsonResult> Register([FromBody] RegisterMemberAndLogInCommand command)
         {
-            return _apiResponseHelper.RunCommandAsync(command);
+            return await _apiResponseHelper.RunCommandAsync(command);
         }
 
         [HttpPost("login")]
-        public Task<JsonResult> Login([FromBody] LogMemberInCommand command)
+        public async Task<JsonResult> Login([FromBody] SignMemberInCommand command)
         {
-            return _apiResponseHelper.RunCommandAsync(command);
+            return await _apiResponseHelper.RunCommandAsync(command);
         }
 
         [HttpPost("sign-out")]
-        public Task<JsonResult> SignOut()
+        public async Task<JsonResult> SignOut()
         {
-            var command = new LogMemberOutCommand();
-            return _apiResponseHelper.RunCommandAsync(command);
+            var command = new SignMemberOutCommand();
+
+            return await _apiResponseHelper.RunCommandAsync(command);
         }
     }
 }

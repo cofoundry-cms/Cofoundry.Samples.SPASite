@@ -2,12 +2,11 @@
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {

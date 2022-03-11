@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import accountApi from "@/api/auth";
 import ValidationSummary from "@/components/ValidationSummary";
 import FormGroup from "@/components/FormGroup";
 import ContentPanel from "@/components/ContentPanel";

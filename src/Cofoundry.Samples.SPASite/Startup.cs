@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cofoundry.Web;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Cofoundry.Web;
 using Microsoft.AspNetCore.Hosting;
-using VueCliMiddleware;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.SpaServices;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using VueCliMiddleware;
 
 namespace Cofoundry.Samples.SPASite
 {

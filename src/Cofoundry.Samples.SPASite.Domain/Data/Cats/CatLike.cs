@@ -1,9 +1,4 @@
-﻿using Cofoundry.Domain.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Cofoundry.Samples.SPASite.Data
 {
@@ -14,9 +9,5 @@ namespace Cofoundry.Samples.SPASite.Data
         public int UserId { get; set; }
 
         public DateTime CreateDate { get; set; }
-
-        public virtual User User { get; set; }
-
-        public virtual CustomEntity CatCustomEntity { get; set; }
     }
 }

@@ -1,9 +1,4 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
@@ -16,17 +11,17 @@ namespace Cofoundry.Samples.SPASite.Domain
     public class MemberUserArea : IUserAreaDefinition
     {
         /// <summary>
-        /// Static access to the area code to make querying
-        /// easier
+        /// By convention we add a constant for the user area code
+        /// to make it easier to reference.
         /// </summary>
-        public const string MemberUserAreaCode = "SPA";
+        public const string Code = "SPA";
 
         /// <summary>
         /// Indicates if users in this area can login using a password. If this is false
         /// the password field will be null and login will typically be via SSO or some 
         /// other method.
         /// </summary>
-        public bool AllowPasswordLogin => true;
+        public bool AllowPasswordSignIn => true;
 
         /// <summary>
         /// Display name of the area, used in the Cofoundry admin panel
@@ -46,18 +41,23 @@ namespace Cofoundry.Samples.SPASite.Domain
         /// A unique 3 letter code identifying this user area. The cofoundry 
         /// user are uses the code "COF" so you can pick anything else!
         /// </summary>
-        public string UserAreaCode => MemberUserAreaCode;
+        public string UserAreaCode => Code;
 
         /// <summary>
         /// Because the login routing is handled by the front end framework, we don't need to redirect to 
         /// a specific login route.
         /// </summary>
-        public string LoginPath => "/";
+        public string SignInPath => "/";
 
         /// <summary>
         /// Setting this to true means that this user area will be used as the default login
         /// schema which means the HttpContext.User property will be set to this identity.
         /// </summary>
-        public bool IsDefaultAuthSchema => true;
+        public bool IsDefaultAuthScheme => true;
+
+        public void ConfigureOptions(UserAreaOptions options)
+        {
+            // No additional configuration required
+        }
     }
 }

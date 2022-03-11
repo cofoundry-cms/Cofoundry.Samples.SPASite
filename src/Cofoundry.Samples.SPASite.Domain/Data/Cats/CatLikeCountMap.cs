@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Cofoundry.Core;
 using Microsoft.EntityFrameworkCore;
-using Cofoundry.Core;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Cofoundry.Samples.SPASite.Data
 {
@@ -13,7 +8,7 @@ namespace Cofoundry.Samples.SPASite.Data
     {
         public void Configure(EntityTypeBuilder<CatLikeCount> builder)
         {
-            builder.ToTable("CatLikeCount", DbConstants.DefaultAppSchema);
+            builder.ToTable(nameof(CatLikeCount), DbConstants.DefaultAppSchema);
 
             builder.HasKey(e => e.CatCustomEntityId);
         }

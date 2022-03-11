@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Cofoundry.Domain;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Cofoundry.Domain;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Samples.SPASite.Domain
@@ -24,11 +20,11 @@ namespace Cofoundry.Samples.SPASite.Domain
         public string Description { get; set; }
 
         [Display(Name = "Breed", Description = "Identity the breed of cat if possible")]
-        [CustomEntity(BreedCustomEntityDefinition.DefinitionCode)]
+        [CustomEntity(BreedCustomEntityDefinition.Code)]
         public int? BreedId { get; set; }
 
         [Display(Name = "Features", Description = "Extra features or properties that help categorize this cat")]
-        [CustomEntityCollection(FeatureCustomEntityDefinition.DefinitionCode)]
+        [CustomEntityCollection(FeatureCustomEntityDefinition.Code)]
         public ICollection<int> FeatureIds { get; set; }
 
         [Display(Name = "Images", Description = "The top image will be the main image that displays in the grid")]

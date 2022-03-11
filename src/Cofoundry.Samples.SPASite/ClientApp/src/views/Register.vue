@@ -6,25 +6,14 @@
             @submit.prevent="submitRegistration"
             v-if="!registrationComplete"
         >
-            <form-group :title="'First Name'" :id="'inputName'">
+            <form-group :title="'Name'" :id="'inputName'">
                 <input
                     type="text"
-                    name="firstname"
+                    name="displayName"
                     class="form-control"
                     id="inputName"
-                    placeholder="First Name"
-                    v-model="command.firstName"
-                >
-            </form-group>
-
-            <form-group :title="'Last Name'" :id="'inputSurname'">
-                <input
-                    type="text"
-                    name="lastname"
-                    class="form-control"
-                    id="inputSurname"
-                    placeholder="Last Name"
-                    v-model="command.lastName"
+                    placeholder="Name"
+                    v-model="command.displayName"
                 >
             </form-group>
 

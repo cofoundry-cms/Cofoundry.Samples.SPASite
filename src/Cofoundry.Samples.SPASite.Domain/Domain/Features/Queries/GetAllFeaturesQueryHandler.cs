@@ -1,10 +1,6 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
+﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
@@ -27,7 +23,7 @@ namespace Cofoundry.Samples.SPASite.Domain
             var features = await _contentRepository
                 .CustomEntities()
                 .GetByDefinition<FeatureCustomEntityDefinition>()
-                .AsRenderSummary()
+                .AsRenderSummaries()
                 .MapItem(MapFeature)
                 .ExecuteAsync();
 

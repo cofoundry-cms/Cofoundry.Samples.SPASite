@@ -1,10 +1,6 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Core.AutoUpdate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain.Install
 {
@@ -23,10 +19,7 @@ namespace Cofoundry.Samples.SPASite.Domain.Install
         /// The module identifier should be unique to this installation
         /// and usually indicates the application or plugin being updated
         /// </summary>
-        public override string ModuleIdentifier
-        {
-            get { return "SPASite"; }
-        }
+        public override string ModuleIdentifier => "SPASite";
 
         /// <summary>
         /// Here we can any modules that this installation is dependent

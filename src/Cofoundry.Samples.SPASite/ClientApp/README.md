@@ -1,5 +1,7 @@
 # SPASite Vue CLI App
 
+Tested with node v14.15.1
+
 ## Project setup
 ```
 npm install

@@ -3,10 +3,8 @@ using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
@@ -30,7 +28,7 @@ namespace Cofoundry.Samples.SPASite.Domain
         public async Task<PagedQueryResult<CatSummary>> ExecuteAsync(SearchCatSummariesQuery query, IExecutionContext executionContext)
         {
             var customEntityQuery = new SearchCustomEntityRenderSummariesQuery();
-            customEntityQuery.CustomEntityDefinitionCode = CatCustomEntityDefinition.DefinitionCode;
+            customEntityQuery.CustomEntityDefinitionCode = CatCustomEntityDefinition.Code;
             customEntityQuery.PageSize = query.PageSize;
             customEntityQuery.PageNumber = query.PageNumber;
             customEntityQuery.PublishStatus = PublishStatusQuery.Published;

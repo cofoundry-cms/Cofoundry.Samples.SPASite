@@ -14,16 +14,16 @@ Notable features include:
 - Using an Entity Framework DbContext to represent custom database tables
 - Executing stored procedures using `IEntityFrameworkSqlExecutor`
 - Integrating custom entity data with Entity Framework data access
-- Using the auto-updater to run sql scripts
-- Email notifications & Email Templating
+- Using the auto-updater to run SQL scripts
+- Email notifications & email templating
 - Registering services with the DI container
 
 #### To get started:
 
-1. Create a database named 'Cofoundry.Samples.SPASite' and check the Cofoundry connection string in the web.config file is correct for your sql server instance
+1. Create a database named 'Cofoundry.Samples.SPASite' and check the Cofoundry connection string in the app.settings file is correct for your SQL Server instance
 2. Run the website and navigate to *"/admin"*, which will display the setup screen
 3. Enter an application name and setup your user account. Submit the form to complete the site setup. 
-4. Either log in and enter your own data or follow the steps below to import some test data
+4. Either sign in and enter your own data or follow the steps below to import some test data
 
 #### Importing test data:
 
@@ -65,9 +65,9 @@ Contains domain logic and data access.
 
 ![Domain solution structure](readme/SpaCatsDomain.png)
 
--  **Data:** We use some custom sql tables to store cat popularity data. An Entity Framework DbContext is used to access the custom tables, which demonstrates integrating custom sql tables with Cofoundry sql tables.
+-  **Data:** We use some custom SQL tables to store cat popularity data. An Entity Framework DbContext is used to access the custom tables.
 - **Domain:** The domain contains all the models, [queries and commands](https://github.com/cofoundry-cms/cofoundry/wiki/CQS) that we use to retrieve and store data. It also contains the [Custom Entity Definitions](https://github.com/cofoundry-cms/cofoundry/wiki/Custom-Entities) that define the *Breed*, *Cat* and *Features* custom entities, and the [User Area Definition](https://github.com/cofoundry-cms/cofoundry/wiki/User-Areas) that defines the *Members* login area. Structuring our code in this way gives us a clean separation between our domain logic layer and our application layer.
-- **Install:** Here we take advantage of the [Auto Update](https://github.com/cofoundry-cms/cofoundry/wiki/Auto-Update) feature in Cofoundry to run sql scripts that create our custom tables and stored procedures.
+- **Install:** Here we take advantage of the [Auto Update](https://github.com/cofoundry-cms/cofoundry/wiki/Auto-Update) feature in Cofoundry to run SQL scripts that create our custom tables and stored procedures.
 - **MailTemplates:** We store our [mail templates](https://github.com/cofoundry-cms/cofoundry/wiki/Mail) in the domain layer so they can be used from inside our commands. Because we are including the template cshtml files as embedded resources here, we need to include an `AssemblyResourceRegistration` which is located in the bootstrap folder. 
 
 #### Cofoundry.Samples.SpaSite.Web

@@ -2,28 +2,24 @@
 using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
 using Cofoundry.Samples.SPASite.Data;
-using System;
-using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
 {
     /// <summary>
-    /// This handler uses ILoggedInPermissionCheckHandler to make sure
-    /// a user logged in before allowing them to set the cat as liked.
+    /// This handler uses ISignedInPermissionCheckHandler to make sure
+    /// a user signed in before allowing them to set the cat as liked.
     /// We could use IPermissionRestrictedCommandHandler to be more 
     /// specific here and create a specific permission for the action,
-    /// but that isn't neccessary here because any logged in user
+    /// but that isn't neccessary here because any signed in user
     /// can perform this action.
     /// 
     /// For more on permissions see https://www.cofoundry.org/docs/framework/roles-and-permissions
     /// </summary>
     public class SetCatLikedCommandHandler
         : ICommandHandler<SetCatLikedCommand>
-        , ILoggedInPermissionCheckHandler
+        , ISignedInPermissionCheckHandler
     {
         private readonly IEntityFrameworkSqlExecutor _entityFrameworkSqlExecutor;
         private readonly SPASiteDbContext _spaSiteDbContext;
@@ -40,7 +36,8 @@ namespace Cofoundry.Samples.SPASite.Domain
         public Task ExecuteAsync(SetCatLikedCommand command, IExecutionContext executionContext)
         {
             // We could use the EF DbContext here, but it's faster to make this change using a 
-            // stored procedure. We use IEntityFrameworkSqlExecutor here to simplify this.
+            // stored procedure. We use IEntityFrameworkSqlExecutor here to simplify this, but
+            // you could also use EF directly, Dapper or mix in any other data access approach.
             // For more info see https://www.cofoundry.org/docs/framework/entity-framework-and-dbcontext-tools#executing-stored-procedures--raw-sql
 
             return _entityFrameworkSqlExecutor

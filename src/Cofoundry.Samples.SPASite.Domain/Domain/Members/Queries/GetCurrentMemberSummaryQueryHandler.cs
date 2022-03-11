@@ -1,8 +1,5 @@
 ﻿using Cofoundry.Domain;
 using Cofoundry.Domain.CQS;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SPASite.Domain
@@ -27,24 +24,25 @@ namespace Cofoundry.Samples.SPASite.Domain
 
         public async Task<MemberSummary> ExecuteAsync(GetCurrentMemberSummaryQuery query, IExecutionContext executionContext)
         {
-            if (!IsLoggedInMember(executionContext.UserContext)) return null;
+            if (!IsSignedInMember(executionContext.UserContext)) return null;
 
             var user = await _contentRepository
                 .Users()
-                .GetCurrent()
+                .Current()
+                .Get()
                 .AsMicroSummary()
                 .ExecuteAsync();
 
             return new MemberSummary()
             {
                 UserId = user.UserId,
-                Name = user.GetFullName()
+                DisplayName = user.DisplayName
             };
         }
 
-        private bool IsLoggedInMember(IUserContext userContext)
+        private bool IsSignedInMember(IUserContext userContext)
         {
-            return userContext.UserId.HasValue && userContext.UserArea.UserAreaCode == MemberUserArea.MemberUserAreaCode;
+            return userContext.IsSignedIn() && userContext.UserArea.UserAreaCode == MemberUserArea.Code;
         }
     }
 }

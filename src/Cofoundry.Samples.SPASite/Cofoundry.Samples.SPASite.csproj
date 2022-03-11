@@ -7,13 +7,17 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.3.1" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.9.2" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.4.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.10.0" />
     <PackageReference Include="VueCliMiddleware" Version="3.1.2" />
   </ItemGroup>
   
   <ItemGroup>
     <ProjectReference Include="..\Cofoundry.Samples.SPASite.Domain\Cofoundry.Samples.SPASite.Domain.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="App_Data\Emails\" />
   </ItemGroup>
   
 </Project>
