@@ -1,9 +1,8 @@
-﻿namespace Cofoundry.Samples.SPASite.Data
-{
-    public class CatLikeCount
-    {
-        public int CatCustomEntityId { get; set; }
+﻿namespace Cofoundry.Samples.SPASite.Data;
 
-        public int TotalLikes { get; set; }
-    }
+public class CatLikeCount
+{
+    public int CatCustomEntityId { get; set; }
+
+    public int TotalLikes { get; set; }
 }

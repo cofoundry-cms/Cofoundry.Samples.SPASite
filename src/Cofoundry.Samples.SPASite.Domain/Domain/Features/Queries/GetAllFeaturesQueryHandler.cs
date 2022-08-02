@@ -1,43 +1,37 @@
-﻿using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
-namespace Cofoundry.Samples.SPASite.Domain
+public class GetAllFeaturesQueryHandler
+    : IQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
+    , IIgnorePermissionCheckHandler
 {
-    public class GetAllFeaturesQueryHandler
-        : IQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
-        , IIgnorePermissionCheckHandler
+    private readonly IContentRepository _contentRepository;
+
+    public GetAllFeaturesQueryHandler(
+        IContentRepository contentRepository
+        )
     {
-        private readonly IContentRepository _contentRepository;
+        _contentRepository = contentRepository;
+    }
 
-        public GetAllFeaturesQueryHandler(
-            IContentRepository contentRepository
-            )
-        {
-            _contentRepository = contentRepository;
-        }
+    public async Task<ICollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
+    {
+        var features = await _contentRepository
+            .CustomEntities()
+            .GetByDefinition<FeatureCustomEntityDefinition>()
+            .AsRenderSummaries()
+            .MapItem(MapFeature)
+            .ExecuteAsync();
 
-        public async Task<ICollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
-        {
-            var features = await _contentRepository
-                .CustomEntities()
-                .GetByDefinition<FeatureCustomEntityDefinition>()
-                .AsRenderSummaries()
-                .MapItem(MapFeature)
-                .ExecuteAsync();
+        return features;
+    }
 
-            return features;
-        }
+    private Feature MapFeature(CustomEntityRenderSummary customEntity)
+    {
+        var feature = new Feature();
 
-        private Feature MapFeature(CustomEntityRenderSummary customEntity)
-        {
-            var feature = new Feature();
+        feature.FeatureId = customEntity.CustomEntityId;
+        feature.Title = customEntity.Title;
 
-            feature.FeatureId = customEntity.CustomEntityId;
-            feature.Title = customEntity.Title;
-
-            return feature;
-        }
+        return feature;
     }
 }

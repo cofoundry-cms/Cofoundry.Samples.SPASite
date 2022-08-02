@@ -1,102 +1,93 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
-using Cofoundry.Samples.SPASite.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Cofoundry.Samples.SPASite.Data;
 
-namespace Cofoundry.Samples.SPASite.Domain
+namespace Cofoundry.Samples.SPASite.Domain;
+
+public class GetCatDetailsByIdQueryHandler
+    : IQueryHandler<GetCatDetailsByIdQuery, CatDetails>
+    , IIgnorePermissionCheckHandler
 {
-    public class GetCatDetailsByIdQueryHandler
-        : IQueryHandler<GetCatDetailsByIdQuery, CatDetails>
-        , IIgnorePermissionCheckHandler
+    private readonly IContentRepository _contentRepository;
+    private readonly SPASiteDbContext _dbContext;
+
+    public GetCatDetailsByIdQueryHandler(
+        IContentRepository contentRepository,
+        SPASiteDbContext dbContext
+        )
     {
-        private readonly IContentRepository _contentRepository;
-        private readonly SPASiteDbContext _dbContext;
+        _contentRepository = contentRepository;
+        _dbContext = dbContext;
+    }
 
-        public GetCatDetailsByIdQueryHandler(
-            IContentRepository contentRepository,
-            SPASiteDbContext dbContext
-            )
-        {
-            _contentRepository = contentRepository;
-            _dbContext = dbContext;
-        }
+    public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
+    {
+        var cat = await _contentRepository
+            .CustomEntities()
+            .GetById(query.CatId)
+            .AsRenderSummary()
+            .Map(MapCatAsync)
+            .ExecuteAsync();
 
-        public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
-        {
-            var cat = await _contentRepository
-                .CustomEntities()
-                .GetById(query.CatId)
-                .AsRenderSummary()
-                .Map(MapCatAsync)
-                .ExecuteAsync();
+        return cat;
+    }
 
-            return cat;
-        }
+    private async Task<CatDetails> MapCatAsync(CustomEntityRenderSummary customEntity)
+    {
+        var model = customEntity.Model as CatDataModel;
+        var cat = new CatDetails();
 
-        private async Task<CatDetails> MapCatAsync(CustomEntityRenderSummary customEntity)
-        {
-            var model = customEntity.Model as CatDataModel;
-            var cat = new CatDetails();
+        cat.CatId = customEntity.CustomEntityId;
+        cat.Name = customEntity.Title;
+        cat.Description = model.Description;
+        cat.Breed = await GetBreedAsync(model.BreedId);
+        cat.Features = await GetFeaturesAsync(model.FeatureIds);
+        cat.Images = await GetImagesAsync(model.ImageAssetIds);
+        cat.TotalLikes = await GetLikeCount(customEntity.CustomEntityId);
 
-            cat.CatId = customEntity.CustomEntityId;
-            cat.Name = customEntity.Title;
-            cat.Description = model.Description;
-            cat.Breed = await GetBreedAsync(model.BreedId);
-            cat.Features = await GetFeaturesAsync(model.FeatureIds);
-            cat.Images = await GetImagesAsync(model.ImageAssetIds);
-            cat.TotalLikes = await GetLikeCount(customEntity.CustomEntityId);
+        return cat;
+    }
 
-            return cat;
-        }
+    private Task<int> GetLikeCount(int catId)
+    {
+        return _dbContext
+            .CatLikeCounts
+            .AsNoTracking()
+            .Where(c => c.CatCustomEntityId == catId)
+            .Select(c => c.TotalLikes)
+            .FirstOrDefaultAsync();
+    }
 
-        private Task<int> GetLikeCount(int catId)
-        {
-            return _dbContext
-                .CatLikeCounts
-                .AsNoTracking()
-                .Where(c => c.CatCustomEntityId == catId)
-                .Select(c => c.TotalLikes)
-                .FirstOrDefaultAsync();
-        }
+    private async Task<Breed> GetBreedAsync(int? breedId)
+    {
+        if (!breedId.HasValue) return null;
+        var query = new GetBreedByIdQuery(breedId.Value);
 
-        private async Task<Breed> GetBreedAsync(int? breedId)
-        {
-            if (!breedId.HasValue) return null;
-            var query = new GetBreedByIdQuery(breedId.Value);
+        return await _contentRepository.ExecuteQueryAsync(query);
+    }
 
-            return await _contentRepository.ExecuteQueryAsync(query);
-        }
+    private async Task<ICollection<Feature>> GetFeaturesAsync(ICollection<int> featureIds)
+    {
+        if (EnumerableHelper.IsNullOrEmpty(featureIds)) return Array.Empty<Feature>();
+        var query = new GetFeaturesByIdRangeQuery(featureIds);
 
-        private async Task<ICollection<Feature>> GetFeaturesAsync(ICollection<int> featureIds)
-        {
-            if (EnumerableHelper.IsNullOrEmpty(featureIds)) return Array.Empty<Feature>();
-            var query = new GetFeaturesByIdRangeQuery(featureIds);
+        var features = await _contentRepository.ExecuteQueryAsync(query);
 
-            var features = await _contentRepository.ExecuteQueryAsync(query);
+        return features
+            .Select(f => f.Value)
+            .OrderBy(f => f.Title)
+            .ToList();
+    }
 
-            return features
-                .Select(f => f.Value)
-                .OrderBy(f => f.Title)
-                .ToList();
-        }
+    private async Task<ICollection<ImageAssetRenderDetails>> GetImagesAsync(ICollection<int> imageAssetIds)
+    {
+        if (EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Array.Empty<ImageAssetRenderDetails>();
 
-        private async Task<ICollection<ImageAssetRenderDetails>> GetImagesAsync(ICollection<int> imageAssetIds)
-        {
-            if (EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Array.Empty<ImageAssetRenderDetails>();
+        var images = await _contentRepository
+            .ImageAssets()
+            .GetByIdRange(imageAssetIds)
+            .AsRenderDetails()
+            .FilterAndOrderByKeys(imageAssetIds)
+            .ExecuteAsync();
 
-            var images = await _contentRepository
-                .ImageAssets()
-                .GetByIdRange(imageAssetIds)
-                .AsRenderDetails()
-                .FilterAndOrderByKeys(imageAssetIds)
-                .ExecuteAsync();
-
-            return images;
-        }
+        return images;
     }
 }

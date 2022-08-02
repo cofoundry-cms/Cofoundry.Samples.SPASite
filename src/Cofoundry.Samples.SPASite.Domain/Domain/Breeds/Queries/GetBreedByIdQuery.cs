@@ -1,16 +1,13 @@
-﻿using Cofoundry.Domain.CQS;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
-namespace Cofoundry.Samples.SPASite.Domain
+public class GetBreedByIdQuery : IQuery<Breed>
 {
-    public class GetBreedByIdQuery : IQuery<Breed>
+    public GetBreedByIdQuery() { }
+
+    public GetBreedByIdQuery(int id)
     {
-        public GetBreedByIdQuery() { }
-
-        public GetBreedByIdQuery(int id)
-        {
-            BreedId = id;
-        }
-
-        public int BreedId { get; set; }
+        BreedId = id;
     }
+
+    public int BreedId { get; set; }
 }

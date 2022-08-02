@@ -1,8 +1,5 @@
-﻿using Cofoundry.Domain;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
-namespace Cofoundry.Samples.SPASite.Domain
+public class FeatureDataModel : ICustomEntityDataModel
 {
-    public class FeatureDataModel : ICustomEntityDataModel
-    {
-    }
 }

@@ -1,16 +1,13 @@
-﻿using Cofoundry.Domain.CQS;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
-namespace Cofoundry.Samples.SPASite.Domain
+public class GetCatDetailsByIdQuery : IQuery<CatDetails>
 {
-    public class GetCatDetailsByIdQuery : IQuery<CatDetails>
+    public GetCatDetailsByIdQuery() { }
+
+    public GetCatDetailsByIdQuery(int id)
     {
-        public GetCatDetailsByIdQuery() { }
-
-        public GetCatDetailsByIdQuery(int id)
-        {
-            CatId = id;
-        }
-
-        public int CatId { get; set; }
+        CatId = id;
     }
+
+    public int CatId { get; set; }
 }

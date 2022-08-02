@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+	  <TargetFramework>net6.0</TargetFramework>
+	  <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cofoundry.Domain" Version="0.10.3" />
+    <PackageReference Include="Cofoundry.Domain" Version="0.11.1" />
   </ItemGroup>
 
   <ItemGroup>

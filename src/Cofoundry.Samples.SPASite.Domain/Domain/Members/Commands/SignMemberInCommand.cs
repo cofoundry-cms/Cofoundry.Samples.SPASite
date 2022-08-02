@@ -1,17 +1,15 @@
-﻿using Cofoundry.Domain.CQS;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 
-namespace Cofoundry.Samples.SPASite
-{
-    public class SignMemberInCommand : ICommand
-    {
-        [Required]
-        [EmailAddress(ErrorMessage = "Please use a valid email address")]
-        public string Email { get; set; }
+namespace Cofoundry.Samples.SPASite;
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
-    }
+public class SignMemberInCommand : ICommand
+{
+    [Required]
+    [EmailAddress(ErrorMessage = "Please use a valid email address")]
+    public string Email { get; set; }
+
+    [Required]
+    [DataType(DataType.Password)]
+    public string Password { get; set; }
 }

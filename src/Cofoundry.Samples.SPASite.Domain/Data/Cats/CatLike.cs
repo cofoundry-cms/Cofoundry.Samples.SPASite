@@ -1,13 +1,10 @@
-﻿using System;
+﻿namespace Cofoundry.Samples.SPASite.Data;
 
-namespace Cofoundry.Samples.SPASite.Data
+public class CatLike
 {
-    public class CatLike
-    {
-        public int CatCustomEntityId { get; set; }
+    public int CatCustomEntityId { get; set; }
 
-        public int UserId { get; set; }
+    public int UserId { get; set; }
 
-        public DateTime CreateDate { get; set; }
-    }
+    public DateTime CreateDate { get; set; }
 }

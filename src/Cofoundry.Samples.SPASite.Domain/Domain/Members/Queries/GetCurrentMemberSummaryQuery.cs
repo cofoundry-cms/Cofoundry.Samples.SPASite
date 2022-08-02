@@ -1,8 +1,7 @@
 ﻿using Cofoundry.Domain.CQS;
 
-namespace Cofoundry.Samples.SPASite.Domain
+namespace Cofoundry.Samples.SPASite.Domain;
+
+public class GetCurrentMemberSummaryQuery : IQuery<MemberSummary>
 {
-    public class GetCurrentMemberSummaryQuery : IQuery<MemberSummary>
-    {
-    }
 }

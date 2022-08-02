@@ -81,7 +81,7 @@ ehthumbs.db
 /tools
 /artifacts
 
-src/.vs
+.vs
 node_modules/
 appsettings.local.json
 .vscode

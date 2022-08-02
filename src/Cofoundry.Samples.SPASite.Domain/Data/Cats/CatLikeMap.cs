@@ -1,16 +1,13 @@
-﻿using Cofoundry.Core;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Cofoundry.Samples.SPASite.Data
+namespace Cofoundry.Samples.SPASite.Data;
+
+public class CatLikeMap : IEntityTypeConfiguration<CatLike>
 {
-    public class CatLikeMap : IEntityTypeConfiguration<CatLike>
+    public void Configure(EntityTypeBuilder<CatLike> builder)
     {
-        public void Configure(EntityTypeBuilder<CatLike> builder)
-        {
-            builder.ToTable(nameof(CatLike), DbConstants.DefaultAppSchema);
+        builder.ToTable(nameof(CatLike), DbConstants.DefaultAppSchema);
 
-            builder.HasKey(e => new { e.CatCustomEntityId, e.UserId });
-        }
+        builder.HasKey(e => new { e.CatCustomEntityId, e.UserId });
     }
 }

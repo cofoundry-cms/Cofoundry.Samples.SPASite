@@ -1,43 +1,37 @@
-﻿using Cofoundry.Domain;
-using Cofoundry.Domain.CQS;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
-namespace Cofoundry.Samples.SPASite.Domain
+public class GetFeaturesByIdRangeQueryHandler
+    : IQueryHandler<GetFeaturesByIdRangeQuery, IDictionary<int, Feature>>
+    , IIgnorePermissionCheckHandler
 {
-    public class GetFeaturesByIdRangeQueryHandler
-        : IQueryHandler<GetFeaturesByIdRangeQuery, IDictionary<int, Feature>>
-        , IIgnorePermissionCheckHandler
+    private readonly IContentRepository _contentRepository;
+
+    public GetFeaturesByIdRangeQueryHandler(
+        IContentRepository contentRepository
+        )
     {
-        private readonly IContentRepository _contentRepository;
+        _contentRepository = contentRepository;
+    }
 
-        public GetFeaturesByIdRangeQueryHandler(
-            IContentRepository contentRepository
-            )
-        {
-            _contentRepository = contentRepository;
-        }
+    public async Task<IDictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
+    {
+        var features = await _contentRepository
+            .CustomEntities()
+            .GetByIdRange(query.FeatureIds)
+            .AsRenderSummaries()
+            .MapItem(MapFeature)
+            .ExecuteAsync();
 
-        public async Task<IDictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
-        {
-            var features = await _contentRepository
-                .CustomEntities()
-                .GetByIdRange(query.FeatureIds)
-                .AsRenderSummaries()
-                .MapItem(MapFeature)
-                .ExecuteAsync();
+        return features;
+    }
 
-            return features;
-        }
+    private Feature MapFeature(CustomEntityRenderSummary customEntity)
+    {
+        var feature = new Feature();
 
-        private Feature MapFeature(CustomEntityRenderSummary customEntity)
-        {
-            var feature = new Feature();
+        feature.FeatureId = customEntity.CustomEntityId;
+        feature.Title = customEntity.Title;
 
-            feature.FeatureId = customEntity.CustomEntityId;
-            feature.Title = customEntity.Title;
-
-            return feature;
-        }
+        return feature;
     }
 }
