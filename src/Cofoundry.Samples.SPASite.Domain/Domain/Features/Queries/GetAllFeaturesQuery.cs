@@ -1,5 +1,5 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
-public class GetAllFeaturesQuery : IQuery<ICollection<Feature>>
+public class GetAllFeaturesQuery : IQuery<IReadOnlyCollection<Feature>>
 {
 }

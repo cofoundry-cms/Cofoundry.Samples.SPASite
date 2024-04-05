@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.Mail;
+using Cofoundry.Core.Mail;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
@@ -20,5 +20,5 @@ public class NewUserWelcomeMailTemplate : IMailTemplate
         get { return "Welcome to SPA Cats!"; }
     }
 
-    public string Name { get; set; }
+    public string Name { get; set; } = string.Empty;
 }

@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.Mail;
+using Cofoundry.Core.Mail;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
@@ -56,7 +56,7 @@ public class RegisterMemberAndLogInCommandHandler
     /// 
     /// See https://www.owasp.org/index.php/Web_Parameter_Tampering
     /// </summary>
-    private AddUserCommand MapAddUserCommand(RegisterMemberAndLogInCommand command)
+    private static AddUserCommand MapAddUserCommand(RegisterMemberAndLogInCommand command)
     {
         var addUserCommand = new AddUserCommand()
         {
@@ -75,8 +75,10 @@ public class RegisterMemberAndLogInCommandHandler
     /// </summary>
     private async Task SendWelcomeNotification(RegisterMemberAndLogInCommand command)
     {
-        var welcomeEmailTemplate = new NewUserWelcomeMailTemplate();
-        welcomeEmailTemplate.Name = command.DisplayName;
+        var welcomeEmailTemplate = new NewUserWelcomeMailTemplate
+        {
+            Name = command.DisplayName
+        };
         await _mailService.SendAsync(command.Email, welcomeEmailTemplate);
     }
 }

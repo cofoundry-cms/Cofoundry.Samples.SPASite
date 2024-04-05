@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
 /// Each custom entity requires a definition class which provides settings
@@ -68,7 +68,7 @@ public class CatCustomEntityDefinition
     /// settings, allowing us to give custom labels for properties such as Title and UrlSlug.
     /// Here we want the in-built Title property to be used as the cat name.
     /// </summary>
-    public Dictionary<string, string> CustomTerms => new Dictionary<string, string>()
+    public Dictionary<string, string> CustomTerms => new()
     {
         { CustomizableCustomEntityTermKeys.Title, "Name" }
     };

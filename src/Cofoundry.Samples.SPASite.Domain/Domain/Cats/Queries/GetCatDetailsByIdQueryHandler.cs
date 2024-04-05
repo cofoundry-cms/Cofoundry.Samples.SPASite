@@ -1,9 +1,9 @@
-﻿using Cofoundry.Samples.SPASite.Data;
+using Cofoundry.Samples.SPASite.Data;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
 public class GetCatDetailsByIdQueryHandler
-    : IQueryHandler<GetCatDetailsByIdQuery, CatDetails>
+    : IQueryHandler<GetCatDetailsByIdQuery, CatDetails?>
     , IIgnorePermissionCheckHandler
 {
     private readonly IContentRepository _contentRepository;
@@ -18,30 +18,35 @@ public class GetCatDetailsByIdQueryHandler
         _dbContext = dbContext;
     }
 
-    public async Task<CatDetails> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
+    public async Task<CatDetails?> ExecuteAsync(GetCatDetailsByIdQuery query, IExecutionContext executionContext)
     {
         var cat = await _contentRepository
             .CustomEntities()
             .GetById(query.CatId)
             .AsRenderSummary()
-            .Map(MapCatAsync)
+            .MapWhenNotNull(MapCatAsync)
             .ExecuteAsync();
 
         return cat;
     }
 
-    private async Task<CatDetails> MapCatAsync(CustomEntityRenderSummary customEntity)
+    private async Task<CatDetails?> MapCatAsync(CustomEntityRenderSummary customEntity)
     {
-        var model = customEntity.Model as CatDataModel;
-        var cat = new CatDetails();
+        if (customEntity.Model is not CatDataModel model)
+        {
+            return null;
+        }
 
-        cat.CatId = customEntity.CustomEntityId;
-        cat.Name = customEntity.Title;
-        cat.Description = model.Description;
-        cat.Breed = await GetBreedAsync(model.BreedId);
-        cat.Features = await GetFeaturesAsync(model.FeatureIds);
-        cat.Images = await GetImagesAsync(model.ImageAssetIds);
-        cat.TotalLikes = await GetLikeCount(customEntity.CustomEntityId);
+        var cat = new CatDetails
+        {
+            CatId = customEntity.CustomEntityId,
+            Name = customEntity.Title,
+            Description = model.Description,
+            Breed = await GetBreedAsync(model.BreedId),
+            Features = await GetFeaturesAsync(model.FeatureIds),
+            Images = await GetImagesAsync(model.ImageAssetIds),
+            TotalLikes = await GetLikeCount(customEntity.CustomEntityId)
+        };
 
         return cat;
     }
@@ -56,17 +61,25 @@ public class GetCatDetailsByIdQueryHandler
             .FirstOrDefaultAsync();
     }
 
-    private async Task<Breed> GetBreedAsync(int? breedId)
+    private async Task<Breed?> GetBreedAsync(int? breedId)
     {
-        if (!breedId.HasValue) return null;
+        if (!breedId.HasValue)
+        {
+            return null;
+        }
+
         var query = new GetBreedByIdQuery(breedId.Value);
 
         return await _contentRepository.ExecuteQueryAsync(query);
     }
 
-    private async Task<ICollection<Feature>> GetFeaturesAsync(ICollection<int> featureIds)
+    private async Task<IReadOnlyCollection<Feature>> GetFeaturesAsync(IReadOnlyCollection<int> featureIds)
     {
-        if (EnumerableHelper.IsNullOrEmpty(featureIds)) return Array.Empty<Feature>();
+        if (EnumerableHelper.IsNullOrEmpty(featureIds))
+        {
+            return Array.Empty<Feature>();
+        }
+
         var query = new GetFeaturesByIdRangeQuery(featureIds);
 
         var features = await _contentRepository.ExecuteQueryAsync(query);
@@ -74,12 +87,15 @@ public class GetCatDetailsByIdQueryHandler
         return features
             .Select(f => f.Value)
             .OrderBy(f => f.Title)
-            .ToList();
+            .ToArray();
     }
 
-    private async Task<ICollection<ImageAssetRenderDetails>> GetImagesAsync(ICollection<int> imageAssetIds)
+    private async Task<IReadOnlyCollection<ImageAssetRenderDetails>> GetImagesAsync(IReadOnlyCollection<int> imageAssetIds)
     {
-        if (EnumerableHelper.IsNullOrEmpty(imageAssetIds)) return Array.Empty<ImageAssetRenderDetails>();
+        if (EnumerableHelper.IsNullOrEmpty(imageAssetIds))
+        {
+            return Array.Empty<ImageAssetRenderDetails>();
+        }
 
         var images = await _contentRepository
             .ImageAssets()

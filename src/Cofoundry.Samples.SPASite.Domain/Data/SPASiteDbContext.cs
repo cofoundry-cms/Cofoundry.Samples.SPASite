@@ -1,4 +1,4 @@
-﻿using Cofoundry.Domain.Data;
+using Cofoundry.Domain.Data;
 
 namespace Cofoundry.Samples.SPASite.Data;
 

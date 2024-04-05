@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
 /// This query uses IIgnorePermissionCheckHandler because the permissions
@@ -36,10 +36,11 @@ public class GetAllBreedsQueryHandler
     /// </summary>
     private Breed MapBreed(CustomEntityRenderSummary customEntity)
     {
-        var breed = new Breed();
-
-        breed.BreedId = customEntity.CustomEntityId;
-        breed.Title = customEntity.Title;
+        var breed = new Breed
+        {
+            BreedId = customEntity.CustomEntityId,
+            Title = customEntity.Title
+        };
 
         return breed;
     }

@@ -1,6 +1,6 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
-public class GetBreedByIdQuery : IQuery<Breed>
+public class GetBreedByIdQuery : IQuery<Breed?>
 {
     public GetBreedByIdQuery() { }
 

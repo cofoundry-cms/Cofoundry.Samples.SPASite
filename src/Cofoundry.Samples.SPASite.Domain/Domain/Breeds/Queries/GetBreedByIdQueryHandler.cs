@@ -1,7 +1,7 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 public class GetBreedByIdQueryHandler
-    : IQueryHandler<GetBreedByIdQuery, Breed>
+    : IQueryHandler<GetBreedByIdQuery, Breed?>
     , IIgnorePermissionCheckHandler
 {
     private readonly IContentRepository _contentRepository;
@@ -13,13 +13,13 @@ public class GetBreedByIdQueryHandler
         _contentRepository = contentRepository;
     }
 
-    public async Task<Breed> ExecuteAsync(GetBreedByIdQuery query, IExecutionContext executionContext)
+    public async Task<Breed?> ExecuteAsync(GetBreedByIdQuery query, IExecutionContext executionContext)
     {
         var breed = await _contentRepository
             .CustomEntities()
             .GetById(query.BreedId)
             .AsRenderSummary()
-            .Map(MapBreed)
+            .MapWhenNotNull(MapBreed)
             .ExecuteAsync();
 
         return breed;
@@ -30,12 +30,13 @@ public class GetBreedByIdQueryHandler
     /// reduce repetition you could use a library like AutoMapper or break out
     /// the logic into a seperate mapper class and inject it in.
     /// </summary>
-    private Breed MapBreed(CustomEntityRenderSummary customEntity)
+    private Breed? MapBreed(CustomEntityRenderSummary customEntity)
     {
-        var breed = new Breed();
-
-        breed.BreedId = customEntity.CustomEntityId;
-        breed.Title = customEntity.Title;
+        var breed = new Breed
+        {
+            BreedId = customEntity.CustomEntityId,
+            Title = customEntity.Title
+        };
 
         return breed;
     }

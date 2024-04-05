@@ -1,6 +1,4 @@
-﻿using Cofoundry.Domain.CQS;
-
-namespace Cofoundry.Samples.SPASite.Domain;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
 /// A simple command handler to wrap member signout logic. Although it's 

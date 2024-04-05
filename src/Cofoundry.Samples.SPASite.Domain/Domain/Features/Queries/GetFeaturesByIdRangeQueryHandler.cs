@@ -1,7 +1,7 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 public class GetFeaturesByIdRangeQueryHandler
-    : IQueryHandler<GetFeaturesByIdRangeQuery, IDictionary<int, Feature>>
+    : IQueryHandler<GetFeaturesByIdRangeQuery, IReadOnlyDictionary<int, Feature>>
     , IIgnorePermissionCheckHandler
 {
     private readonly IContentRepository _contentRepository;
@@ -13,7 +13,7 @@ public class GetFeaturesByIdRangeQueryHandler
         _contentRepository = contentRepository;
     }
 
-    public async Task<IDictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
+    public async Task<IReadOnlyDictionary<int, Feature>> ExecuteAsync(GetFeaturesByIdRangeQuery query, IExecutionContext executionContext)
     {
         var features = await _contentRepository
             .CustomEntities()
@@ -27,10 +27,11 @@ public class GetFeaturesByIdRangeQueryHandler
 
     private Feature MapFeature(CustomEntityRenderSummary customEntity)
     {
-        var feature = new Feature();
-
-        feature.FeatureId = customEntity.CustomEntityId;
-        feature.Title = customEntity.Title;
+        var feature = new Feature
+        {
+            FeatureId = customEntity.CustomEntityId,
+            Title = customEntity.Title
+        };
 
         return feature;
     }

@@ -1,8 +1,8 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 public class Breed
 {
-    public int BreedId { get; set; }
+    public required int BreedId { get; set; }
 
-    public string Title { get; set; }
+    public required string Title { get; set; }
 }

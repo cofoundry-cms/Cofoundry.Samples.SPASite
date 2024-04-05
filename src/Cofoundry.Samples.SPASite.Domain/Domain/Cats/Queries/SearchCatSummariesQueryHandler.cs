@@ -1,5 +1,4 @@
-﻿using Cofoundry.Samples.SPASite.Data;
-using Microsoft.EntityFrameworkCore;
+using Cofoundry.Samples.SPASite.Data;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
@@ -21,12 +20,14 @@ public class SearchCatSummariesQueryHandler
 
     public async Task<PagedQueryResult<CatSummary>> ExecuteAsync(SearchCatSummariesQuery query, IExecutionContext executionContext)
     {
-        var customEntityQuery = new SearchCustomEntityRenderSummariesQuery();
-        customEntityQuery.CustomEntityDefinitionCode = CatCustomEntityDefinition.Code;
-        customEntityQuery.PageSize = query.PageSize;
-        customEntityQuery.PageNumber = query.PageNumber;
-        customEntityQuery.PublishStatus = PublishStatusQuery.Published;
-        customEntityQuery.SortBy = CustomEntityQuerySortType.PublishDate;
+        var customEntityQuery = new SearchCustomEntityRenderSummariesQuery
+        {
+            CustomEntityDefinitionCode = CatCustomEntityDefinition.Code,
+            PageSize = query.PageSize,
+            PageNumber = query.PageNumber,
+            PublishStatus = PublishStatusQuery.Published,
+            SortBy = CustomEntityQuerySortType.PublishDate
+        };
 
         var catCustomEntities = await _contentRepository
             .CustomEntities()
@@ -40,7 +41,7 @@ public class SearchCatSummariesQueryHandler
         return MapCats(catCustomEntities, allMainImages, allLikeCounts);
     }
 
-    private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(PagedQueryResult<CustomEntityRenderSummary> customEntityResult)
+    private Task<IReadOnlyDictionary<int, ImageAssetRenderDetails>> GetMainImages(PagedQueryResult<CustomEntityRenderSummary> customEntityResult)
     {
         var imageAssetIds = customEntityResult
             .Items
@@ -71,27 +72,29 @@ public class SearchCatSummariesQueryHandler
             .ToDictionaryAsync(c => c.CatCustomEntityId, c => c.TotalLikes);
     }
 
-    private PagedQueryResult<CatSummary> MapCats(
+    private static PagedQueryResult<CatSummary> MapCats(
         PagedQueryResult<CustomEntityRenderSummary> customEntityResult,
-        IDictionary<int, ImageAssetRenderDetails> images,
-        IDictionary<int, int> allLikeCounts
+        IReadOnlyDictionary<int, ImageAssetRenderDetails> images,
+        IReadOnlyDictionary<int, int> allLikeCounts
         )
     {
-        var cats = new List<CatSummary>(customEntityResult.Items.Count());
+        var cats = new List<CatSummary>(customEntityResult.Items.Count);
 
         foreach (var customEntity in customEntityResult.Items)
         {
             var model = (CatDataModel)customEntity.Model;
 
-            var cat = new CatSummary();
-            cat.CatId = customEntity.CustomEntityId;
-            cat.Name = customEntity.Title;
-            cat.Description = model.Description;
-            cat.TotalLikes = allLikeCounts.GetOrDefault(customEntity.CustomEntityId);
+            var cat = new CatSummary
+            {
+                CatId = customEntity.CustomEntityId,
+                Name = customEntity.Title,
+                Description = model.Description,
+                TotalLikes = allLikeCounts.GetValueOrDefault(customEntity.CustomEntityId)
+            };
 
             if (!EnumerableHelper.IsNullOrEmpty(model.ImageAssetIds))
             {
-                cat.MainImage = images.GetOrDefault(model.ImageAssetIds.FirstOrDefault());
+                cat.MainImage = images.GetValueOrDefault(model.ImageAssetIds.FirstOrDefault());
             }
 
             cats.Add(cat);

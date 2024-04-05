@@ -1,7 +1,4 @@
-﻿using Cofoundry.Samples.SPASite.Domain;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Cofoundry.Samples.SPASite;
+﻿namespace Cofoundry.Samples.SPASite;
 
 [Route("api/features")]
 public class FeaturesApiController : ControllerBase

@@ -1,6 +1,3 @@
-﻿using Cofoundry.Samples.SPASite.Domain;
-using Microsoft.AspNetCore.Mvc;
-
 namespace Cofoundry.Samples.SPASite;
 
 [AuthorizeUserArea(MemberUserArea.Code)]
@@ -20,7 +17,7 @@ public class CurrentMemberApiController : ControllerBase
     }
 
     [HttpGet("cats/liked")]
-    public async Task<JsonResult> GetLikedCats()
+    public async Task<IActionResult> GetLikedCats()
     {
         // Here we get the userId of the currently signed in member. We could have
         // done this in the query handler, but instead we've chosen to keep the query 
@@ -32,8 +29,13 @@ public class CurrentMemberApiController : ControllerBase
             .AsUserContext()
             .ExecuteAsync();
 
-        var query = new GetCatSummariesByMemberLikedQuery(userContext.UserId.Value);
+        var signedInUser = userContext.ToSignedInContext();
+        if (signedInUser == null)
+        {
+            return Forbid();
+        }
 
+        var query = new GetCatSummariesByMemberLikedQuery(signedInUser.UserId);
         return await _apiResponseHelper.RunQueryAsync(query);
     }
 }

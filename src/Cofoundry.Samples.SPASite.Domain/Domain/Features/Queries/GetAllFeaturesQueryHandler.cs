@@ -1,7 +1,7 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 public class GetAllFeaturesQueryHandler
-    : IQueryHandler<GetAllFeaturesQuery, ICollection<Feature>>
+    : IQueryHandler<GetAllFeaturesQuery, IReadOnlyCollection<Feature>>
     , IIgnorePermissionCheckHandler
 {
     private readonly IContentRepository _contentRepository;
@@ -13,7 +13,7 @@ public class GetAllFeaturesQueryHandler
         _contentRepository = contentRepository;
     }
 
-    public async Task<ICollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
+    public async Task<IReadOnlyCollection<Feature>> ExecuteAsync(GetAllFeaturesQuery query, IExecutionContext executionContext)
     {
         var features = await _contentRepository
             .CustomEntities()
@@ -27,10 +27,11 @@ public class GetAllFeaturesQueryHandler
 
     private Feature MapFeature(CustomEntityRenderSummary customEntity)
     {
-        var feature = new Feature();
-
-        feature.FeatureId = customEntity.CustomEntityId;
-        feature.Title = customEntity.Title;
+        var feature = new Feature
+        {
+            FeatureId = customEntity.CustomEntityId,
+            Title = customEntity.Title
+        };
 
         return feature;
     }

@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
 /// The difference between the CatDetails and CatSummary model
@@ -7,13 +7,13 @@
 /// </summary>
 public class CatSummary
 {
-    public int CatId { get; set; }
+    public required int CatId { get; set; }
 
-    public string Name { get; set; }
+    public required string Name { get; set; }
 
-    public string Description { get; set; }
+    public required string? Description { get; set; }
 
-    public int TotalLikes { get; set; }
+    public required int TotalLikes { get; set; }
 
-    public ImageAssetRenderDetails MainImage { get; set; }
+    public ImageAssetRenderDetails? MainImage { get; set; }
 }

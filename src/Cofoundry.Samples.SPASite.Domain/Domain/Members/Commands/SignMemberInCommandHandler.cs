@@ -1,6 +1,4 @@
-﻿using Cofoundry.Domain.CQS;
-
-namespace Cofoundry.Samples.SPASite.Domain;
+﻿namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
 /// Cofoundry has a number of apis to help you validate

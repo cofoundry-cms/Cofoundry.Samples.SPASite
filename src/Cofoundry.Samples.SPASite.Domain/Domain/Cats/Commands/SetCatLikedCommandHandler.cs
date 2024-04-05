@@ -1,14 +1,14 @@
-﻿using Cofoundry.Core.EntityFramework;
+using Cofoundry.Core.EntityFramework;
 using Cofoundry.Samples.SPASite.Data;
 using Microsoft.Data.SqlClient;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
 /// <summary>
-/// This handler uses ISignedInPermissionCheckHandler to make sure
-/// a user signed in before allowing them to set the cat as liked.
-/// We could use IPermissionRestrictedCommandHandler to be more 
-/// specific here and create a specific permission for the action,
+/// This handler uses <see cref="ISignedInPermissionCheckHandler"/>
+/// to make sure a user signed in before allowing them to set the cat
+/// as liked. We could use <see cref="IPermissionRestrictedCommandHandler"/>
+/// to be more specific here and create a specific permission for the action,
 /// but that isn't neccessary here because any signed in user
 /// can perform this action.
 /// 
@@ -39,11 +39,11 @@ public class SetCatLikedCommandHandler
 
         return _entityFrameworkSqlExecutor
             .ExecuteCommandAsync(_spaSiteDbContext,
-            "app.CatLike_SetLiked",
-             new SqlParameter("@CatId", command.CatId),
-             new SqlParameter("@UserId", executionContext.UserContext.UserId),
-             new SqlParameter("@IsLiked", command.IsLiked),
-             new SqlParameter("@CreateDate", executionContext.ExecutionDate)
+                "app.CatLike_SetLiked",
+                 new SqlParameter("@CatId", command.CatId),
+                 new SqlParameter("@UserId", executionContext.UserContext.UserId),
+                 new SqlParameter("@IsLiked", command.IsLiked),
+                 new SqlParameter("@CreateDate", executionContext.ExecutionDate)
              );
     }
 }

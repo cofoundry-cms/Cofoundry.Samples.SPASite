@@ -1,6 +1,6 @@
-﻿namespace Cofoundry.Samples.SPASite.Domain;
+namespace Cofoundry.Samples.SPASite.Domain;
 
-public class GetCatDetailsByIdQuery : IQuery<CatDetails>
+public class GetCatDetailsByIdQuery : IQuery<CatDetails?>
 {
     public GetCatDetailsByIdQuery() { }
 

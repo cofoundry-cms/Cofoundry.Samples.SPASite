@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.AutoUpdate;
+using Cofoundry.Core.AutoUpdate;
 
 namespace Cofoundry.Samples.SPASite.Domain.Install;
 
@@ -24,5 +24,5 @@ public class UpdatePackageFactory : BaseDbOnlyUpdatePackageFactory
     /// on. In this case we are dependent on the Cofoundry installation
     /// being run before this one
     /// </summary>
-    public override ICollection<string> DependentModules { get; } = new string[] { CofoundryModuleInfo.ModuleIdentifier };
+    public override IReadOnlyCollection<string> DependentModules { get; } = [CofoundryModuleInfo.ModuleIdentifier];
 }

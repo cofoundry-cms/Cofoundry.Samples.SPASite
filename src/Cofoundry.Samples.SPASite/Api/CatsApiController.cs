@@ -1,6 +1,3 @@
-﻿using Cofoundry.Samples.SPASite.Domain;
-using Microsoft.AspNetCore.Mvc;
-
 namespace Cofoundry.Samples.SPASite;
 
 [Route("api/cats")]
@@ -19,10 +16,7 @@ public class CatsApiController : ControllerBase
     [HttpGet("")]
     public async Task<JsonResult> Get([FromQuery] SearchCatSummariesQuery query)
     {
-        if (query == null)
-        {
-            query = new SearchCatSummariesQuery();
-        }
+        query ??= new SearchCatSummariesQuery();
 
         return await _apiResponseHelper.RunQueryAsync(query);
     }

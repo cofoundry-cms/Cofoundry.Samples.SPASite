@@ -1,5 +1,4 @@
-﻿using Cofoundry.Samples.SPASite.Data;
-using Microsoft.EntityFrameworkCore;
+using Cofoundry.Samples.SPASite.Data;
 
 namespace Cofoundry.Samples.SPASite.Domain;
 
@@ -45,7 +44,7 @@ public class GetCatSummariesByMemberLikedQueryHandler
         return MapCats(catCustomEntities, allMainImages, allLikeCounts);
     }
 
-    private Task<IDictionary<int, ImageAssetRenderDetails>> GetMainImages(ICollection<CustomEntityRenderSummary> customEntities)
+    private Task<IReadOnlyDictionary<int, ImageAssetRenderDetails>> GetMainImages(IReadOnlyCollection<CustomEntityRenderSummary> customEntities)
     {
         var imageAssetIds = customEntities
             .Select(i => (CatDataModel)i.Model)
@@ -60,12 +59,12 @@ public class GetCatSummariesByMemberLikedQueryHandler
             .ExecuteAsync();
     }
 
-    private Task<Dictionary<int, int>> GetLikeCounts(ICollection<CustomEntityRenderSummary> customEntities)
+    private Task<Dictionary<int, int>> GetLikeCounts(IReadOnlyCollection<CustomEntityRenderSummary> customEntities)
     {
         var catIds = customEntities
             .Select(i => i.CustomEntityId)
             .Distinct()
-            .ToList();
+            .ToArray();
 
         return _dbContext
             .CatLikeCounts
@@ -74,27 +73,29 @@ public class GetCatSummariesByMemberLikedQueryHandler
             .ToDictionaryAsync(c => c.CatCustomEntityId, c => c.TotalLikes);
     }
 
-    private List<CatSummary> MapCats(
-        ICollection<CustomEntityRenderSummary> customEntities,
-        IDictionary<int, ImageAssetRenderDetails> images,
-        IDictionary<int, int> allLikeCounts
+    private static List<CatSummary> MapCats(
+        IReadOnlyCollection<CustomEntityRenderSummary> customEntities,
+        IReadOnlyDictionary<int, ImageAssetRenderDetails> images,
+        IReadOnlyDictionary<int, int> allLikeCounts
         )
     {
-        var cats = new List<CatSummary>(customEntities.Count());
+        var cats = new List<CatSummary>(customEntities.Count);
 
         foreach (var customEntity in customEntities)
         {
             var model = (CatDataModel)customEntity.Model;
 
-            var cat = new CatSummary();
-            cat.CatId = customEntity.CustomEntityId;
-            cat.Name = customEntity.Title;
-            cat.Description = model.Description;
-            cat.TotalLikes = allLikeCounts.GetOrDefault(customEntity.CustomEntityId);
+            var cat = new CatSummary
+            {
+                CatId = customEntity.CustomEntityId,
+                Name = customEntity.Title,
+                Description = model.Description,
+                TotalLikes = allLikeCounts.GetValueOrDefault(customEntity.CustomEntityId)
+            };
 
             if (!EnumerableHelper.IsNullOrEmpty(model.ImageAssetIds))
             {
-                cat.MainImage = images.GetOrDefault(model.ImageAssetIds.FirstOrDefault());
+                cat.MainImage = images.GetValueOrDefault(model.ImageAssetIds.FirstOrDefault());
             }
 
             cats.Add(cat);

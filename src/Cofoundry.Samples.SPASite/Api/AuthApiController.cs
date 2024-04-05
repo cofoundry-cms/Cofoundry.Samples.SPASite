@@ -1,6 +1,4 @@
-﻿using Cofoundry.Samples.SPASite.Domain;
 using Microsoft.AspNetCore.Antiforgery;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Cofoundry.Samples.SPASite;
 
@@ -58,7 +56,7 @@ public class AuthApiController : ControllerBase
     }
 
     [HttpPost("sign-out")]
-    public async Task<JsonResult> SignOut()
+    public async Task<JsonResult> SignOutUser()
     {
         var command = new SignMemberOutCommand();
 
